@@ -12,7 +12,12 @@ manager::~manager()
 
 }
 
-QString manager::userInput(QString input)
+void manager::userInput(int input)
+{
+
+}
+
+void manager::userInput(int input, int input2)
 {
 
 }

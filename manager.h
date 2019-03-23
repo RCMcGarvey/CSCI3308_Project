@@ -10,9 +10,12 @@ public:
     manager();
     ~manager();
 
-    QString userInput(QString input);
+    //void userInput(QString input);
+    void userInput(int input);
+    void userInput(int input, int input2);
     int getPlayerHealth();
     QString getNarrative();
+
 private:
     void combatEvent();
     void moveEvent();
