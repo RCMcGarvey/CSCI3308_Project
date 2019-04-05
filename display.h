@@ -59,7 +59,7 @@ private:
     Ui::Display *ui;
     void populateDropdown(int box, QString button);
 
-    manager bossMan;
+    Manager bossMan;
 
     QPalette tb = palette();
     QString prompt = ">>>";

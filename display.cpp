@@ -72,6 +72,7 @@ void Display::on_moveButton_clicked()
 void Display::on_northButton_clicked()
 {
     ui->textEdit->append("You went north");
+    bossMan.userInput(1, "move");
     ui->northButton->setVisible(false);
     ui->eastButton->setVisible(false);
     ui->southButton->setVisible(false);
@@ -82,6 +83,7 @@ void Display::on_northButton_clicked()
 void Display::on_eastButton_clicked()
 {
     ui->textEdit->append("You went east");
+    bossMan.userInput(2, "move");
     ui->northButton->setVisible(false);
     ui->eastButton->setVisible(false);
     ui->southButton->setVisible(false);
@@ -92,6 +94,7 @@ void Display::on_eastButton_clicked()
 void Display::on_westButton_clicked()
 {
     ui->textEdit->append("You went west");
+    bossMan.userInput(4, "move");
     ui->northButton->setVisible(false);
     ui->eastButton->setVisible(false);
     ui->southButton->setVisible(false);
@@ -101,7 +104,8 @@ void Display::on_westButton_clicked()
 
 void Display::on_southButton_clicked()
 {
-    ui->textEdit->append("You went south");
+    ui->textEdit->append("You go south");
+    bossMan.userInput(3, "move");
     ui->northButton->setVisible(false);
     ui->eastButton->setVisible(false);
     ui->southButton->setVisible(false);
@@ -347,7 +351,7 @@ void Display::on_comboBox_activated(int index)
 {
     if(box1)
     {
-        bossMan.userInput(index);
+        //bossMan.userInput(index);
         if(currentButton == "Use Item")
         {
             ui->comboBox->clear();

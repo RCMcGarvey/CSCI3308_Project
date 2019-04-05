@@ -8,33 +8,10 @@ Most cout statements can be replaced with alternative behaviors
 //to seed random number generator
 #include <stdio.h>
 #include <time.h>
-
 #include "player.h"
+#include "item.h"
 
 //Simple constructor
-Item::Item(ItemType t, std::string n, bool single_use, int atk, int def, double crit){
-  type = t;
-  name = n;
-  is_single_use = single_use;
-  is_active = false;
-  attack_boost = atk;
-  defense_boost = def;
-  crit_chance = crit;
-  has_message = false;
-  message = "";
-}
-//specific constructor
-Item::Item(ItemType t, std::string n, bool single_use, int atk, int def, double crit, std::string msg){
-  type = t;
-  name = n;
-  is_single_use = single_use;
-  is_active = false;
-  attack_boost = atk;
-  defense_boost = def;
-  crit_chance = crit;
-  has_message = true;
-  message = msg;
-}
 
 /*
 Consider replacing the following method with a signal/slot pair
@@ -62,7 +39,7 @@ Player::Player(){
 //returns true if item was added to inventory
 
 //May need to re-implement print/output
-bool Player::collectItem(Item* new_item){
+/*bool Player::collectItem(Item* new_item){
   //collecting
   if(new_item->type == ItemType::Weapon&&inventory[0]==nullptr){
     inventory[0] = new_item;
@@ -90,7 +67,7 @@ bool Player::collectItem(Item* new_item){
     }
   }
   std::cout<<"You couldn't pick up the "<<new_item->name<<". (You may need to drop an item)"<<std::endl;
-}
+}*/
 
 //Clears and returns a pointer to the item in the slot'th inventory slot
 Item* Player::dropItem(int slot){
@@ -143,9 +120,25 @@ void Player::calculateStats(){
   }
 }
 
+int Player::getHealth()
+{
+    return health;
+}
+
+Item* Player::getInventory(int slot)
+{
+    return inventory[slot];
+}
+
+void Player::useItem(int slot)
+{
+    Item *current = new Item();
+    current = inventory[slot];
+    //if(current->type == )
+}
 //Used to test functionalities of various methods
 //This isn't necessary
-int main(){
+/*int main(){
   //seeding random number generator
   srand(time(0));
   //testing weapon slot
@@ -172,4 +165,4 @@ int main(){
   std::cout<<"Program terminated successfully"<<std::endl;
   return 0;
 }
-
+*/
