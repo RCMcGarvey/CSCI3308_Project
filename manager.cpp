@@ -4,7 +4,7 @@
 
 Manager::Manager()
 {
-    //prison.theBegining();
+    toOutput = prison.theBeginning();
 }
 
 Manager::~Manager()
@@ -16,7 +16,7 @@ void Manager::userInput(int input, string action)
 {
     if(action == "move")
     {
-        prison.nextRoom(input);
+        toOutput = prison.nextRoom(input);
     }
     else if(action == "weapon")
     {

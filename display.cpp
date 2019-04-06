@@ -32,7 +32,7 @@ Display::Display(QWidget *parent) :
     ui->comboBox_2->setVisible(false);
     //ui->lineEdit->setVisible(false);
 
-
+    ui->textEdit->append(bossMan.getNarrative());
 }
 
 Display::~Display()
@@ -49,7 +49,7 @@ void Display::on_moveButton_clicked()
 {
     if(ui->moveButton->text() == "Move")
     {
-        ui->textEdit->append("Move Pushed");
+        //ui->textEdit->append("Move Pushed");
         ui->northButton->setVisible(true);
         ui->eastButton->setVisible(true);
         ui->southButton->setVisible(true);
@@ -71,8 +71,9 @@ void Display::on_moveButton_clicked()
 
 void Display::on_northButton_clicked()
 {
-    ui->textEdit->append("You went north");
+    //ui->textEdit->append("You went north");
     bossMan.userInput(1, "move");
+    ui->textEdit->append(bossMan.getNarrative());
     ui->northButton->setVisible(false);
     ui->eastButton->setVisible(false);
     ui->southButton->setVisible(false);
@@ -82,8 +83,9 @@ void Display::on_northButton_clicked()
 
 void Display::on_eastButton_clicked()
 {
-    ui->textEdit->append("You went east");
+    //ui->textEdit->append("You went east");
     bossMan.userInput(2, "move");
+    ui->textEdit->append(bossMan.getNarrative());
     ui->northButton->setVisible(false);
     ui->eastButton->setVisible(false);
     ui->southButton->setVisible(false);
@@ -93,8 +95,9 @@ void Display::on_eastButton_clicked()
 
 void Display::on_westButton_clicked()
 {
-    ui->textEdit->append("You went west");
+    //ui->textEdit->append("You went west");
     bossMan.userInput(4, "move");
+    ui->textEdit->append(bossMan.getNarrative());
     ui->northButton->setVisible(false);
     ui->eastButton->setVisible(false);
     ui->southButton->setVisible(false);
@@ -104,8 +107,9 @@ void Display::on_westButton_clicked()
 
 void Display::on_southButton_clicked()
 {
-    ui->textEdit->append("You go south");
+    //ui->textEdit->append("You go south");
     bossMan.userInput(3, "move");
+    ui->textEdit->append(bossMan.getNarrative());
     ui->northButton->setVisible(false);
     ui->eastButton->setVisible(false);
     ui->southButton->setVisible(false);
