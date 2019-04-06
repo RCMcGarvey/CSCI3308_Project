@@ -69,7 +69,7 @@ QString room::nextRoom(int dir) {
 
 QString room::theBeginning() {
     currentRoom = &outside;
-
+    return currentRoom->description;
 }
 
 
