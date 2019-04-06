@@ -1,44 +1,62 @@
-#include "manager.h"
+#include "Manager.h"
 
 //Ryan
 
-manager::manager()
+Manager::Manager()
+{
+    toOutput = prison.theBeginning();
+}
+
+Manager::~Manager()
 {
 
 }
 
-manager::~manager()
+void Manager::userInput(int input, string action)
+{
+    if(action == "move")
+    {
+        toOutput = prison.nextRoom(input);
+    }
+    else if(action == "weapon")
+    {
+
+    }
+    else if(action == "spell")
+    {
+
+    }
+    else if(1)
+    {
+
+    }
+}
+
+void Manager::userInput(QString input)
 {
 
 }
 
-QString manager::userInput(QString input)
+
+
+void Manager::userInput(int input, int input2)
 {
 
 }
 
-int manager::getPlayerHealth()
+int Manager::getPlayerHealth()
+{
+    return 5;
+}
+
+QString Manager::getNarrative()
+{
+    return toOutput;
+}
+
+void Manager::combatEvent()
 {
 
 }
 
-QString manager::getNarrative()
-{
-
-}
-
-void manager::combatEvent()
-{
-
-}
-
-void manager::moveEvent()
-{
-
-}
-
-void manager::playerEvent()
-{
-
-}
 

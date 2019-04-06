@@ -2,22 +2,32 @@
 #define MANAGER_H
 
 #include <QString>
+#include "player.h"
+#include "room.h"
+#include <string>
+#include <QTextEdit>
 
-class manager
+class Manager
 {
 
 public:
-    manager();
-    ~manager();
+    Manager( );
+    ~Manager();
 
-    QString userInput(QString input);
+    //void userInput(QString input);
+    void userInput(int input, string action);
+    void userInput(QString input);
+    void userInput(int input, int input2);
     int getPlayerHealth();
     QString getNarrative();
+
 private:
     void combatEvent();
-    void moveEvent();
-    void playerEvent();
+    QString toOutput;
 
+
+    Player theHero;
+    room prison;
 
 };
 

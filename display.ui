@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>833</width>
+    <width>830</width>
     <height>618</height>
    </rect>
   </property>
@@ -14,22 +14,12 @@
    <string>Display</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QLineEdit" name="lineEdit">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>510</y>
-      <width>811</width>
-      <height>31</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QProgressBar" name="progressBar">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>470</y>
-      <width>371</width>
+      <y>420</y>
+      <width>811</width>
       <height>31</height>
      </rect>
     </property>
@@ -46,24 +36,223 @@
       <x>10</x>
       <y>10</y>
       <width>811</width>
-      <height>451</height>
+      <height>401</height>
      </rect>
     </property>
    </widget>
-   <widget class="QProgressBar" name="progressBar_2">
+   <widget class="QPushButton" name="westButton">
     <property name="geometry">
      <rect>
-      <x>420</x>
-      <y>470</y>
-      <width>401</width>
-      <height>31</height>
+      <x>10</x>
+      <y>490</y>
+      <width>31</width>
+      <height>28</height>
      </rect>
     </property>
-    <property name="value">
-     <number>24</number>
+    <property name="text">
+     <string>W</string>
     </property>
-    <property name="textVisible">
-     <bool>false</bool>
+   </widget>
+   <widget class="QPushButton" name="fightButton">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>460</y>
+      <width>93</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Fight</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="weaponButton">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>460</y>
+      <width>93</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Weapon</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="moveButton">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>490</y>
+      <width>93</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Move</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="northButton">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>460</y>
+      <width>31</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>N</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="eastButton">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>490</y>
+      <width>31</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>E</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="southButton">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>520</y>
+      <width>31</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>S</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="spellButton">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>460</y>
+      <width>93</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Spell</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="InventoryButton">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>490</y>
+      <width>93</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Inventory</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="lookButton">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>520</y>
+      <width>93</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Look Around</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="useButton">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>490</y>
+      <width>93</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Use Item</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="inspectButton">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>490</y>
+      <width>93</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Inspect</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pickupButton">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>520</y>
+      <width>93</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Pick Up</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="interactButton">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>520</y>
+      <width>93</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Interact</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="swapButton">
+    <property name="geometry">
+     <rect>
+      <x>480</x>
+      <y>490</y>
+      <width>93</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Swap</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>460</y>
+      <width>111</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_2">
+    <property name="geometry">
+     <rect>
+      <x>702</x>
+      <y>460</y>
+      <width>111</width>
+      <height>22</height>
+     </rect>
     </property>
    </widget>
   </widget>
@@ -72,7 +261,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>833</width>
+     <width>830</width>
      <height>26</height>
     </rect>
    </property>
