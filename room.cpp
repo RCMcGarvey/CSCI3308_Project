@@ -87,22 +87,22 @@ room::room() {
 
     //outside
     outside.description = "You look over your shoulder. Tendrils of fog slither out from the encroaching forest like snakes, hissing as they slide over the dead ground. Menacing shadows watch you from the cover of the trees. The night is frigid; you pull your clothes tighter. If you spend any longer outside, you’ll freeze to death.";
-    outside.description += "/nThe manor to the north you’ve stumbled upon sends a chill deep into your bones. Ancient vines crawl over a dilapidated, dry fountain. Gothic windows, high and imposing, line the massive building’s exterior. Light spills through the highest window. The wind pushes you from behind toward the house.";
-    outside.tryS = "Your instincts kick in, and your legs freeze up. If you go that way you know, you will die a miserable cold death.";
-    outside.tryE = "There is a scary looking mist that frightens you too much to go that way.";
-    outside.tryW = "You trip, fall, and when you stand back up your facing north.";
+    outside.description += "\nThe manor to the north you’ve stumbled upon sends a chill deep into your bones. Ancient vines crawl over a dilapidated, dry fountain. Gothic windows, high and imposing, line the massive building’s exterior. Light spills through the highest window. The wind pushes you from behind toward the house.\n";
+    outside.tryS = "Your instincts kick in, and your legs freeze up. If you go that way you know, you will die a miserable cold death.\n";
+    outside.tryE = "There is a scary looking mist that frightens you too much to go that way.\n";
+    outside.tryW = "You trip, fall, and when you stand back up your facing north.\n";
     outside.north = &frontOfHouse;
 
     //front of house
-    frontOfHouse.description = "Cautiously, you approach the manor. Loose shingles rattle from the roof above. As you step up the wooden stairs leading to the door, the creaking underfoot sends shivers up your spine. The door, black and glossy, stands before you.";
-    frontOfHouse.tryS = "You just came from that way and it feels too counterproductive.";
-    frontOfHouse.tryE = "A strong gust of chilly wind blows you back.";
-    frontOfHouse.tryW = "You walk into the fountain. It trips you. You get out and are facing north. You better get indoors soon.";
-    outside.north = &knocking;
+    frontOfHouse.description = "Cautiously, you approach the manor. Loose shingles rattle from the roof above. As you step up the wooden stairs leading to the door, the creaking underfoot sends shivers up your spine. The door, black and glossy, stands before you.\n";
+    frontOfHouse.tryS = "You just came from that way and it feels too counterproductive.\n";
+    frontOfHouse.tryE = "A strong gust of chilly wind blows you back.\n";
+    frontOfHouse.tryW = "You walk into the fountain. It trips you. You get out and are facing north. You better get indoors soon.\n";
+    frontOfHouse.north = &knocking;
 
     //knocking on door
-    knocking.description = "You knock on the door, sending a dull thud echoing through the inside of the house. After a moment’s pause, a shudder passes through the exterior of the house. You wait, but you don’t hear anyone come to open the door. The air is getting colder; your breath spirals around you.";
-    knocking.description += "You reach for the doorknob, but when your hand touches the brass, a loud click comes from within the door. Soundlessly, the door swings open. The inside of the house is darker than the night but you can feel the air is a little warmer there.";
+    knocking.description = "You knock on the door, sending a dull thud echoing through the inside of the house. After a moment’s pause, a shudder passes through the exterior of the house. You wait, but you don’t hear anyone come to open the door. The air is getting colder; your breath spirals around you.\n";
+    knocking.description += "You reach for the doorknob, but when your hand touches the brass, a loud click comes from within the door. Soundlessly, the door swings open. The inside of the house is darker than the night but you can feel the air is a little warmer there.\n";
 
     //the foyer
 
