@@ -33,6 +33,8 @@ public:
     roms frontOfHouse;
     roms knocking;
     roms foyer;
+    bool hasEnemy();
+    void cleared();
 };
 
 #endif // ROOM_H
