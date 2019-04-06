@@ -2,16 +2,38 @@
 #define ROOM_H
 #include <QString>
 
+
 class room
 {
 public:
+    struct roms {
+        QString description;
+        bool visited = false;
+        bool monsters = false;
+        roms *south = nullptr;
+        QString tryS;
+        QString southGo;
+        roms *north = nullptr;
+        QString tryN;
+        QString northGo;
+        roms *east = nullptr;
+        QString tryE;
+        QString eastGo;
+        roms *west = nullptr;
+        QString tryW;
+        QString westGo;
+    };
+    roms *currentRoom;
     room();
-    QString nextRoom(int dir);
-    QString where[5][5][2];
-    bool locked[5][5][2];
-    bool stairs[5][5][2];
-    int x = 0, y = 0, z = 0;
-    QString cant = "You can't go that way.";
+    QString nextRoom(int dir);  
+    QString moving = "";
+    QString nothing = "There is nothing that way";
+    QString theBeginning();
+    roms outside;
+    roms frontOfHouse;
+    roms knocking;
+    roms foyer;
 };
 
 #endif // ROOM_H
+
