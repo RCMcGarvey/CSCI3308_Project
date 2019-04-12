@@ -52,12 +52,13 @@ public:
     roms foyer;
     bool hasEnemy();
     void cleared();
+    int howManyItems;
 
     //Added implementations:
     //returns a pointer to the enemy, if manager needs it
     enemy* getEnemy(){return currentRoom->monster;}
     //returns an array (length 4) of item pointers
-    Item** getRoomItems(){return currentRoom->items;}
+    Item* getRoomItems(int itemNum){return currentRoom->items[itemNum];}
     //if the enemy is alive, returns enemy's attack
     int getEnemyAttack();//-1 means enemy has died or doesn't exist
     //player can attack and destroy the enemy

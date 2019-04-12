@@ -154,6 +154,7 @@ bool  room::addItem(Item* newItem){
             currentRoom->items[i] = newItem;
             return true;
         }
+        ++howManyItems;
     }
     return false;
 }

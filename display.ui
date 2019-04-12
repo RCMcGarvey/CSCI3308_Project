@@ -39,6 +39,9 @@
       <height>401</height>
      </rect>
     </property>
+    <property name="textInteractionFlags">
+     <set>Qt::NoTextInteraction</set>
+    </property>
    </widget>
    <widget class="QPushButton" name="westButton">
     <property name="geometry">
@@ -253,6 +256,19 @@
       <width>111</width>
       <height>22</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>425</y>
+      <width>81</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Health</string>
     </property>
    </widget>
   </widget>

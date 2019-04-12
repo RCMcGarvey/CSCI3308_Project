@@ -2,11 +2,14 @@
 #include "ui_display.h"
 
 
+
 Display::Display(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Display)
 {
     ui->setupUi(this);
+
+    mainMenu();
 
     //ui->lineEdit->setText(prompt);
 
@@ -15,6 +18,9 @@ Display::Display(QWidget *parent) :
     tb.setColor(QPalette::Base, Qt::black);
     tb.setColor(QPalette::Text, Qt::white);
     ui->textEdit->setPalette(tb);
+
+    ui->progressBar->setStyleSheet("QProgressBar::chunk {background: rgb(230, 20, 70, 100%);}");
+
     box1 = false;
 
     ui->northButton->setVisible(false);
@@ -40,9 +46,12 @@ Display::~Display()
     delete ui;
 }
 
-void Display::setHealth()
+void Display::mainMenu()
 {
-    ui->progressBar->setValue(bossMan.getPlayerHealth());
+    ui->textEdit->setHtml("<center><big>Presented by some Swonky Creatures</big></center>");
+    //QThread::sleep(10);
+    //ui->textEdit->setText("Hi there");
+
 }
 
 void Display::on_moveButton_clicked()
@@ -186,6 +195,9 @@ void Display::on_lookButton_clicked()
 void Display::on_weaponButton_clicked()
 {
    ui->textEdit->append("You swing violently with your fists");
+   bossMan.combatEvent();
+   ui->textEdit->append(bossMan.getNarrative());
+   ui->progressBar->setValue(bossMan.getPlayerHealth());
    ui->weaponButton->setVisible(false);
    ui->spellButton->setVisible(false);
    ui->fightButton->setText("Fight");
@@ -323,8 +335,10 @@ void Display::populateDropdown(int box, QString button)
 {
     if(box == 1)
     {
+
         if(button == "Swap" || button == "Use Item" || button == "Inspect")
         {
+
             ui->comboBox->addItem("Slot 1");
             ui->comboBox->addItem("Slot 2");
             ui->comboBox->addItem("Slot 3");
@@ -333,6 +347,14 @@ void Display::populateDropdown(int box, QString button)
             ui->comboBox->addItem("Slot 6");
             ui->comboBox->addItem("Slot 7");
             ui->comboBox->addItem("Slot 8");
+        }
+        else if(button == "Interact" || button == "Pick Up")
+        {
+            for(int i = 0; i < bossMan.howManyItems(); ++i)
+            {
+                ui->comboBox->addItem(bossMan.getItem(i,1));
+                ui->textEdit->append(bossMan.getItem(i,1));
+            }
         }
     }
     else if (box == 2)
@@ -348,6 +370,10 @@ void Display::populateDropdown(int box, QString button)
             ui->comboBox_2->addItem("Slot 7");
             ui->comboBox_2->addItem("Slot 8");
         }
+    }
+    else if(1)
+    {
+
     }
 }
 

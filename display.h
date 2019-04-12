@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "manager.h"
+#include <QThread>
 
 namespace Ui {
 class Display;
@@ -16,7 +17,7 @@ public:
     explicit Display(QWidget *parent = nullptr);
     ~Display();
 
-    void setHealth();
+    void mainMenu();
     void printMessage(QString message);
 
 
@@ -62,7 +63,8 @@ private:
     Manager bossMan;
 
     QPalette tb = palette();
-    QString prompt = ">>>";
+    //QPalette pb = palette();
+    //QString prompt = ">>>";
     bool box1;
     int item;
     QString currentButton;

@@ -6,6 +6,9 @@
 #include "room.h"
 #include <string>
 #include <QTextEdit>
+#include <stdlib.h>
+#include <enemy.h>
+
 
 class Manager
 {
@@ -20,14 +23,18 @@ public:
     void userInput(int input, int input2);
     int getPlayerHealth();
     QString getNarrative();
+    void combatEvent();
+    QString getItem(int index, int from);
+    int howManyItems();
 
 private:
-    void combatEvent();
     QString toOutput;
 
+    //QThread god;
 
     Player theHero;
-    room prison;
+    room map;
+
 
 };
 

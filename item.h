@@ -2,6 +2,7 @@
 #define ITEM_H
 
 #include <string>
+#include <QString>
 
 using namespace std;
 
@@ -9,7 +10,7 @@ struct Item{
 
   //what the item is
   string type;
-  std::string name;
+  QString name;
   //item behavior when
   bool is_single_use;
   bool is_active;
@@ -24,7 +25,7 @@ struct Item{
 
   //Constructor: (basic weapons, armor, and potions)
   //  type        name     singleuse atk dfs  crit
-  Item(string t, std::string n, bool single_use, int atk, int def, double crit)
+  Item(string t, QString n, bool single_use, int atk, int def, double crit)
   {
     type = t;
     name = n;
@@ -39,7 +40,7 @@ struct Item{
 
   //Constructor: (scrolls, items with messages, misc)
   //  type        name     singleuse atk dfs  crit    use/message
-  Item(string t, std::string n, bool single_use, int atk, int def, double crit, std::string msg)
+  Item(string t, QString n, bool single_use, int atk, int def, double crit, std::string msg)
   {
     type = t;
     name = n;
