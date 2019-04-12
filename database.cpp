@@ -6,7 +6,8 @@ database::database()
         db.setHostName("127.0.0.1");
         db.setDatabaseName("proj_db");
         db.setUserName("csci3308_proj");
-        db.setPassword("OpenSesame");
+        QString dbPass = qgetenv("DBPASS");
+        db.setPassword(dbPass);
         bool ok = db.open();
         if (ok){
             cout << "Database Connection Open" << endl;
@@ -15,7 +16,6 @@ database::database()
             cout << "Database Connection Failed!!!" << endl;
             throw;
         }
-        // IMPLEMENT ENV VARIABLE FOR PASSWORD!!!
 }
 
 
@@ -28,4 +28,11 @@ void database::addUser(QString username, QString usr_password)
 
     query.exec(execStr);
 
+}
+
+
+database::~database()
+{
+    //Close database!!
+    db.close();
 }

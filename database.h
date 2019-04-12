@@ -12,6 +12,7 @@ class database
 {
 public:
     database();
+    ~database();
     void addUser(QString username, QString usr_password);
     void addChar(QString char_name, QString stats, QString inventory, QString level, QString user);
     void addLevel();

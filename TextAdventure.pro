@@ -32,7 +32,8 @@ SOURCES += \
     player.cpp \
     enemy.cpp \
     room.cpp \
-    database.cpp
+    database.cpp \
+    hashpass.cpp
 
 HEADERS += \
         display.h \
@@ -40,7 +41,8 @@ HEADERS += \
     player.h \
     enemy.h \
     room.h \
-    database.h
+    database.h \
+    hashpass.h
 
 FORMS += \
         display.ui
