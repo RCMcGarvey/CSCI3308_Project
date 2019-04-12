@@ -1,11 +1,11 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 
-enum EnemyType{Ghost, Zombie, Skeleton}; // Base enemy subtypes
+enum EnemyType{Ghost, Zombie, Skeleton, Vampire, Ghoul}; // Base enemy subtypes
 
 /* Enemy attribute list:
 
-struct Ghost {
+struct Ghost { // Basic enemy
 
     int health = 100;
     int max_health = 100;
@@ -14,7 +14,7 @@ struct Ghost {
 
 };
 
-struct Zombie {
+struct Zombie { // Basic enemy, tanky
 
     int health = 150;
     int max_health = 150;
@@ -23,7 +23,7 @@ struct Zombie {
 
 };
 
-struct Skeleton {
+struct Skeleton { // Basic enemy, glass cannon
 
     int health = 60;
     int max_health = 75;
@@ -31,6 +31,25 @@ struct Skeleton {
     double crit_chance = 0.3;
 
 };
+
+struct Vampire { // Health stealer
+
+    int health = 80;
+    int max_health = 80;
+    int base_attack = 7;
+    double crit_chance = 0.3;
+
+};
+
+struct Ghoul { // More annoying, regenerative variant of Ghost type
+
+    int health = 100;
+    int max_health = 100;
+    int base_attack = 5;
+    double crit_chance = 0.4
+
+};
+
 
 */
 
