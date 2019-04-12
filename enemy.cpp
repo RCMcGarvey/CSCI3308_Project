@@ -17,7 +17,7 @@ enemy::enemy() { // Create default enemy
 
 }
 
-enemy::enemy(EnemyType t, int h, int h_max, int b_atk, double c) { // Enemy type, health, max_health, base_attack
+enemy::enemy(EnemyType t, int h, int h_max, int b_atk, double c) { // Enemy type, health, max_health, base_attack, crit_chance
 
     type = t;
     health = h;
@@ -51,6 +51,12 @@ enemy::enemy(EnemyType t) { // Set attributes based on enemy type
             base_attack = 10;
             crit_chance = 0.3;
             break;
+        case Vampire:
+            health = 80;
+            max_health = 80;
+            base_attack = 7;
+            crit_chance = 0.3;
+            break;
     }
     alive = true;
 }
@@ -75,12 +81,26 @@ int enemy::attack() {
     int atk = base_attack;
     int bonus = rand() % 1000;
     (crit_chance * 1000 > bonus) ? atk *= 3 : atk *= 1;
+    if (type == Vampire) { // Vampire type steals health
+        adjustHealth(atk / 2);
+    }
+    if (type == Ghoul) { // Ghoul type regens health each turn
+        adjustHealth(5);
+    }
     return atk;
 
 }
 
-//int main() {
+bool enemy::getAlive() {
 
-//    srand(time(0)); // Seeded 4/5
+    return alive;
 
-//}
+}
+
+/*
+int main() {
+
+    srand(time(0)); // Seeded 4/5
+
+}
+*/
