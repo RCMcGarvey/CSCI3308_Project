@@ -57,6 +57,12 @@ enemy::enemy(EnemyType t) { // Set attributes based on enemy type
             base_attack = 7;
             crit_chance = 0.3;
             break;
+        case Ghoul:
+            health = 100;
+            max_health = 100;
+            base_attack = 5;
+            crit_chance = 0.4;
+            break;
     }
     alive = true;
 }
