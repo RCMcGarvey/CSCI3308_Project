@@ -1,11 +1,15 @@
 #include "display.h"
 #include <QApplication>
+#include "database.h"
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    Display w;
-    w.show();
+    database db;
+    db.addUser("aryan", "pass");
+//    QApplication a(argc, argv);
+//    Display w;
+//    w.show();
 
-    return a.exec();
+//    return a.exec();
+    return 0;
 }
