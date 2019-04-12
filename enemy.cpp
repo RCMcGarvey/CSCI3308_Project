@@ -1,3 +1,7 @@
+/*
+Anton's Changelog:
+-Removed main(), to prevent undefined behavior
+*/
 #include "enemy.h"
 #include "player.h"
 
@@ -13,13 +17,15 @@ enemy::enemy() { // Create default enemy
 
 }
 
-enemy::enemy(EnemyType t, int h, int h_max, int b_atk, double c) { // Enemy type, health, max_health, base_attack
+enemy::enemy(EnemyType t, int h, int h_max, int b_atk, double c) { // Enemy type, health, max_health, base_attack, crit_chance
 
     type = t;
     health = h;
     max_health = h_max;
     base_attack = b_atk;
     crit_chance = c;
+
+    alive = true;
 
 }
 
@@ -46,7 +52,7 @@ enemy::enemy(EnemyType t) { // Set attributes based on enemy type
             crit_chance = 0.3;
             break;
     }
-
+    alive = true;
 }
 
 enemy::~enemy() {}
@@ -73,8 +79,16 @@ int enemy::attack() {
 
 }
 
+bool enemy::getAlive() {
+
+    return alive;
+
+}
+
+/*
 int main() {
 
     srand(time(0)); // Seeded 4/5
 
 }
+*/

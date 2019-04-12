@@ -45,6 +45,7 @@ class enemy {
 
         void adjustHealth(int); // For taking damage/healing
         int attack(); // For dealing damage
+        bool getAlive();
 
     private:
 
