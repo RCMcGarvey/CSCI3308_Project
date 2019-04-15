@@ -85,15 +85,6 @@ void room::cleared() {
 
 room::room() {
     //Found somewhere in the building
-    Item* oldSword  = new Item("weapon", "Old Sword", false, 12, 0, .1);
-    Item* woodenBow = new Item("weapon", "Wooden Bow", false, 5, 0, .5);
-    Item* rustyDagger = new Item("weapon", "Rusty Dagger", false, 7, 0, .0);
-    Item* healingPotion = new Item("potion", "Potion of Healing", true, 0, 15, 0.0);
-    //Can be found outdoors
-    Item* stick = new Item("weapon", "A dry stick", false, 1, 0, .0);
-    Item* dryTwig = new Item("weapon", "A dry twig", true, 0, 0, .0);
-    Item* brick = new Item("weapon", "A Red Brick", true, 15, 0, .1);
-    enemy* snowman = new enemy(EnemyType::Skeleton, 100,100, 5, .1);
 
     //outside
     outside.description = "You look over your shoulder. Tendrils of fog slither out from the encroaching forest like snakes, hissing as they slide over the dead ground. Menacing shadows watch you from the cover of the trees. The night is frigid; you pull your clothes tighter. If you spend any longer outside, you’ll freeze to death.";
@@ -158,3 +149,4 @@ bool  room::addItem(Item* newItem){
     }
     return false;
 }
+

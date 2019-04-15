@@ -27,6 +27,9 @@ public:
     QString getItem(int index, int from);
     int howManyItems();
 
+    //Anton's Functions
+    Item** getRoomItems(){return map.getRoomItems();}
+
 private:
     QString toOutput;
 

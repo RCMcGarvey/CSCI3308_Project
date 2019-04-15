@@ -41,6 +41,8 @@ public:
 
   Item* getInventory(int slot);
 
+  int getDefense();
+
 private:
 
   Item* inventory[8];

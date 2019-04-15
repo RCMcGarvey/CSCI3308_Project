@@ -45,9 +45,9 @@ QString Manager::getNarrative()
 
 void Manager::combatEvent()
 {
-    int comp = (rand() % 100) + 1;
-    int enemyAttack = map.getEnemy()->attack();
-    int playerAttack = theHero.attack();
+    //int comp = (rand() % 100) + 1;
+    int enemyAttack = -map.getEnemy()->attack();
+    int playerAttack = -theHero.attack();
     if(map.hasEnemy() == true)
     {
         map.getEnemy()->adjustHealth(playerAttack);
@@ -73,20 +73,31 @@ void Manager::combatEvent()
             }
             }
         }
-
+        theHero.adjustHealth(enemyAttack + theHero.getDefense());
+        if(theHero.getHealth() == 0)
+        {
+            toOutput = "<p style='color:darkred'><center><big>You're innards become outards!</big></center></p>";
+        }
     }
     else
     {
-
+        toOutput = "Theres nothing here to fight";
     }
 
 }
 
 QString Manager::getItem(int index, int from)
 {
+    Item** roomItems = map.getRoomItems();
+    QString ret;
     if(from == 1)
     {
-        return map.getRoomItems(index)->name;
+//        return map.getRoomItems(index)->name;
+        if(roomItems[index] == nullptr){
+            ret+="Nothing there";
+            return ret;
+        }
+        else return roomItems[index]->name;
     }
     else if(from == 2)
     {

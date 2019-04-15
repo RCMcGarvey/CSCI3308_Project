@@ -136,6 +136,11 @@ void Player::useItem(int slot)
     current = inventory[slot];
     //if(current->type == )
 }
+
+int Player::getDefense()
+{
+    return defense_boost;
+}
 //Used to test functionalities of various methods
 //This isn't necessary
 /*int main(){

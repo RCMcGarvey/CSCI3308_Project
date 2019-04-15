@@ -23,6 +23,8 @@ Display::Display(QWidget *parent) :
 
     box1 = false;
 
+    ui->textEdit->setStyleSheet(QStringLiteral("font: 12pt \"times\";"));
+
     ui->northButton->setVisible(false);
     ui->eastButton->setVisible(false);
     ui->southButton->setVisible(false);
@@ -350,10 +352,12 @@ void Display::populateDropdown(int box, QString button)
         }
         else if(button == "Interact" || button == "Pick Up")
         {
-            for(int i = 0; i < bossMan.howManyItems(); ++i)
+            //ui->textEdit->append(QString::number(bossMan.howManyItems(),10));
+            for(int i = 0; i < 4; ++i)
             {
-                ui->comboBox->addItem(bossMan.getItem(i,1));
-                ui->textEdit->append(bossMan.getItem(i,1));
+                if(bossMan.getItem(i, 1) != nullptr)
+                    ui->comboBox->addItem(bossMan.getItem(i,1));
+
             }
         }
     }
