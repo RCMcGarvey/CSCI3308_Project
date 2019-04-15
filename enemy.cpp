@@ -8,23 +8,24 @@ Anton's Changelog:
 #include <stdio.h>
 #include <time.h>
 
-enemy::enemy() { // Create default enemy
+enemy::enemy() { // Create default enemy (Snowman)
 
-    health = 100;
-    max_health = 100;
-    base_attack = 5;
-    alive = true;
+    type = Snowman;
+    health = 10;
+    max_health = 10;
+    base_attack = 0;
+    crit_chance = 0.0;
+    alive = true; // Barely true
 
 }
 
-enemy::enemy(EnemyType t, int h, int h_max, int b_atk, double c) { // Enemy type, health, max_health, base_attack, crit_chance
+enemy::enemy(EnemyType t, int h, int h_max, int b_atk, double c) { // Set custom attributes
 
     type = t;
     health = h;
     max_health = h_max;
     base_attack = b_atk;
     crit_chance = c;
-
     alive = true;
 
 }
@@ -33,6 +34,12 @@ enemy::enemy(EnemyType t) { // Set attributes based on enemy type
 
     type = t;
     switch(t) {
+        case Snowman:
+            health = 10;
+            max_health = 10;
+            base_attack = 0;
+            crit_chance = 0.0;
+            break;
         case Ghost:
             health = 100;
             max_health = 100;
@@ -63,6 +70,18 @@ enemy::enemy(EnemyType t) { // Set attributes based on enemy type
             base_attack = 5;
             crit_chance = 0.4;
             break;
+        case Diary:
+            health = 420;
+            max_health = 420;
+            base_attack = 20;
+            crit_chance = 0.5;
+            break;
+        case ZippyFlap:
+            health = 200;
+            max_health = 200;
+            base_attack = 15;
+            crit_chance = 0.1;
+            break;
     }
     alive = true;
 }
@@ -82,16 +101,32 @@ void enemy::adjustHealth(int amt) {
 
 }
 
+void enemy::adjustCrit(double amt) {
+
+    crit_chance += amt;
+    if (crit_chance < 0.0) {
+        crit_chance = 0.0;
+    }
+    else if (crit_chance > 1.0) {
+        crit_chance = 1.0;
+    }
+
+}
+
 int enemy::attack() {
 
     int atk = base_attack;
-    int bonus = rand() % 1000;
-    (crit_chance * 1000 > bonus) ? atk *= 3 : atk *= 1;
+    int bonus = rand() % 100;
+    (crit_chance * 100 > bonus) ? atk *= 3 : atk *= 1;
+    // Special attribute modifiers:
     if (type == Vampire) { // Vampire type steals health
         adjustHealth(atk / 2);
     }
     if (type == Ghoul) { // Ghoul type regens health each turn
         adjustHealth(5);
+    }
+    if (type == ZippyFlap) { // ZippyFlap type has dynamic crit_chance
+        adjustCrit(0.1);
     }
     return atk;
 
