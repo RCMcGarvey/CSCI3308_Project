@@ -21,9 +21,6 @@ Consider replacing the following method with a signal/slot pair
 //   //complete implementation
 // }
 
-void Item::display_message(){
-  if(has_message) std::cout<<message<<std::endl;;
-}
  /////////////////////////END ITEM CLASS DEFINITIONS////////////////////////////
 ////////////////////////BEGIN PLAYER CLASS DEFINITIONS/////////////////////////
 Player::Player(){
@@ -39,35 +36,35 @@ Player::Player(){
 //returns true if item was added to inventory
 
 //May need to re-implement print/output
-/*bool Player::collectItem(Item* new_item){
+bool Player::collectItem(Item* new_item){
   //collecting
-  if(new_item->type == ItemType::Weapon&&inventory[0]==nullptr){
+  if(new_item->type == ItemType::weapon&&inventory[0]==nullptr){
     inventory[0] = new_item;
-    std::cout<<"You picked up a "<<new_item->name<<"!"<<std::endl;
+    //std::cout<<"You picked up a "<<new_item->name<<"!"<<std::endl;
     return true;
   }
-  else if(new_item->type == ItemType::Armor && inventory[1] == nullptr){
+  else if(new_item->type == ItemType::armor && inventory[1] == nullptr){
     inventory[1] = new_item;
-    std::cout<<"You picked up a "<<new_item->name<<"!"<<std::endl;
+    //std::cout<<"You picked up a "<<new_item->name<<"!"<<std::endl;
     return true;
   }
-  else if(new_item->type == ItemType::Spell && inventory[2] == nullptr){
+  else if(new_item->type == ItemType::spell && inventory[2] == nullptr){
     inventory[2] = new_item;
-    std::cout<<"You picked up a "<<new_item->name<<"!"<<std::endl;
+    //std::cout<<"You picked up a "<<new_item->name<<"!"<<std::endl;
     return true;
   }
   //(Add other inventory slot functionalities here)
-  else if(new_item->type == ItemType::Other){
+  else if(new_item->type == ItemType::other){
     for(int i = 3; i<8; i++){
       if(inventory[i] == nullptr){
         inventory[i] = new_item;
-        std::cout<<"You picked up a "<<new_item->name<<"!"<<std::endl;
+        //std::cout<<"You picked up a "<<new_item->name<<"!"<<std::endl;
         return true;
       }
     }
   }
-  std::cout<<"You couldn't pick up the "<<new_item->name<<". (You may need to drop an item)"<<std::endl;
-}*/
+  //std::cout<<"You couldn't pick up the "<<new_item->name<<". (You may need to drop an item)"<<std::endl;
+}
 
 //Clears and returns a pointer to the item in the slot'th inventory slot
 Item* Player::dropItem(int slot){

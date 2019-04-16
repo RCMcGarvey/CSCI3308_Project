@@ -9,7 +9,7 @@
 #include "item.h"
 
 //Feel free to add other item types here
-enum class ItemType{Weapon, Armor, Spell, Other};
+//enum class ItemType{Weapon, Armor, Spell, Other};
 
 //Base item class (may be subclassed for different behaviors or effects)
 

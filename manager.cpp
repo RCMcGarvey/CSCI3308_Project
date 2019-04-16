@@ -14,23 +14,39 @@ Manager::~Manager()
 
 }
 
-void Manager::userInput(int input, string action)
+QString Manager::move(int input)
 {
-    if(action == "move")
-    {
-        toOutput = map.nextRoom(input);
-    }
+    return map.nextRoom(input);
 }
 
-void Manager::userInput(QString input)
+QString Manager::inspect(int input)
 {
+    QString ret;
+    ret = theHero.getInventory(input)->name;
+}
+
+bool Manager::pickup(int input)
+{
+    Item **holder = map.getRoomItems();
+    if(theHero.collectItem(holder[input]) == false)
+    {
+        return  false;
+    }
+    else
+    {
+        return true;
+    }
+
 
 }
 
 void Manager::userInput(int input, int input2)
 {
-    Item holder;
-
+    Item *holder = theHero.dropItem(input);
+    Item *holder2 = theHero.getInventory(input2);
+    theHero.collectItem(holder2);
+    theHero.dropItem(input2);
+    theHero.collectItem(holder);
 }
 
 int Manager::getPlayerHealth()
@@ -76,12 +92,30 @@ void Manager::combatEvent()
         theHero.adjustHealth(enemyAttack + theHero.getDefense());
         if(theHero.getHealth() == 0)
         {
-            toOutput = "<p style='color:darkred'><center><big>You're innards become outards!</big></center></p>";
+            int msg = rand() % 3;
+            switch(msg)
+            {
+            case 0:
+            {
+                toOutput = "<p style='color:darkred'><center><big>You're innards become outards!</big></center></p>";
+                break;
+            }
+            case 1:
+            {
+                toOutput = "<p style='color:darkred'><center><big>Warning graphic content!</big></center></p>";
+                break;
+            }
+            case 2:
+            {
+                toOutput = "<p style='color:darkred'><center><big>You got slushed by the monster!</big></center></p>";
+                break;
+            }
+            }
         }
     }
     else
     {
-        toOutput = "Theres nothing here to fight";
+        toOutput = "Theres nothing to fight";
     }
 
 }

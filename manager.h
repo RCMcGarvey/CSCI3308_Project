@@ -18,8 +18,10 @@ public:
     ~Manager();
 
     //void userInput(QString input);
-    void userInput(int input, string action);
-    void userInput(QString input);
+    QString move(int input);
+    bool pickup(int input);
+    void drop(int input);
+    QString inspect(int input);
     void userInput(int input, int input2);
     int getPlayerHealth();
     QString getNarrative();

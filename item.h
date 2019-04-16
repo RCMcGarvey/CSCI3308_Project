@@ -6,10 +6,12 @@
 
 using namespace std;
 
+enum ItemType{weapon, spell, armor, consumable, other};
+
 struct Item{
 
   //what the item is
-  string type;
+  ItemType type;
   QString name;
   //item behavior when
   bool is_single_use;
@@ -21,11 +23,11 @@ struct Item{
 
 // in case the item is a sheet of paper which says something
   bool has_message;
-  std::string message;
+  QString message;
 
   //Constructor: (basic weapons, armor, and potions)
   //  type        name     singleuse atk dfs  crit
-  Item(string t, QString n, bool single_use, int atk, int def, double crit)
+  Item(ItemType t, QString n, bool single_use, int atk, int def, double crit)
   {
     type = t;
     name = n;
@@ -40,7 +42,7 @@ struct Item{
 
   //Constructor: (scrolls, items with messages, misc)
   //  type        name     singleuse atk dfs  crit    use/message
-  Item(string t, QString n, bool single_use, int atk, int def, double crit, std::string msg)
+  Item(ItemType t, QString n, bool single_use, int atk, int def, double crit, QString msg)
   {
     type = t;
     name = n;
@@ -56,7 +58,25 @@ struct Item{
   Item(){}
 
   //open to implementation
-  void display_message();
+  QString display_message()
+  {
+      if(type == weapon)
+      {
+           return name + "Attack";
+      }
+      else if(type == spell)
+      {
+
+      }
+      else if(type == armor)
+      {
+
+      }
+      else
+      {
+
+      }
+  }
   // bool action();//may be used to destroy single-use items after use
 };
 

@@ -19,7 +19,7 @@ Display::Display(QWidget *parent) :
     tb.setColor(QPalette::Text, Qt::white);
     ui->textEdit->setPalette(tb);
 
-    ui->progressBar->setStyleSheet("QProgressBar::chunk {background: rgb(230, 20, 70, 100%);}");
+    ui->progressBar->setStyleSheet("QProgressBar::chunk {background: rgb(125, 0, 20, 100%);}");
 
     box1 = false;
 
@@ -83,7 +83,7 @@ void Display::on_moveButton_clicked()
 void Display::on_northButton_clicked()
 {
     //ui->textEdit->append("You went north");
-    bossMan.userInput(1, "move");
+    bossMan.move(1);
     ui->textEdit->append(bossMan.getNarrative());
     ui->northButton->setVisible(false);
     ui->eastButton->setVisible(false);
@@ -95,7 +95,7 @@ void Display::on_northButton_clicked()
 void Display::on_eastButton_clicked()
 {
     //ui->textEdit->append("You went east");
-    bossMan.userInput(2, "move");
+    bossMan.move(2);
     ui->textEdit->append(bossMan.getNarrative());
     ui->northButton->setVisible(false);
     ui->eastButton->setVisible(false);
@@ -107,7 +107,7 @@ void Display::on_eastButton_clicked()
 void Display::on_westButton_clicked()
 {
     //ui->textEdit->append("You went west");
-    bossMan.userInput(4, "move");
+    bossMan.move(4);
     ui->textEdit->append(bossMan.getNarrative());
     ui->northButton->setVisible(false);
     ui->eastButton->setVisible(false);
@@ -119,7 +119,7 @@ void Display::on_westButton_clicked()
 void Display::on_southButton_clicked()
 {
     //ui->textEdit->append("You go south");
-    bossMan.userInput(3, "move");
+    bossMan.move(3);
     ui->textEdit->append(bossMan.getNarrative());
     ui->northButton->setVisible(false);
     ui->eastButton->setVisible(false);
@@ -338,7 +338,7 @@ void Display::populateDropdown(int box, QString button)
     if(box == 1)
     {
 
-        if(button == "Swap" || button == "Use Item" || button == "Inspect")
+        if(button == "Swap" || button == "Use Item" || button == "Inspect" || button == "Drop")
         {
 
             ui->comboBox->addItem("Slot 1");
@@ -355,7 +355,7 @@ void Display::populateDropdown(int box, QString button)
             //ui->textEdit->append(QString::number(bossMan.howManyItems(),10));
             for(int i = 0; i < 4; ++i)
             {
-                if(bossMan.getItem(i, 1) != nullptr)
+                if(bossMan.getItem(i, 1) != "Nothing there")
                     ui->comboBox->addItem(bossMan.getItem(i,1));
 
             }
@@ -403,6 +403,16 @@ void Display::on_comboBox_activated(int index)
         }
         else if (currentButton == "Pick Up")
         {
+            if(bossMan.pickup(index) == false)
+            {
+                ui->textEdit->append("You need to drop an item");
+                populateDropdown(2, "Drop");
+                ui->comboBox_2->setVisible(true);
+            }
+            else
+            {
+                ui->textEdit->append("You picked up a " + ui->comboBox->currentText() + ".");
+            }
             ui->comboBox->clear();
             on_pickupButton_clicked();
         }
