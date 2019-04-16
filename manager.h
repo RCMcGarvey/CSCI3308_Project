@@ -21,6 +21,7 @@ public:
     QString move(int input);
     bool pickup(int input);
     void drop(int input);
+    QString interact(int input);
     QString inspect(int input);
     void userInput(int input, int input2);
     int getPlayerHealth();

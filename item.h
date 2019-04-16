@@ -62,19 +62,19 @@ struct Item{
   {
       if(type == weapon)
       {
-           return name + "Attack";
+           return name + ", Attack Value: " + QString::number(attack_boost);
       }
       else if(type == spell)
       {
-
+           return name + ", Description: " + message;
       }
       else if(type == armor)
       {
-
+           return name + ", Armor Value: " + QString::number(defense_boost);
       }
       else
       {
-
+           return name + ". " + message;
       }
   }
   // bool action();//may be used to destroy single-use items after use

@@ -19,7 +19,10 @@ Display::Display(QWidget *parent) :
     tb.setColor(QPalette::Text, Qt::white);
     ui->textEdit->setPalette(tb);
 
-    ui->progressBar->setStyleSheet("QProgressBar::chunk {background: rgb(125, 0, 20, 100%);}");
+    ui->progressBar->setStyleSheet("QProgressBar::chunk {background: rgb(150, 0, 20, 100%);}");
+    ui->progressBar_2->setStyleSheet("QProgressBar::chunk {background: rgb(150, 0, 20, 100%);}");
+
+    ui->progressBar_2->setVisible(false);
 
     box1 = false;
 
@@ -393,12 +396,14 @@ void Display::on_comboBox_activated(int index)
         }
         else if(currentButton == "Inspect")
         {
+            ui->textEdit->append(bossMan.inspect(index));
             ui->comboBox->clear();
             on_inspectButton_clicked();
         }
         else if (currentButton == "Interact")
         {
             ui->comboBox->clear();
+            ui->textEdit->append(bossMan.interact(index));
             on_interactButton_clicked();
         }
         else if (currentButton == "Pick Up")
@@ -407,6 +412,7 @@ void Display::on_comboBox_activated(int index)
             {
                 ui->textEdit->append("You need to drop an item");
                 populateDropdown(2, "Drop");
+                currentButton = "Drop";
                 ui->comboBox_2->setVisible(true);
             }
             else
@@ -426,8 +432,15 @@ void Display::on_comboBox_activated(int index)
 
 void Display::on_comboBox_2_activated(int index)
 {
-    bossMan.userInput(item, index);
-    ui->comboBox->clear();
-    ui->comboBox_2->clear();
-    on_swapButton_clicked();
+    if(currentButton == "Drop")
+    {
+        bossMan.drop(index);
+    }
+    else if(currentButton == "Swap")
+    {
+        bossMan.userInput(item, index);
+        ui->comboBox->clear();
+        ui->comboBox_2->clear();
+        on_swapButton_clicked();
+    }
 }

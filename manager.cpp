@@ -21,8 +21,42 @@ QString Manager::move(int input)
 
 QString Manager::inspect(int input)
 {
-    QString ret;
-    ret = theHero.getInventory(input)->name;
+    if(theHero.getInventory(input) != nullptr)
+    {
+        return theHero.getInventory(input)->display_message();
+    }
+    else
+    {
+        return "You have nothing in that slot.";
+    }
+}
+
+QString Manager::interact(int input)
+{
+    Item **items = map.getRoomItems();
+    if(items[input] != nullptr)
+    {
+        return items[input]->display_message();
+    }
+}
+
+void Manager::drop(int input)
+{
+    bool flag = false;
+    Item **roomItems = map.getRoomItems();
+    for(int i = 0; i < 4; ++i)
+    {
+        if(roomItems[i] == nullptr)
+        {
+            roomItems[i] = theHero.dropItem(input);
+            flag = true;
+            break;
+        }
+    }
+    if(!flag)
+    {
+        delete theHero.dropItem(input);
+    }
 }
 
 bool Manager::pickup(int input)
