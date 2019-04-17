@@ -116,7 +116,7 @@ void enemy::adjustCrit(double amt) {
 int enemy::attack() {
 
     int atk = base_attack;
-    int bonus = rand() % 100;
+    int bonus = rand() % atk * atk;
     (crit_chance * 100 > bonus) ? atk *= 3 : atk *= 1;
     // Special attribute modifiers:
     if (type == Vampire) { // Vampire type steals health
