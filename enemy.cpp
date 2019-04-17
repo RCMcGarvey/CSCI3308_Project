@@ -8,6 +8,8 @@ Anton's Changelog:
 #include <stdio.h>
 #include <time.h>
 
+#include <QDebug>
+
 enemy::enemy() { // Create default enemy (Snowman)
 
     type = Snowman;
@@ -89,8 +91,9 @@ enemy::enemy(EnemyType t) { // Set attributes based on enemy type
 enemy::~enemy() {}
 
 void enemy::adjustHealth(int amt) {
-
-    health += amt;
+    qDebug()<<"Entered enemy adjust health";
+    health -= amt;
+    qDebug()<<health;
     if (health < 0) {
         health = 0;
         alive = false;

@@ -1,12 +1,15 @@
 #include "Manager.h"
 #include <iostream>
 
+#include <QDebug>
+
 //Ryan
 
 Manager::Manager()
 {
     toOutput = map.theBeginning();
     srand(8191);
+    theHero = Player(Bard);
 }
 
 Manager::~Manager()
@@ -21,7 +24,14 @@ QString Manager::move(int input)
 
 QString Manager::inspect(int input)
 {
-
+    if(theHero.getInventory()[input] != nullptr)
+    {
+        return theHero.getInventory()[input]->display_message();
+    }
+    else
+    {
+        return "You have no item in that slot.";
+    }
 }
 
 QString Manager::interact(int input)
@@ -54,15 +64,8 @@ void Manager::drop(int input)
 
 bool Manager::pickup(int input)
 {
-    Item **holder = map.getRoomItems();
-    if(theHero.collectItem(holder[input]) == false)
-    {
-        return  false;
-    }
-    else
-    {
-        return true;
-    }
+    Item *current = map.getRoomItems()[input];
+    return theHero.collectItem(current);
 
 
 }
@@ -85,63 +88,79 @@ QString Manager::getNarrative()
     return toOutput;
 }
 
-void Manager::combatEvent()
+QString Manager::combatEvent(QString action)
 {
     //int comp = (rand() % 100) + 1;
-    int enemyAttack = -map.getEnemy()->attack();
-    int playerAttack = -theHero.attack();
-    if(map.hasEnemy() == true)
+
+    int enemyAttack = map.getEnemyAttack();
+    int playerAttack = theHero.attack(action);
+    //    int playerAttack = 5;
+    //    int enemyAttack = 5;
+
+    if(map.getEnemy())
     {
-        map.getEnemy()->adjustHealth(playerAttack);
-        if(map.getEnemy()->getAlive() == false)
+        //qDebug()<<"map has enemy 1";
+        if(map.getEnemy())
         {
-            int msg = rand() % 3;
-            switch(msg)
+            map.getEnemy()->adjustHealth(playerAttack);
+            theHero.adjustHealth(-enemyAttack);
+            if(map.getEnemy()->getAlive() == false)
             {
-            case 0:
-            {
-                toOutput = "You have defeated the beast.";
-                break;
+                //qDebug()<<"enemy is not alive";
+                map.cleared();
+                int msg = rand() % 3;
+                switch(msg)
+                {
+                case 0:
+                {
+                    return "You have defeated the beast.";
+
+                }
+                case 1:
+                {
+                    return "The creature is slain by your hand.";
+
+                }
+                case 2:
+                {
+                    return "The monster flees never to be seen again.";
+
+                }
+                }
             }
-            case 1:
+            else if(map.getEnemy()->getAlive() == true)
             {
-                toOutput = "The creature is slain by your hand.";
-                break;
+                return "You did " + QString::number(playerAttack,10) + " damage to the creature and take "+QString::number(enemyAttack, 10);
             }
-            case 2:
+            if(theHero.getHealth() == 0)
             {
-                toOutput = "The monster flees never to be seen again.";
-                break;
-            }
-            }
-        }
-        theHero.adjustHealth(enemyAttack + theHero.getDefense());
-        if(theHero.getHealth() == 0)
-        {
-            int msg = rand() % 3;
-            switch(msg)
-            {
-            case 0:
-            {
-                toOutput = "<p style='color:darkred'><center><big>You're innards become outards!</big></center></p>";
-                break;
-            }
-            case 1:
-            {
-                toOutput = "<p style='color:darkred'><center><big>Warning graphic content!</big></center></p>";
-                break;
-            }
-            case 2:
-            {
-                toOutput = "<p style='color:darkred'><center><big>You got slushed by the monster!</big></center></p>";
-                break;
-            }
+                int msg = rand() % 3;
+                switch(msg)
+                {
+                case 0:
+                {
+                    return "<p style='color:darkred'><center><big>You're innards become outards!</big></center></p>";
+                    break;
+                }
+                case 1:
+                {
+                    return "<p style='color:darkred'><center><big>Your body -Warning graphic content- by the creature!</big></center></p>";
+                    break;
+                }
+                case 2:
+                {
+                    return "<p style='color:darkred'><center><big>You got slushed by the monster!</big></center></p>";
+                    break;
+                }
+                }
             }
         }
     }
     else
     {
-        toOutput = "Theres nothing to fight";
+        //qDebug()<<"else executed";
+        return "There's nothing to fight";
+        //        toOutput = "Theres nothing to fight";
     }
 
 }

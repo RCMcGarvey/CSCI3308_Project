@@ -36,7 +36,7 @@ public:
   void toggleItem(int slot);
 
   //returns attack damage
-  int attack();
+  int attack(QString);
   //Updates player's stats fields
   void calculateStats();
   //gets health for health bars;
@@ -57,5 +57,6 @@ private:
   int attack_boost;
   int defense_boost;
   double critChance; //for rogue class
+  PlayerClass role;
 };
 #endif // PLAYER_H

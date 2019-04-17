@@ -37,12 +37,14 @@ Player::Player(){
 Player::Player(PlayerClass role)
 {
     if(role == Warrior)
+        //weapon, weapon, normal
     {
         health = 125;
         max_health = 125;
         base_attack = 5;
         attack_boost = 0;
         defense_boost = 0;
+        critChance = 0;
         for(int i = 0; i < 8; ++i)
         {
             inventory.push_back(nullptr);
@@ -50,12 +52,14 @@ Player::Player(PlayerClass role)
 
     }
     else if(role == Mage)
+        //spell, spell, normal
     {
         health = 100;
         max_health = 100;
         base_attack = 0;
         attack_boost = 0;
         defense_boost = 0;
+        critChance = 0;
         for (int i = 0; i < 8; ++i)
         {
             inventory.push_back(nullptr);
@@ -68,6 +72,7 @@ Player::Player(PlayerClass role)
         base_attack = 5;
         attack_boost = 0;
         defense_boost = 0;
+        critChance = 0;
         for(int i = 0; i < 10; ++i)
         {
             inventory.push_back(nullptr);
@@ -86,6 +91,7 @@ Player::Player(PlayerClass role)
             inventory.push_back(nullptr);
         }
     }
+    this->role = role;
 }
 
 //Attempts to add item to current inventory
@@ -143,17 +149,56 @@ void Player::toggleItem(int slot){
 }
 
 //Returns attack damage dealt by player
-int Player::attack(){
+int Player::attack(QString type){
   calculateStats();
   int atk = base_attack+attack_boost;
   //to prevent SIGSEGVs
   int bonus = rand()%1000;
+  if(role == Warrior){
+      if(type =="Weapon"){
+          if(inventory[0]){
+              atk+=inventory[0]->attack_boost;
+          }
+          if(inventory[1]){
+              atk+=inventory[1]->attack_boost;
+          }
+      }
+      else if(type == "Spell"){
+         return 0;
+      }
+  }
+  else if(role == Mage){
+      if(type =="Weapon"){
+        return 0;
+      }
+      else if(type == "Spell"){
+        //special spell actions
+      }
+  }
+  else{
+      if(type =="Weapon"){
+          if(inventory[0]){
+              atk+=inventory[0]->attack_boost;
+          }
+      }
+      else if(type == "Spell"){
+    //special spell actions
+      }
+  }
+  atk += (rand()%10* atk/20);//to vary attack damage (constants can be adjusted)
+
+  if(inventory[0]&&inventory[0]->crit_chance+critChance*1000>bonus) atk*=3;//critical hit
+
+  if(bonus>989) atk = 0;//attack missed... for some reason
+
+  /*
   if(inventory[0]&&inventory[0]->is_active){
     atk+=inventory[0]->attack_boost;
     if(inventory[0]->crit_chance+critChance*1000>bonus) atk*=3;//critical hit
   }
   atk += (rand()%10* atk/20);//to vary attack damage (constants can be adjusted)
   if(bonus>989) atk = 0;//attack missed... for some reason
+  */
   return atk;
 }
 

@@ -27,7 +27,7 @@ public:
     void userInput(int input, int input2);
     int getPlayerHealth();
     QString getNarrative();
-    void combatEvent();
+    QString combatEvent(QString);
     QString getItem(int index, int from);
     int howManyItems();
 

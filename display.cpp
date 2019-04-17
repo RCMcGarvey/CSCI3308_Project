@@ -44,6 +44,8 @@ Display::Display(QWidget *parent) :
     //ui->lineEdit->setVisible(false);
 
     ui->textEdit->append(bossMan.getNarrative());
+    ui->progressBar->setMaximum(bossMan.getPlayerHealth());
+    ui->progressBar->setValue(bossMan.getPlayerHealth());
 }
 
 Display::~Display()
@@ -86,8 +88,7 @@ void Display::on_moveButton_clicked()
 void Display::on_northButton_clicked()
 {
     //ui->textEdit->append("You went north");
-    bossMan.move(1);
-    ui->textEdit->append(bossMan.getNarrative());
+    ui->textEdit->append(bossMan.move(1));
     ui->northButton->setVisible(false);
     ui->eastButton->setVisible(false);
     ui->southButton->setVisible(false);
@@ -98,8 +99,7 @@ void Display::on_northButton_clicked()
 void Display::on_eastButton_clicked()
 {
     //ui->textEdit->append("You went east");
-    bossMan.move(2);
-    ui->textEdit->append(bossMan.getNarrative());
+    ui->textEdit->append(bossMan.move(2));
     ui->northButton->setVisible(false);
     ui->eastButton->setVisible(false);
     ui->southButton->setVisible(false);
@@ -110,8 +110,7 @@ void Display::on_eastButton_clicked()
 void Display::on_westButton_clicked()
 {
     //ui->textEdit->append("You went west");
-    bossMan.move(4);
-    ui->textEdit->append(bossMan.getNarrative());
+    ui->textEdit->append(bossMan.move(4));
     ui->northButton->setVisible(false);
     ui->eastButton->setVisible(false);
     ui->southButton->setVisible(false);
@@ -122,8 +121,7 @@ void Display::on_westButton_clicked()
 void Display::on_southButton_clicked()
 {
     //ui->textEdit->append("You go south");
-    bossMan.move(3);
-    ui->textEdit->append(bossMan.getNarrative());
+    ui->textEdit->append(bossMan.move(3));
     ui->northButton->setVisible(false);
     ui->eastButton->setVisible(false);
     ui->southButton->setVisible(false);
@@ -199,9 +197,10 @@ void Display::on_lookButton_clicked()
 
 void Display::on_weaponButton_clicked()
 {
-   ui->textEdit->append("You swing violently with your fists");
-   bossMan.combatEvent();
-   ui->textEdit->append(bossMan.getNarrative());
+   currentButton = "Weapon";
+   //ui->textEdit->append("You swing violently with your fists");
+   ui->textEdit->append(bossMan.combatEvent(currentButton));
+   //ui->textEdit->append(bossMan.getNarrative());
    ui->progressBar->setValue(bossMan.getPlayerHealth());
    ui->weaponButton->setVisible(false);
    ui->spellButton->setVisible(false);
@@ -210,7 +209,10 @@ void Display::on_weaponButton_clicked()
 
 void Display::on_spellButton_clicked()
 {
-    ui->textEdit->append("You flail your hands in an attempt to cast a spell.");
+    currentButton ="Spell";
+
+//    ui->textEdit->append("You flail your hands in an attempt to cast a spell.");
+    ui->textEdit->append(bossMan.combatEvent(currentButton));
     ui->weaponButton->setVisible(false);
     ui->spellButton->setVisible(false);
     ui->fightButton->setText("Fight");

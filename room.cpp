@@ -2,6 +2,7 @@
 #include <QString>
 
 //Kelley
+#include <QDebug>
 
 //call this after they move, pass it 1 for north, 2 for east
 //3 for south, 4 for west, 5 for up a floor/level
@@ -75,12 +76,18 @@ QString room::theBeginning() {
 
 //call this to see if there is an enemy in this room
 bool room::hasEnemy() {
+    if(currentRoom == nullptr){
+        qDebug()<<"no current room";
+        return false;
+    }
+//    return false;
     return currentRoom->monsters;
 }
 
 //when the enemy is defeated call this
 void room::cleared() {
     currentRoom->monsters = false;
+    currentRoom->monster = nullptr;
 }
 
 room::room() {
