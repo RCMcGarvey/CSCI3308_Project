@@ -116,18 +116,26 @@ void enemy::adjustCrit(double amt) {
 int enemy::attack() {
 
     int atk = base_attack;
-    int bonus = rand() % atk * atk;
-    (crit_chance * 100 > bonus) ? atk *= 3 : atk *= 1;
+    int bonus = rand() % (atk * atk) + 10;
+    bool critFlag = false;
+    (crit_chance * 100 > bonus) ? critFlag = true : critFlag = false;
+    if (critFlag) { // Critical hit
+        atk *= 3;
+    }
     // Special attribute modifiers:
-    if (type == Vampire) { // Vampire type steals health
+    if (type == Vampire) { // Vampire steals health
         adjustHealth(atk / 2);
     }
-    if (type == Ghoul) { // Ghoul type regens health each turn
+    if (type == Ghoul) { // Ghoul regens health each turn
         adjustHealth(5);
     }
-    if (type == ZippyFlap) { // ZippyFlap type has dynamic crit_chance
+    if (type == ZippyFlap) { // ZippyFlap has dynamic crit_chance
         adjustCrit(0.1);
     }
+    if (critFlag && type == Skeleton) { // Skeleton one-shots on crit
+        atk = 1000;
+    }
+
     return atk;
 
 }
