@@ -21,14 +21,7 @@ QString Manager::move(int input)
 
 QString Manager::inspect(int input)
 {
-    if(theHero.getInventory(input) != nullptr)
-    {
-        return theHero.getInventory(input)->display_message();
-    }
-    else
-    {
-        return "You have nothing in that slot.";
-    }
+
 }
 
 QString Manager::interact(int input)
@@ -76,11 +69,10 @@ bool Manager::pickup(int input)
 
 void Manager::userInput(int input, int input2)
 {
-    Item *holder = theHero.dropItem(input);
-    Item *holder2 = theHero.getInventory(input2);
-    theHero.collectItem(holder2);
-    theHero.dropItem(input2);
-    theHero.collectItem(holder);
+    Item *holder = theHero.getInventory()[input];
+    theHero.getInventory()[input] = theHero.getInventory()[input2];
+    theHero.getInventory()[input2] = holder;
+
 }
 
 int Manager::getPlayerHealth()
@@ -169,12 +161,21 @@ QString Manager::getItem(int index, int from)
     }
     else if(from == 2)
     {
-        return theHero.getInventory(index)->name;
+        vector<Item*> playerItems = theHero.getInventory();
+        if(playerItems[index] == nullptr)
+        {
+            ret+="Empty Slot";
+            return  ret;
+        }
+        else
+        {
+            return playerItems[index]->name;
+        }
     }
 }
 
 int Manager::howManyItems()
 {
-    return map.howManyItems;
+    return theHero.getInventory().size();
 }
 

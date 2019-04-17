@@ -7,6 +7,9 @@
 
 #include <string>
 #include "item.h"
+#include <vector>
+
+enum PlayerClass{Mage, Warrior, Bard, Rogue};
 
 //Feel free to add other item types here
 //enum class ItemType{Weapon, Armor, Spell, Other};
@@ -17,7 +20,7 @@
 class Player{
 public:
   Player();
-  Player(int);
+  Player(PlayerClass);
 
   //tries to add an item to the inventory
   //returns false if item cannot be collected
@@ -39,19 +42,20 @@ public:
   //gets health for health bars;
   int getHealth();
 
-  Item* getInventory(int slot);
+  vector<Item*> &getInventory();
 
   int getDefense();
 
 private:
 
-  Item* inventory[8];
-  //[Weapon, Armor, Spell, item, item, item, item, item]
+  vector<Item*> inventory;
+  //[Weapon, Armor, Spell, item, item, item, item, item] two more items for bards
   int health;//current health
   int max_health;//can change as character levels up
   int base_attack;
   // double defense;
   int attack_boost;
   int defense_boost;
+  double critChance; //for rogue class
 };
 #endif // PLAYER_H

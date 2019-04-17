@@ -233,6 +233,7 @@ void Display::on_useButton_clicked()
     else
     {
         ui->comboBox->setVisible(false);
+        ui->comboBox->clear();
         box1 = false;
         ui->InventoryButton->setEnabled(true);
         ui->inspectButton->setEnabled(true);
@@ -256,6 +257,7 @@ void Display::on_pickupButton_clicked()
     else
     {
         ui->comboBox->setVisible(false);
+        ui->comboBox->clear();
         box1 = false;
         ui->lookButton->setEnabled(true);
         ui->interactButton->setEnabled(true);
@@ -279,6 +281,7 @@ void Display::on_inspectButton_clicked()
     else
     {
         ui->comboBox->setVisible(false);
+        ui->comboBox->clear();
         box1 = false;
         ui->InventoryButton->setEnabled(true);
         ui->useButton->setEnabled(true);
@@ -310,6 +313,8 @@ void Display::on_swapButton_clicked()
         ui->InventoryButton->setEnabled(true);
         ui->useButton->setEnabled(true);
         ui->inspectButton->setEnabled(true);
+        ui->comboBox->clear();
+        ui->comboBox_2->clear();
         ui->swapButton->setText("Swap");
     }
 }
@@ -329,6 +334,7 @@ void Display::on_interactButton_clicked()
     else
     {
         ui->comboBox->setVisible(false);
+        ui->comboBox->clear();
         box1 = false;
         ui->interactButton->setText("Interact");
         ui->pickupButton->setEnabled(true);
@@ -343,15 +349,10 @@ void Display::populateDropdown(int box, QString button)
 
         if(button == "Swap" || button == "Use Item" || button == "Inspect" || button == "Drop")
         {
-
-            ui->comboBox->addItem("Slot 1");
-            ui->comboBox->addItem("Slot 2");
-            ui->comboBox->addItem("Slot 3");
-            ui->comboBox->addItem("Slot 4");
-            ui->comboBox->addItem("Slot 5");
-            ui->comboBox->addItem("Slot 6");
-            ui->comboBox->addItem("Slot 7");
-            ui->comboBox->addItem("Slot 8");
+            for(int i = 0; i < bossMan.howManyItems(); ++i)
+            {
+                ui->comboBox->addItem(bossMan.getItem(i,2));
+            }
         }
         else if(button == "Interact" || button == "Pick Up")
         {
@@ -368,14 +369,10 @@ void Display::populateDropdown(int box, QString button)
     {
         if(button == "Swap")
         {
-            ui->comboBox_2->addItem("Slot 1");
-            ui->comboBox_2->addItem("Slot 2");
-            ui->comboBox_2->addItem("Slot 3");
-            ui->comboBox_2->addItem("Slot 4");
-            ui->comboBox_2->addItem("Slot 5");
-            ui->comboBox_2->addItem("Slot 6");
-            ui->comboBox_2->addItem("Slot 7");
-            ui->comboBox_2->addItem("Slot 8");
+            for(int i = 0; i < bossMan.howManyItems(); ++i)
+            {
+                ui->comboBox_2->addItem(bossMan.getItem(i,2));
+            }
         }
     }
     else if(1)
@@ -418,8 +415,8 @@ void Display::on_comboBox_activated(int index)
             else
             {
                 ui->textEdit->append("You picked up a " + ui->comboBox->currentText() + ".");
+                ui->comboBox->clear();
             }
-            ui->comboBox->clear();
             on_pickupButton_clicked();
         }
     }

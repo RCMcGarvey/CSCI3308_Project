@@ -21,6 +21,8 @@ Consider replacing the following method with a signal/slot pair
 //   //complete implementation
 // }
 
+
+
  /////////////////////////END ITEM CLASS DEFINITIONS////////////////////////////
 ////////////////////////BEGIN PLAYER CLASS DEFINITIONS/////////////////////////
 Player::Player(){
@@ -29,7 +31,61 @@ Player::Player(){
   base_attack = 5;//can be changed in subclasses
   attack_boost = 0;
   defense_boost = 0;
-  for(int i = 0; i<8; i++) inventory[i] = nullptr;
+  for(int i = 0; i<8; i++) inventory.push_back(nullptr);
+}
+
+Player::Player(PlayerClass role)
+{
+    if(role == Warrior)
+    {
+        health = 125;
+        max_health = 125;
+        base_attack = 5;
+        attack_boost = 0;
+        defense_boost = 0;
+        for(int i = 0; i < 8; ++i)
+        {
+            inventory.push_back(nullptr);
+        }
+
+    }
+    else if(role == Mage)
+    {
+        health = 100;
+        max_health = 100;
+        base_attack = 0;
+        attack_boost = 0;
+        defense_boost = 0;
+        for (int i = 0; i < 8; ++i)
+        {
+            inventory.push_back(nullptr);
+        }
+    }
+    else if(role == Bard)
+    {
+        health = 90;
+        max_health = 90;
+        base_attack = 5;
+        attack_boost = 0;
+        defense_boost = 0;
+        for(int i = 0; i < 10; ++i)
+        {
+            inventory.push_back(nullptr);
+        }
+    }
+    else if(role == Rogue)
+    {
+        health = 100;
+        max_health = 100;
+        base_attack = 5;
+        attack_boost = 0;
+        defense_boost = 0;
+        critChance = .33;
+        for (int i = 0; i < 8; ++i)
+        {
+            inventory.push_back(nullptr);
+        }
+    }
 }
 
 //Attempts to add item to current inventory
@@ -94,7 +150,7 @@ int Player::attack(){
   int bonus = rand()%1000;
   if(inventory[0]&&inventory[0]->is_active){
     atk+=inventory[0]->attack_boost;
-    if(inventory[0]->crit_chance*1000>bonus) atk*=3;//critical hit
+    if(inventory[0]->crit_chance+critChance*1000>bonus) atk*=3;//critical hit
   }
   atk += (rand()%10* atk/20);//to vary attack damage (constants can be adjusted)
   if(bonus>989) atk = 0;//attack missed... for some reason
@@ -122,9 +178,9 @@ int Player::getHealth()
     return health;
 }
 
-Item* Player::getInventory(int slot)
+vector<Item*>& Player::getInventory()
 {
-    return inventory[slot];
+    return inventory;
 }
 
 void Player::useItem(int slot)

@@ -8,6 +8,7 @@
 #include <QTextEdit>
 #include <stdlib.h>
 #include <enemy.h>
+#include <vector>
 
 
 class Manager
