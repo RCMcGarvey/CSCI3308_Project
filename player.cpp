@@ -295,7 +295,14 @@ int Player::attack(QString type){
         return 0;
       }
       else if(type == "Spell"){
-        //special spell actions
+        if(inventory[0]){
+          adjustHealth(inventory[0]->defense_boost);
+          atk+=inventory[0]->attack_boost;
+        }
+        if(inventory[1]){
+          adjustHealth(inventory[1]->defense_boost);
+          atk+=inventory[1]->attack_boost;
+        }
       }
   }
   else{
@@ -304,14 +311,15 @@ int Player::attack(QString type){
               atk+=inventory[0]->attack_boost;
           }
       }
-      else if(type == "Spell"){
-    //special spell actions
+      else if(type == "Spell"&&inventory[1]){
+        adjustHealth(inventory[1]->defense_boost);
+        atk+=inventory[1]->attack_boost;
       }
   }
   atk += (rand()%10* atk/20);//to vary attack damage (constants can be adjusted)
 
-  if(inventory[0]&&inventory[0]->crit_chance+critChance*1000>bonus) atk*=3;//critical hit
-
+  if(role == Mage&&(inventory[1]->crit_chance+critChance)*1000>bonus) atk*=3;
+  else if(inventory[0]&&(inventory[0]->crit_chance+critChance)*1000>bonus) atk*=3;//critical hit
   if(bonus>989) atk = 0;//attack missed... for some reason
 
   /*
@@ -373,21 +381,16 @@ int Player::getDefense()
   //testing armor slot
   Item* generic_armor = new Item(ItemType::Armor, "Generic Armor", false, 0,15,0.0);
   Item* generic_armor2 = new Item(ItemType::Armor, "Rusty Armor", false, 0,-15,0.0);
-
   Item* sui = new Item(ItemType::Spell, "Sparkler", true, 1000,0,0.);
   sui->is_active = true;
   Player* dude = new Player();
   dude->collectItem(generic_sword);
   dude->collectItem(generic_sword2);
-
   dude->collectItem(generic_armor);
   dude->collectItem(generic_armor2);
-
   dude->collectItem(sui);
-
   std::cout<<"Player attacks for "<<dude->attack()<<std::endl;
   std::cout<<"Player attacks for "<<dude->attack()<<std::endl;
-
   std::cout<<"Program terminated successfully"<<std::endl;
   return 0;
 }
