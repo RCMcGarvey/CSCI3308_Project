@@ -1,5 +1,6 @@
 #include "display.h"
 #include <QApplication>
+#include "database.h"
 
 int main(int argc, char *argv[])
 {

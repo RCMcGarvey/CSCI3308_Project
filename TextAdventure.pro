@@ -31,14 +31,18 @@ SOURCES += \
     manager.cpp \
     player.cpp \
     enemy.cpp \
-    room.cpp
+    room.cpp \
+    database.cpp \
+    hashpass.cpp
 
 HEADERS += \
         display.h \
     manager.h \
     player.h \
     enemy.h \
-    room.h
+    room.h \
+    database.h \
+    hashpass.h
 
 FORMS += \
         display.ui
