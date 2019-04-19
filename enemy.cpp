@@ -130,7 +130,7 @@ void enemy::adjustCrit(double amt) {
 int enemy::attack() {
 
     int atk = base_attack;
-    int bonus = rand() % (atk * atk) + 10;
+    int bonus = rand() % 101;
     bool critFlag = false;
     (crit_chance * 100 > bonus) ? critFlag = true : critFlag = false;
     if (critFlag) { // Critical hit
@@ -146,7 +146,7 @@ int enemy::attack() {
     if (type == ZippyFlap) { // ZippyFlap has dynamic crit_chance
         adjustCrit(0.1);
     }
-    if (critFlag && type == Skeleton) { // Skeleton one-shots on crit
+    if (critFlag && type == Skeleton) { // Skeleton yeets on crit
         atk = 70;
     }
 
@@ -163,10 +163,13 @@ bool enemy::getAlive() {
 QString enemy::getEnemyName() {
 
     return name;
+
 }
 
-int enemy::getHealth(){
+int enemy::getHealth() {
+
     return health;
+
 }
 /*
 int main() {
