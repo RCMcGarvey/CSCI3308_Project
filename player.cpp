@@ -311,7 +311,7 @@ int Player::attack(QString type){
               atk+=inventory[0]->attack_boost;
           }
       }
-      else if(type == "Spell"){
+      else if(type == "Spell"&&inventory[1]){
         adjustHealth(inventory[1]->defense_boost);
         atk+=inventory[1]->attack_boost;
       }
