@@ -9,7 +9,7 @@ Manager::Manager()
 {
     toOutput = map.theBeginning();
     srand(8191);
-    theHero = Player(Bard);
+    theHero = Player(Warrior);
     gameOver = false;
 }
 

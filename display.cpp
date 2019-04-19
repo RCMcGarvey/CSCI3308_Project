@@ -57,10 +57,24 @@ Display::~Display()
 
 void Display::mainMenu()
 {
-    ui->textEdit->setHtml("<center><big>Presented by some Swonky Creatures</big></center>");
-    //QThread::sleep(10);
-    //ui->textEdit->setText("Hi there");
+    ui->textEdit->clear();
+    ui->textEdit->setHtml("<center><big>Presented by some Swonky Creatures</big></center>"
+                          "<br></br>"
+                          "<center><big>Insert title here</big></center>");
+    //QTimer::singleShot(200, this, SLOT());
 
+
+}
+
+void Display::instructions()
+{
+    ui->textEdit->clear();
+    QString howYouDo = "-Basic interaction is through the push buttons."
+                       "-You are unable to move while there is an enemy in the same area you are."
+                       "-When you attack an enemy you can use a weapon or a spell"
+                       "    -Weapons can be used by Bards, Warriors, and Rogues"
+                       "";
+    ui->textEdit->append()
 }
 
 void Display::on_moveButton_clicked()
@@ -219,6 +233,7 @@ void Display::on_weaponButton_clicked()
    ui->progressBar_2->setValue(bossMan.enemyHealth());
    ui->weaponButton->setVisible(false);
    ui->spellButton->setVisible(false);
+   ui->lookButton->setEnabled(true);
    ui->fightButton->setText("Fight");
 }
 
@@ -385,9 +400,7 @@ void Display::populateDropdown(int box, QString button)
             //ui->textEdit->append(QString::number(bossMan.howManyItems(),10));
             for(int i = 0; i < 4; ++i)
             {
-                if(bossMan.getItem(i, 1) != "Nothing there")
-                    ui->comboBox->addItem(bossMan.getItem(i,1));
-
+               ui->comboBox->addItem(bossMan.getItem(i,1));
             }
         }
     }
@@ -474,6 +487,26 @@ void Display::on_actionMain_Menu_triggered()
 }
 
 void Display::on_actionHelp_triggered()
+{
+
+}
+
+void Display::on_warrior_clicked()
+{
+
+}
+
+void Display::on_mage_clicked()
+{
+
+}
+
+void Display::on_bard_clicked()
+{
+
+}
+
+void Display::on_rogue_clicked()
 {
 
 }

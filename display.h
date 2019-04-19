@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "manager.h"
 #include <QThread>
+#include <QTimer>
 
 namespace Ui {
 class Display;
@@ -19,6 +20,7 @@ public:
 
     void mainMenu();
     void printMessage(QString message);
+    void instructions();
 
 
 private slots:
@@ -60,6 +62,14 @@ private slots:
 
     void on_actionHelp_triggered();
 
+    void on_warrior_clicked();
+
+    void on_mage_clicked();
+
+    void on_bard_clicked();
+
+    void on_rogue_clicked();
+
 private:
     Ui::Display *ui;
     void populateDropdown(int box, QString button);
@@ -67,8 +77,6 @@ private:
     Manager bossMan;
 
     QPalette tb = palette();
-    //QPalette pb = palette();
-    //QString prompt = ">>>";
     bool box1;
     int item;
     QString currentButton;
