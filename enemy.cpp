@@ -12,7 +12,7 @@ Anton's Changelog:
 #include <QDebug>
 
 enemy::enemy() { // Create default enemy (Snowman)
-    srand(1013);
+    srand(time(0));
     type = Snowman;
     health = 10;
     max_health = 10;
@@ -24,7 +24,7 @@ enemy::enemy() { // Create default enemy (Snowman)
 }
 
 enemy::enemy(EnemyType t, int h, int h_max, int b_atk, double c) { // Set custom attributes
-    srand(1013);
+    srand(time(0));
     type = t;
     health = h;
     max_health = h_max;
@@ -36,7 +36,7 @@ enemy::enemy(EnemyType t, int h, int h_max, int b_atk, double c) { // Set custom
 }
 
 enemy::enemy(EnemyType t) { // Set attributes based on enemy type
-    srand(1013);
+    srand(time(0));
     type = t;
     switch(t) {
         case Snowman:
