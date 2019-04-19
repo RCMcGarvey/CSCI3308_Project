@@ -31,13 +31,20 @@ SOURCES += \
     manager.cpp \
     player.cpp \
     enemy.cpp \
-    room.cpp
+    room.cpp \
+    database.cpp \
+    hashpass.cpp
 
 HEADERS += \
         display.h \
     manager.h \
     player.h \
     enemy.h \
+<<<<<<< HEAD
+=======
+    hashpass.h
+    database.h \
+>>>>>>> origin/db
     room.h \
     item.h
 

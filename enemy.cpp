@@ -12,7 +12,7 @@ Anton's Changelog:
 #include <QDebug>
 
 enemy::enemy() { // Create default enemy (Snowman)
-    srand(time(0));
+    srand(static_cast <unsigned int> (time(NULL)));
     type = Snowman;
     health = 10;
     max_health = 10;
@@ -24,7 +24,7 @@ enemy::enemy() { // Create default enemy (Snowman)
 }
 
 enemy::enemy(EnemyType t, int h, int h_max, int b_atk, double c) { // Set custom attributes
-    srand(time(0));
+    srand(static_cast <unsigned int> (time(NULL)));
     type = t;
     health = h;
     max_health = h_max;
@@ -36,7 +36,7 @@ enemy::enemy(EnemyType t, int h, int h_max, int b_atk, double c) { // Set custom
 }
 
 enemy::enemy(EnemyType t) { // Set attributes based on enemy type
-    srand(time(0));
+    srand(static_cast <unsigned int> (time(NULL)));
     type = t;
     switch(t) {
         case Snowman:
@@ -147,7 +147,11 @@ int enemy::attack() {
         adjustCrit(0.1);
     }
     if (critFlag && type == Skeleton) { // Skeleton yeets on crit
+<<<<<<< HEAD
+        atk = 50;
+=======
         atk = 70;
+>>>>>>> origin/db
     }
 
     return atk;

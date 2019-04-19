@@ -43,7 +43,11 @@ public:
     };
 
 
+<<<<<<< HEAD
+    enemy* outsideSnowman = new enemy(Skeleton);
+=======
     enemy* outsideSnowman = new enemy(Snowman);
+>>>>>>> origin/db
 
     QString meunster = "There is a monster blocking your movements.";
 
@@ -86,6 +90,14 @@ public:
     roms office;
     roms bathroom1;
     roms bathroom2;
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+=======
+>>>>>>> origin/db
+=======
+
+>>>>>>> f76a42689c9c66af15ddaeea1e04225c22af35c8
     roms smallBedroom;
     roms longHallway;
     roms longerHallway;
