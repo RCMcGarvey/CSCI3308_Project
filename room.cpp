@@ -144,7 +144,7 @@ room::room() {
     outside.items[0] = stick;
     outside.items[1] = dryTwig;
     outside.roomName = "Outside";
-    if(rand()%2 == 1) {
+    if(rand()%1 == 1) {
         outside.monster = outsideSnowman;
         outside.enemyDes = "There is a snowman coming towards you. It has a vicious look in its coal eyes and a sinister mouth. The carrot sticking out of it is twisted.\n";
     }
