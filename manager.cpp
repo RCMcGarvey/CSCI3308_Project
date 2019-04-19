@@ -10,6 +10,7 @@ Manager::Manager()
     toOutput = map.theBeginning();
     srand(8191);
     theHero = Player(Bard);
+    gameOver = false;
 }
 
 Manager::~Manager()
@@ -19,7 +20,10 @@ Manager::~Manager()
 
 QString Manager::move(int input)
 {
-    return map.nextRoom(input);
+    if(map.hasEnemy())
+        return "An enemy blocks your path.";
+   else
+        return map.nextRoom(input);
 }
 
 QString Manager::inspect(int input)
@@ -65,12 +69,18 @@ void Manager::drop(int input)
 bool Manager::pickup(int input)
 {
     Item *current = map.getRoomItems()[input];
-    return theHero.collectItem(current);
-
-
+    if(theHero.collectItem(current) == false)
+    {
+        return false;
+    }
+    else
+    {
+        map.getRoomItems()[input] = nullptr;
+        return true;
+    }
 }
 
-void Manager::userInput(int input, int input2)
+void Manager::swap(int input, int input2)
 {
     Item *holder = theHero.getInventory()[input];
     theHero.getInventory()[input] = theHero.getInventory()[input2];
@@ -92,67 +102,55 @@ QString Manager::combatEvent(QString action)
 {
     //int comp = (rand() % 100) + 1;
 
-    int enemyAttack = map.getEnemyAttack();
+    int enemyAttack = map.getEnemyAttack() - theHero.getDefense();
     int playerAttack = theHero.attack(action);
-    //    int playerAttack = 5;
-    //    int enemyAttack = 5;
-
+    QString enemyname = map.getEnemy()->getEnemyName();
     if(map.getEnemy())
     {
         //qDebug()<<"map has enemy 1";
         if(map.getEnemy())
         {
-            map.getEnemy()->adjustHealth(playerAttack);
+            map.getEnemy()->adjustHealth(-playerAttack);
             theHero.adjustHealth(-enemyAttack);
+            //qDebug()<<map.getEnemy()->getEnemyName();
             if(map.getEnemy()->getAlive() == false)
             {
                 //qDebug()<<"enemy is not alive";
                 map.cleared();
+                theHero.adjustHealth(enemyAttack);
+                int msg = rand() % 3;
+                switch(msg)
+                {
+                case 0:            
+                    return "You have defeated the " + enemyname + ".";
+                case 1:                
+                    return "The "+ enemyname +" is slain by your hand.";
+                case 2: 
+                    return "The "+ enemyname +" flees never to be seen again.";
+                }
+            }
+            else if(theHero.getHealth() == 0)
+            {
                 int msg = rand() % 3;
                 switch(msg)
                 {
                 case 0:
                 {
-                    return "You have defeated the beast.";
-
+                    return "You take "+ QString::number(enemyAttack) +" damage.<br></br><p style='color:darkred'><center><big>You're innards become outards!</big></center></p>";
                 }
                 case 1:
                 {
-                    return "The creature is slain by your hand.";
-
+                    return "You take "+ QString::number(enemyAttack) +" damage.<br></br><p style='color:darkred'><center><big>The " + enemyname + " rips off your arms and beats you to death with them!</big></center></p>";
                 }
                 case 2:
                 {
-                    return "The monster flees never to be seen again.";
-
+                    return "You take "+ QString::number(enemyAttack) +" damage.<br></br><p style='color:darkred'><center><big>You got slushed by the " + enemyname + "!</big></center></p>";
                 }
                 }
             }
             else if(map.getEnemy()->getAlive() == true)
             {
-                return "You did " + QString::number(playerAttack,10) + " damage to the creature and take "+QString::number(enemyAttack, 10);
-            }
-            if(theHero.getHealth() == 0)
-            {
-                int msg = rand() % 3;
-                switch(msg)
-                {
-                case 0:
-                {
-                    return "<p style='color:darkred'><center><big>You're innards become outards!</big></center></p>";
-                    break;
-                }
-                case 1:
-                {
-                    return "<p style='color:darkred'><center><big>Your body -Warning graphic content- by the creature!</big></center></p>";
-                    break;
-                }
-                case 2:
-                {
-                    return "<p style='color:darkred'><center><big>You got slushed by the monster!</big></center></p>";
-                    break;
-                }
-                }
+                return "You did " + QString::number(playerAttack,10) + " damage to the "+ enemyname +" and take "+QString::number(enemyAttack, 10)+" damage.";
             }
         }
     }
@@ -198,3 +196,7 @@ int Manager::howManyItems()
     return theHero.getInventory().size();
 }
 
+int Manager::enemyHealth()
+{
+    return map.getEnemy()->getHealth();
+}

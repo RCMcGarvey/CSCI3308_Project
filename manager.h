@@ -24,21 +24,21 @@ public:
     void drop(int input);
     QString interact(int input);
     QString inspect(int input);
-    void userInput(int input, int input2);
+    void swap(int input, int input2);
     int getPlayerHealth();
     QString getNarrative();
     QString combatEvent(QString);
     QString getItem(int index, int from);
     int howManyItems();
+    int enemyHealth();
+
+    bool gameOver;
 
     //Anton's Functions
     Item** getRoomItems(){return map.getRoomItems();}
 
 private:
     QString toOutput;
-
-    //QThread god;
-
     Player theHero;
     room map;
 

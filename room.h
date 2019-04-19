@@ -44,12 +44,12 @@ public:
     Item* oldSword  = new Item(weapon, "Old Sword", false, 12, 0, .1);
     Item* woodenBow = new Item(weapon, "Wooden Bow", false, 5, 0, .5);
     Item* rustyDagger = new Item(weapon, "Rusty Dagger", false, 7, 0, .0);
-    Item* healingPotion = new Item(consumable, "Potion of Healing", true, 0, 15, 0.0);
+    Item* healingPotion = new Item(consumable, "Potion of Healing", false, 0, 15, 0.0);
     //Can be found outdoors
     Item* stick = new Item(weapon, "A dry stick", false, 1, 0, .0);
-    Item* dryTwig = new Item(weapon, "A dry twig", true, 0, 0, .0);
+    Item* dryTwig = new Item(weapon, "A dry twig", false, 0, 0, .0);
     Item* brick = new Item(weapon, "A Red Brick", true, 15, 0, .1);
-    enemy* snowman = new enemy(EnemyType::Skeleton, 10,10, 5, .1);
+    enemy* snowman = new enemy(Skeleton);
 
 
     roms *currentRoom;

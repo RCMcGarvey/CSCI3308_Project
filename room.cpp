@@ -102,6 +102,8 @@ room::room() {
     outside.north = &frontOfHouse;
     outside.items[0] = stick;
     outside.items[1] = dryTwig;
+    outside.items[2] = healingPotion;
+    outside.items[3] = brick;
     outside.monster = snowman;
 
     //front of house

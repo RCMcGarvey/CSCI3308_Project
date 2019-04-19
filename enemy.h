@@ -1,6 +1,9 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 
+#include <QString>
+
+
 enum EnemyType{Snowman, Ghost, Zombie, Skeleton, Vampire, Ghoul, Diary, ZippyFlap}; // Base enemy subtypes
 
 /* Enemy attribute list:
@@ -100,10 +103,13 @@ class enemy {
         void adjustCrit(double); // For ZippyFlap enemy
         int attack(); // For dealing damage
         bool getAlive();
+        QString getEnemyName();
+        int getHealth();
 
     private:
 
         EnemyType type;
+        QString name;
         int health;
         int max_health;
         int base_attack;

@@ -56,6 +56,7 @@ private:
   // double defense;
   int attack_boost;
   int defense_boost;
+  int nextOpenSlot = 3;
   double critChance; //for rogue class
   PlayerClass role;
 };

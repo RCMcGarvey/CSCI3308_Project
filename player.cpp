@@ -10,6 +10,7 @@ Most cout statements can be replaced with alternative behaviors
 #include <time.h>
 #include "player.h"
 #include "item.h"
+#include <QDebug>
 
 //Simple constructor
 
@@ -73,9 +74,10 @@ Player::Player(PlayerClass role)
         attack_boost = 0;
         defense_boost = 0;
         critChance = 0;
+        inventory.resize(10);
         for(int i = 0; i < 10; ++i)
         {
-            inventory.push_back(nullptr);
+            inventory[i] = nullptr;
         }
     }
     else if(role == Rogue)
@@ -99,32 +101,153 @@ Player::Player(PlayerClass role)
 
 //May need to re-implement print/output
 bool Player::collectItem(Item* new_item){
-  //collecting
-  if(new_item->type == ItemType::weapon&&inventory[0]==nullptr){
-    inventory[0] = new_item;
-    //std::cout<<"You picked up a "<<new_item->name<<"!"<<std::endl;
-    return true;
-  }
-  else if(new_item->type == ItemType::armor && inventory[1] == nullptr){
-    inventory[1] = new_item;
-    //std::cout<<"You picked up a "<<new_item->name<<"!"<<std::endl;
-    return true;
-  }
-  else if(new_item->type == ItemType::spell && inventory[2] == nullptr){
-    inventory[2] = new_item;
-    //std::cout<<"You picked up a "<<new_item->name<<"!"<<std::endl;
-    return true;
-  }
-  //(Add other inventory slot functionalities here)
-  else if(new_item->type == ItemType::other){
-    for(int i = 3; i<8; i++){
-      if(inventory[i] == nullptr){
-        inventory[i] = new_item;
-        //std::cout<<"You picked up a "<<new_item->name<<"!"<<std::endl;
-        return true;
+  bool flag = false;
+  switch(new_item->type)
+  {
+    case weapon:
+      if(role == Warrior)
+      {
+        if(inventory[0] == nullptr)
+        {
+            inventory[0] = new_item;
+            flag = true;
+        }
+        else if(inventory[1] == nullptr)
+        {
+            inventory[1] = new_item;
+            flag = true;
+        }
+        else
+        {
+            for (int i = 3; i < inventory.size(); ++i)
+            {
+                if(inventory[i] == nullptr)
+                {
+                    inventory[i] = new_item;
+                    flag = true;
+                    break;
+                }
+            }
+        }
+      }
+      else if(role == Mage)
+      {
+        return flag;
+      }
+      else if(role == Bard || role == Rogue)
+      {
+          if(inventory[0] == nullptr)
+          {
+              inventory[0] = new_item;
+              return true;
+          }
+          else
+          {
+            for(int i = 3; i < inventory.size(); ++i)
+            {
+                if(inventory[i] == nullptr)
+                {
+                    inventory[i] = new_item;
+                    return true;
+                }
+            }
+          }
+      }
+      break;
+    case spell:
+    if(role == Mage)
+    {
+      if(inventory[0] == nullptr)
+      {
+          inventory[0] = new_item;
+          flag = true;
+      }
+      else if(inventory[1] == nullptr)
+      {
+          inventory[1] = new_item;
+          flag = true;
+      }
+      else
+      {
+          for (int i = 3; i < inventory.size(); ++i)
+          {
+              if(inventory[i] == nullptr)
+              {
+                  inventory[i] = new_item;
+                  flag = true;
+                  break;
+              }
+          }
       }
     }
+    else if(role == Warrior)
+    {
+      return flag;
+    }
+    else if(role == Bard || role == Rogue)
+    {
+        if(inventory[1] == nullptr)
+        {
+            inventory[1] = new_item;
+            flag = true;
+        }
+        else
+        {
+          for(int i = 3; i < inventory.size(); ++i)
+          {
+              if(inventory[i] == nullptr)
+              {
+                  inventory[i] = new_item;
+                  flag = true;
+                  break;
+              }
+          }
+        }
+    }
+      break;
+    case armor:
+      if(inventory[2] == nullptr)
+      {
+          inventory[2] = new_item;
+          flag = true;
+      }
+      else
+      {
+        for(int i = 3; i < inventory.size(); ++i)
+        {
+            if(inventory[i] == nullptr)
+            {
+                inventory[i] = new_item;
+                flag = true;
+                break;
+            }
+        }
+      }
+      break;
+    case consumable:
+      for(int i = 3; i < inventory.size(); ++i)
+      {
+          if(inventory[i] == nullptr)
+          {
+              inventory[i] = new_item;
+              flag = true;
+              break;
+          }
+      }
+      break;
+    case other:
+      for(int i = 3; i < inventory.size(); ++i)
+      {
+          if(inventory[i] == nullptr)
+          {
+              inventory[i] = new_item;
+              flag = true;
+              break;
+          }
+      }
+      break;
   }
+  return flag;
   //std::cout<<"You couldn't pick up the "<<new_item->name<<". (You may need to drop an item)"<<std::endl;
 }
 

@@ -276,12 +276,28 @@
      <rect>
       <x>430</x>
       <y>420</y>
-      <width>431</width>
+      <width>381</width>
       <height>31</height>
      </rect>
     </property>
     <property name="value">
      <number>24</number>
+    </property>
+    <property name="textVisible">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>740</x>
+      <y>425</y>
+      <width>55</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Enemy</string>
     </property>
    </widget>
   </widget>
@@ -301,6 +317,7 @@
     <addaction name="actionSave"/>
     <addaction name="actionLoad"/>
     <addaction name="actionHelp"/>
+    <addaction name="actionMain_Menu"/>
    </widget>
    <addaction name="menuMenu"/>
   </widget>
@@ -326,6 +343,11 @@
   <action name="actionHelp">
    <property name="text">
     <string>Help</string>
+   </property>
+  </action>
+  <action name="actionMain_Menu">
+   <property name="text">
+    <string>Main Menu</string>
    </property>
   </action>
  </widget>

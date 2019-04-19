@@ -56,6 +56,10 @@ private slots:
 
     void on_comboBox_2_activated(int index);
 
+    void on_actionMain_Menu_triggered();
+
+    void on_actionHelp_triggered();
+
 private:
     Ui::Display *ui;
     void populateDropdown(int box, QString button);

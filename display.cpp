@@ -23,10 +23,12 @@ Display::Display(QWidget *parent) :
     ui->progressBar_2->setStyleSheet("QProgressBar::chunk {background: rgb(150, 0, 20, 100%);}");
 
     ui->progressBar_2->setVisible(false);
+    ui->progressBar_2->setMaximum(bossMan.enemyHealth());
+    ui->label_2->setVisible(false);
 
     box1 = false;
 
-    ui->textEdit->setStyleSheet(QStringLiteral("font: 12pt \"times\";"));
+    ui->textEdit->setStyleSheet(QStringLiteral("font: 10pt \"times\";"));
 
     ui->northButton->setVisible(false);
     ui->eastButton->setVisible(false);
@@ -89,6 +91,7 @@ void Display::on_northButton_clicked()
 {
     //ui->textEdit->append("You went north");
     ui->textEdit->append(bossMan.move(1));
+    ui->progressBar_2->setMaximum(bossMan.enemyHealth());
     ui->northButton->setVisible(false);
     ui->eastButton->setVisible(false);
     ui->southButton->setVisible(false);
@@ -100,6 +103,7 @@ void Display::on_eastButton_clicked()
 {
     //ui->textEdit->append("You went east");
     ui->textEdit->append(bossMan.move(2));
+    ui->progressBar_2->setMaximum(bossMan.enemyHealth());
     ui->northButton->setVisible(false);
     ui->eastButton->setVisible(false);
     ui->southButton->setVisible(false);
@@ -111,6 +115,7 @@ void Display::on_westButton_clicked()
 {
     //ui->textEdit->append("You went west");
     ui->textEdit->append(bossMan.move(4));
+    ui->progressBar_2->setMaximum(bossMan.enemyHealth());
     ui->northButton->setVisible(false);
     ui->eastButton->setVisible(false);
     ui->southButton->setVisible(false);
@@ -122,6 +127,7 @@ void Display::on_southButton_clicked()
 {
     //ui->textEdit->append("You go south");
     ui->textEdit->append(bossMan.move(3));
+    ui->progressBar_2->setMaximum(bossMan.enemyHealth());
     ui->northButton->setVisible(false);
     ui->eastButton->setVisible(false);
     ui->southButton->setVisible(false);
@@ -131,6 +137,12 @@ void Display::on_southButton_clicked()
 
 void Display::on_fightButton_clicked()
 {
+    if(bossMan.enemyHealth() != 0)
+    {
+        ui->progressBar_2->setValue(bossMan.enemyHealth());
+        ui->progressBar_2->setVisible(true);
+        ui->label_2->setVisible(true);
+    }
     if(ui->fightButton->text() == "Fight")
     {
         ui->spellButton->setVisible(true);
@@ -144,6 +156,8 @@ void Display::on_fightButton_clicked()
         ui->weaponButton->setVisible(false);
         ui->lookButton->setEnabled(true);
         ui->fightButton->setText("Fight");
+        ui->progressBar_2->setVisible(false);
+        ui->label_2->setVisible(false);
     }
 }
 
@@ -202,6 +216,7 @@ void Display::on_weaponButton_clicked()
    ui->textEdit->append(bossMan.combatEvent(currentButton));
    //ui->textEdit->append(bossMan.getNarrative());
    ui->progressBar->setValue(bossMan.getPlayerHealth());
+   ui->progressBar_2->setValue(bossMan.enemyHealth());
    ui->weaponButton->setVisible(false);
    ui->spellButton->setVisible(false);
    ui->fightButton->setText("Fight");
@@ -213,6 +228,8 @@ void Display::on_spellButton_clicked()
 
 //    ui->textEdit->append("You flail your hands in an attempt to cast a spell.");
     ui->textEdit->append(bossMan.combatEvent(currentButton));
+    ui->progressBar->setValue(bossMan.getPlayerHealth());
+    ui->progressBar_2->setValue(bossMan.enemyHealth());
     ui->weaponButton->setVisible(false);
     ui->spellButton->setVisible(false);
     ui->fightButton->setText("Fight");
@@ -258,6 +275,13 @@ void Display::on_pickupButton_clicked()
     }
     else
     {
+        if(currentButton == "Drop")
+        {
+            ui->comboBox->setVisible(false);
+            ui->comboBox_2->setVisible(false);
+            ui->comboBox->clear();
+            ui->comboBox_2->clear();
+        }
         ui->comboBox->setVisible(false);
         ui->comboBox->clear();
         box1 = false;
@@ -369,7 +393,7 @@ void Display::populateDropdown(int box, QString button)
     }
     else if (box == 2)
     {
-        if(button == "Swap")
+        if(button == "Swap" || button == "Drop")
         {
             for(int i = 0; i < bossMan.howManyItems(); ++i)
             {
@@ -418,8 +442,8 @@ void Display::on_comboBox_activated(int index)
             {
                 ui->textEdit->append("You picked up a " + ui->comboBox->currentText() + ".");
                 ui->comboBox->clear();
+                on_pickupButton_clicked();
             }
-            on_pickupButton_clicked();
         }
     }
     else
@@ -437,9 +461,19 @@ void Display::on_comboBox_2_activated(int index)
     }
     else if(currentButton == "Swap")
     {
-        bossMan.userInput(item, index);
+        bossMan.swap(item, index);
         ui->comboBox->clear();
         ui->comboBox_2->clear();
         on_swapButton_clicked();
     }
+}
+
+void Display::on_actionMain_Menu_triggered()
+{
+
+}
+
+void Display::on_actionHelp_triggered()
+{
+
 }
