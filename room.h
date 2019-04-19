@@ -86,6 +86,7 @@ public:
     roms office;
     roms bathroom1;
     roms bathroom2;
+
     roms smallBedroom;
     roms longHallway;
     roms longerHallway;

@@ -146,7 +146,7 @@ room::room() {
     outside.roomName = "Outside";
     if(rand()%2 == 1) {
         outside.monster = outsideSnowman;
-        outside.enemyDes = "There is a snowman coming towards you. It has a vicious look in its coal eyes and mouth. The carrot sticking out of it is twisted.\n";
+        outside.enemyDes = "There is a snowman coming towards you. It has a vicious look in its coal eyes and a sinister mouth. The carrot sticking out of it is twisted.\n";
     }
 
     //front of house
@@ -338,11 +338,61 @@ QString room::saveGame() {
     } else {
         saves += "0";
     }
+    if(office.visited == true) {
+        saves += "1";
+    } else {
+        saves += "0";
+    }
+    if(bathroom1.visited == true) {
+        saves += "1";
+    } else {
+        saves += "0";
+    }
+    if(bathroom2.visited == true) {
+        saves += "1";
+    } else {
+        saves += "0";
+    }
     return "your mom was in my room ;)";
 }
 
 void room::loadGame(QString load) {
-
+    if(load[0] == "1")
+        outside.visited = true;
+    if(load[1] == "1")
+        frontOfHouse.visited = true;
+    if(load[2] == "1")
+        knocking.visited = true;
+    if(load[3] == "1")
+        foyer.visited = true;
+    if(load[4] == "1")
+        diningRoom.visited = true;
+    if(load[5] == "1")
+        rightHallway.visited = true;
+    if(load[6] == "1")
+        leftHallway.visited = true;
+    if(load[7] == "1")
+        library.visited = true;
+    if(load[8] == "1")
+        barrenRoom.visited = true;
+    if(load[9] == "1")
+        sittingRoom.visited = true;
+    if(load[10] == "1")
+        trophyRoom.visited = true;
+    if(load[11] == "1")
+        kitchen.visited = true;
+    if(load[12] == "1")
+        cellar.visited = true;
+    if(load[13] == "1")
+        roomWithCouch.visited = true;
+    if(load[14] == "1")
+        pianoRoom.visited = true;
+    if(load[15] == "1")
+        office.visited = true;
+    if(load[16] == "1")
+        bathroom1.visited = true;
+    if(load[17] == "1")
+        bathroom2.visited = true;
 }
 
 QString room::lookAround() {
