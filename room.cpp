@@ -229,36 +229,6 @@ room::room() {
     //bathroom 2
 
 
-    //small bedroom
-
-
-    //long hallway
-
-
-    //longer hallway
-
-
-    //spooky bathroom
-
-
-    //master bedroom
-
-
-    //monster bedroom
-
-
-    //spooky bathroom 2
-
-
-    //child bedroom
-
-
-    //gallery of mirrors
-
-
-    //painting of a demon child room
-
-
 }
 
 QString room::saveGame() {
@@ -393,6 +363,7 @@ void room::loadGame(QString load) {
         bathroom1.visited = true;
     if(load[17] == "1")
         bathroom2.visited = true;
+
 }
 
 QString room::lookAround() {
@@ -461,9 +432,9 @@ int room::getItemID(Item *itemPtr) {
             return 8;
         if(itemPtr->name == "A Dining Chair")
             return 9;
-        return NULL;
+        return 99;
     } else {
-        return NULL;
+        return 99;
     }
 }
 
