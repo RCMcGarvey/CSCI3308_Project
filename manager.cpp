@@ -40,7 +40,7 @@ void Manager::setPlayerClass(int role)
 
 QString Manager::move(int input)
 {
-    if(map.hasEnemy())
+    if(map.getEnemy() != nullptr)
         return "An enemy blocks your path.";
    else
         return map.nextRoom(input);
@@ -120,19 +120,13 @@ QString Manager::startNarrative()
 
 QString Manager::combatEvent(QString action)
 {
-    //int comp = (rand() % 100) + 1;
-
-    int enemyAttack = map.getEnemyAttack() - theHero.getDefense();
-    int playerAttack = theHero.attack(action);
-    QString enemyname = map.getEnemy()->getEnemyName();
-    if(map.getEnemy())
+    if(map.getEnemy() != nullptr)
     {
-        //qDebug()<<"map has enemy 1";
-        if(map.getEnemy())
-        {
+        int enemyAttack = map.getEnemyAttack() - theHero.getDefense();
+        int playerAttack = theHero.attack(action);
+        QString enemyname = map.getEnemy()->getEnemyName();
             map.getEnemy()->adjustHealth(-playerAttack);
             theHero.adjustHealth(-enemyAttack);
-            //qDebug()<<map.getEnemy()->getEnemyName();
             if(map.getEnemy()->getAlive() == false)
             {
                 //qDebug()<<"enemy is not alive";
@@ -172,7 +166,6 @@ QString Manager::combatEvent(QString action)
             {
                 return "You did " + QString::number(playerAttack,10) + " damage to the "+ enemyname +" and take "+QString::number(enemyAttack, 10)+" damage.";
             }
-        }
     }
     else
     {
@@ -218,5 +211,7 @@ int Manager::howManyItems()
 
 int Manager::enemyHealth()
 {
+    if(map.getEnemy() == nullptr)
+        return 0;
     return map.getEnemy()->getHealth();
 }
