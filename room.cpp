@@ -123,6 +123,17 @@ room::room() {
     srand(time(NULL));
     //Found somewhere in the building
 
+    itemList[0] = oldSword;
+    itemList[1] = woodenBow;
+    itemList[2] = rustyDagger;
+    itemList[3] = healingPotion;
+    itemList[4] = stick;
+    itemList[5] = dryTwig;
+    itemList[6] = brick;
+    itemList[7] = board;
+    itemList[8] = knife;
+    itemList[9] = chair;
+
     //outside
     outside.description = "You look over your shoulder. Tendrils of fog slither out from the encroaching forest like snakes, hissing as they slide over the dead ground. Menacing shadows watch you from the cover of the trees. The night is frigid; you pull your clothes tighter. If you spend any longer outside, you’ll freeze to death.\n";
     outside.description += "The manor to the north you’ve stumbled upon sends a chill deep into your bones. Ancient vines crawl over a dilapidated, dry fountain. Gothic windows, high and imposing, line the massive building’s exterior. Light spills through the highest window. The wind pushes you from behind toward the house.\n";
@@ -251,6 +262,82 @@ room::room() {
 }
 
 QString room::saveGame() {
+    QString saves;
+    if(outside.visited == true) {
+        saves += "1";
+    } else {
+        saves += "0";
+    }
+    if(frontOfHouse.visited == true) {
+        saves += "1";
+    } else {
+        saves += "0";
+    }
+    if(knocking.visited == true) {
+        saves += "1";
+    } else {
+        saves += "0";
+    }
+    if(foyer.visited == true) {
+        saves += "1";
+    } else {
+        saves += "0";
+    }
+    if(diningRoom.visited == true) {
+        saves += "1";
+    } else {
+        saves += "0";
+    }
+    if(rightHallway.visited == true) {
+        saves += "1";
+    } else {
+        saves += "0";
+    }
+    if(leftHallway.visited == true) {
+        saves += "1";
+    } else {
+        saves += "0";
+    }
+    if(library.visited == true) {
+        saves += "1";
+    } else {
+        saves += "0";
+    }
+    if(barrenRoom.visited == true) {
+        saves += "1";
+    } else {
+        saves += "0";
+    }
+    if(sittingRoom.visited == true) {
+        saves += "1";
+    } else {
+        saves += "0";
+    }
+    if(trophyRoom.visited == true) {
+        saves += "1";
+    } else {
+        saves += "0";
+    }
+    if(kitchen.visited == true) {
+        saves += "1";
+    } else {
+        saves += "0";
+    }
+    if(cellar.visited == true) {
+        saves += "1";
+    } else {
+        saves += "0";
+    }
+    if(roomWithCouch.visited == true) {
+        saves += "1";
+    } else {
+        saves += "0";
+    }
+    if(pianoRoom.visited == true) {
+        saves += "1";
+    } else {
+        saves += "0";
+    }
     return "your mom was in my room ;)";
 }
 
@@ -296,5 +383,37 @@ bool  room::addItem(Item* newItem){
         ++howManyItems;
     }
     return false;
+}
+
+Item* room::getItem(int id) {
+    return itemList[id];
+}
+
+int room::getItemID(Item *itemPtr) {
+    if(itemPtr != nullptr) {
+        if(itemPtr->name == "Old Sword")
+            return 0;
+        if(itemPtr->name == "Wooden Bow")
+            return 1;
+        if(itemPtr->name == "Rusty Dagger")
+            return 2;
+        if(itemPtr->name == "Potion of Healing")
+            return 3;
+        if(itemPtr->name == "A Dry Stick")
+            return 4;
+        if(itemPtr->name == "A Dry Twig")
+            return 5;
+        if(itemPtr->name == "A Brick")
+            return 6;
+        if(itemPtr->name == "A Wooden Board")
+            return 7;
+        if(itemPtr->name == "A Dining Knife")
+            return 8;
+        if(itemPtr->name == "A Dining Chair")
+            return 9;
+        return NULL;
+    } else {
+        return NULL;
+    }
 }
 

@@ -42,18 +42,6 @@ public:
         enemy* monster = nullptr;//enemy in the room, if any
     };
 
-    Item* oldSword  = new Item(weapon, "Old Sword", false, 20, 0, .1);
-    Item* woodenBow = new Item(weapon, "Wooden Bow", false, 20, 0, .5);
-    Item* rustyDagger = new Item(weapon, "Rusty Dagger", false, 12, 0, .0);
-    Item* healingPotion = new Item(consumable, "Potion of Healing", true, 0, 15, 0.0);
-    //Can be found outdoors
-    Item* stick = new Item(weapon, "A Sry Stick", false, 1, 0, .0);
-    Item* dryTwig = new Item(weapon, "A Dry Twig", true, 0, 0, .0);
-    Item* brick = new Item(weapon, "A Brick", true, 10, 0, .1);
-    Item* board = new Item(weapon, "A Wooden Board", false, 10, 0, 0.01);
-    Item* knife = new Item(weapon, "A Dining Knife", false, 8, 0, 1.0);
-    Item* chair = new Item(weapon, "A Dining Chair", true, 20, 0, 1.0);
-
 
     enemy* outsideSnowman = new enemy(Snowman);
 
@@ -66,6 +54,19 @@ public:
     QString nothing = "There is nothing that way";
     QString theBeginning();
     QString lookAround();
+
+    Item* itemList[100];
+    Item* oldSword  = new Item(weapon, "Old Sword", false, 20, 0, .1);
+    Item* woodenBow = new Item(weapon, "Wooden Bow", false, 20, 0, .5);
+    Item* rustyDagger = new Item(weapon, "Rusty Dagger", false, 12, 0, .0);
+    Item* healingPotion = new Item(consumable, "Potion of Healing", true, 0, 15, 0.0);
+    //Can be found outdoors
+    Item* stick = new Item(weapon, "A Dry Stick", false, 1, 0, .0);
+    Item* dryTwig = new Item(weapon, "A Dry Twig", true, 0, 0, .0);
+    Item* brick = new Item(weapon, "A Brick", true, 10, 0, .1);
+    Item* board = new Item(weapon, "A Wooden Board", false, 10, 0, 0.01);
+    Item* knife = new Item(weapon, "A Dining Knife", false, 8, 0, 1.0);
+    Item* chair = new Item(weapon, "A Dining Chair", true, 20, 0, 1.0);
 
     roms outside;
     roms frontOfHouse;
@@ -118,6 +119,8 @@ public:
     //save the game
     QString saveGame();
     void loadGame(QString load);
+    Item* getItem(int id);
+    int getItemID(Item* itemPtr);
 };
 
 #endif // ROOM_H
