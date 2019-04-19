@@ -10,7 +10,7 @@ database::database()
         db.setPassword(dbPass);
         bool ok = db.open();
         if (ok){
-            cout << "Database Connection Open" << endl;
+            cout << "Database Connection Open!" << endl;
         }
         else {
             cout << "Database Connection Failed!!!" << endl;
