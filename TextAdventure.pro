@@ -40,9 +40,10 @@ HEADERS += \
     manager.h \
     player.h \
     enemy.h \
-    room.h \
-    database.h \
     hashpass.h
+    database.h \
+    room.h \
+    item.h
 
 FORMS += \
         display.ui
