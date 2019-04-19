@@ -230,36 +230,6 @@ room::room() {
     //bathroom 2
 
 
-    //small bedroom
-
-
-    //long hallway
-
-
-    //longer hallway
-
-
-    //spooky bathroom
-
-
-    //master bedroom
-
-
-    //monster bedroom
-
-
-    //spooky bathroom 2
-
-
-    //child bedroom
-
-
-    //gallery of mirrors
-
-
-    //painting of a demon child room
-
-
 }
 
 QString room::saveGame() {
@@ -354,6 +324,7 @@ QString room::saveGame() {
     } else {
         saves += "0";
     }
+<<<<<<< HEAD
     return "your mom was in my room ;)";
 }
 
@@ -652,6 +623,8 @@ QString room::saveGame() {
     } else {
         saves += "0";
     }
+=======
+>>>>>>> f76a42689c9c66af15ddaeea1e04225c22af35c8
     return "your mom was in my room ;)";
 }
 
