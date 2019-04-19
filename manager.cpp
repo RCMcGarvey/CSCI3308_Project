@@ -9,13 +9,33 @@ Manager::Manager()
 {
     toOutput = map.theBeginning();
     srand(8191);
-    theHero = Player(Warrior);
+    //theHero = Player(Warrior);
     gameOver = false;
 }
 
 Manager::~Manager()
 {
 
+}
+
+void Manager::setPlayerClass(int role)
+{
+    if(role == 1)
+    {
+        theHero = Player(Warrior);
+    }
+    else if(role == 2)
+    {
+        theHero = Player(Mage);
+    }
+    else if(role == 3)
+    {
+        theHero = Player(Bard);
+    }
+    else if(role == 4)
+    {
+        theHero = Player(Rogue);
+    }
 }
 
 QString Manager::move(int input)
@@ -93,7 +113,7 @@ int Manager::getPlayerHealth()
     return theHero.getHealth();
 }
 
-QString Manager::getNarrative()
+QString Manager::startNarrative()
 {
     return toOutput;
 }

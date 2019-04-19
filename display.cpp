@@ -11,10 +11,6 @@ Display::Display(QWidget *parent) :
 
     mainMenu();
 
-    //ui->lineEdit->setText(prompt);
-
-    //connect(ui->lineEdit, SIGNAL(returnPressed()), this, SLOT(readInput()));
-
     tb.setColor(QPalette::Base, Qt::black);
     tb.setColor(QPalette::Text, Qt::white);
     ui->textEdit->setPalette(tb);
@@ -22,14 +18,12 @@ Display::Display(QWidget *parent) :
     ui->progressBar->setStyleSheet("QProgressBar::chunk {background: rgb(150, 0, 20, 100%);}");
     ui->progressBar_2->setStyleSheet("QProgressBar::chunk {background: rgb(150, 0, 20, 100%);}");
 
-    ui->progressBar_2->setVisible(false);
-    ui->progressBar_2->setMaximum(bossMan.enemyHealth());
-    ui->label_2->setVisible(false);
-
-    box1 = false;
-
     ui->textEdit->setStyleSheet(QStringLiteral("font: 10pt \"times\";"));
-
+    ui->label->setVisible(false);
+    ui->InventoryButton->setVisible(false);
+    ui->moveButton->setVisible(false);
+    ui->fightButton->setVisible(false);
+    ui->lookButton->setVisible(false);
     ui->northButton->setVisible(false);
     ui->eastButton->setVisible(false);
     ui->southButton->setVisible(false);
@@ -43,11 +37,11 @@ Display::Display(QWidget *parent) :
     ui->pickupButton->setVisible(false);
     ui->comboBox->setVisible(false);
     ui->comboBox_2->setVisible(false);
-    //ui->lineEdit->setVisible(false);
+    ui->label_2->setVisible(false);
+    ui->progressBar->setVisible(false);
+    ui->progressBar_2->setVisible(false);
 
-    ui->textEdit->append(bossMan.getNarrative());
-    ui->progressBar->setMaximum(bossMan.getPlayerHealth());
-    ui->progressBar->setValue(bossMan.getPlayerHealth());
+
 }
 
 Display::~Display()
@@ -60,8 +54,8 @@ void Display::mainMenu()
     ui->textEdit->clear();
     ui->textEdit->setHtml("<center><big>Presented by some Swonky Creatures</big></center>"
                           "<br></br>"
-                          "<center><big>Insert title here</big></center>");
-    //QTimer::singleShot(200, this, SLOT());
+                          "<center><big>Mysterious Diary that Records the Voice</big></center>");
+
 
 
 }
@@ -71,10 +65,37 @@ void Display::instructions()
     ui->textEdit->clear();
     QString howYouDo = "-Basic interaction is through the push buttons."
                        "-You are unable to move while there is an enemy in the same area you are."
-                       "-When you attack an enemy you can use a weapon or a spell"
-                       "    -Weapons can be used by Bards, Warriors, and Rogues"
-                       "";
-    ui->textEdit->append()
+                       "-When you attack an enemy you can use a weapon or a spell."
+                       "    -Weapons can be used/picked up by Bards, Warriors, and Rogues."
+                       "    -Spells can be used/picked up Mages, Bards, and Rogues."
+                       "    -All other items can be picked up by the other classes."
+                       "    [Weapon, Spell, Armor, Item, Item, ...]"
+                       "-Once a room has been cleared its state wont change."
+                       "Get to the end and dont die.";
+    ui->textEdit->append(howYouDo);
+}
+
+void Display::startGame()
+{
+    ui->textEdit->clear();
+    ui->textEdit->append("Please select your class");
+}
+
+void Display::andThusItBegins()
+{
+    ui->moveButton->setVisible(true);
+    ui->fightButton->setVisible(true);
+    ui->InventoryButton->setVisible(true);
+    ui->lookButton->setVisible(true);
+    ui->label->setVisible(true);
+    ui->progressBar->setVisible(true);
+    ui->textEdit->append(bossMan.startNarrative());
+    ui->progressBar->setMaximum(bossMan.getPlayerHealth());
+    ui->progressBar->setValue(bossMan.getPlayerHealth());
+    ui->progressBar_2->setVisible(false);
+    ui->progressBar_2->setMaximum(bossMan.enemyHealth());
+    ui->label_2->setVisible(false);
+    box1 = false;
 }
 
 void Display::on_moveButton_clicked()
@@ -493,20 +514,44 @@ void Display::on_actionHelp_triggered()
 
 void Display::on_warrior_clicked()
 {
-
+   bossMan.setPlayerClass(1);
+   ui->warrior->setVisible(false);
+   ui->mage->setVisible(false);
+   ui->bard->setVisible(false);
+   ui->rogue->setVisible(false);
+   ui->textEdit->clear();
+   andThusItBegins();
 }
 
 void Display::on_mage_clicked()
 {
-
+    bossMan.setPlayerClass(2);
+    ui->warrior->setVisible(false);
+    ui->mage->setVisible(false);
+    ui->bard->setVisible(false);
+    ui->rogue->setVisible(false);
+    ui->textEdit->clear();
+    andThusItBegins();
 }
 
 void Display::on_bard_clicked()
 {
-
+    bossMan.setPlayerClass(3);
+    ui->warrior->setVisible(false);
+    ui->mage->setVisible(false);
+    ui->bard->setVisible(false);
+    ui->rogue->setVisible(false);
+    ui->textEdit->clear();
+    andThusItBegins();
 }
 
 void Display::on_rogue_clicked()
 {
-
+    bossMan.setPlayerClass(4);
+    ui->warrior->setVisible(false);
+    ui->mage->setVisible(false);
+    ui->bard->setVisible(false);
+    ui->rogue->setVisible(false);
+    ui->textEdit->clear();
+    andThusItBegins();
 }

@@ -19,6 +19,7 @@ public:
     ~Manager();
 
     //void userInput(QString input);
+    void setPlayerClass(int role);
     QString move(int input);
     bool pickup(int input);
     void drop(int input);
@@ -26,11 +27,12 @@ public:
     QString inspect(int input);
     void swap(int input, int input2);
     int getPlayerHealth();
-    QString getNarrative();
+    QString startNarrative();
     QString combatEvent(QString);
     QString getItem(int index, int from);
     int howManyItems();
     int enemyHealth();
+
 
     bool gameOver;
 

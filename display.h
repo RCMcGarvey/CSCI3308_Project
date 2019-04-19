@@ -21,6 +21,8 @@ public:
     void mainMenu();
     void printMessage(QString message);
     void instructions();
+    void startGame();
+    void andThusItBegins();
 
 
 private slots:
