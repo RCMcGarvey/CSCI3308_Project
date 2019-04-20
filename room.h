@@ -77,6 +77,7 @@ public:
     roms leftHallway;
     roms library;
     roms barrenRoom;
+    roms foggyGreenhouse;
     roms sittingRoom;
     roms trophyRoom;
     roms kitchen;

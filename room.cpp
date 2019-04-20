@@ -138,29 +138,29 @@ room::room() {
     outside.description = "You look over your shoulder. Tendrils of fog slither out from the encroaching forest like snakes, hissing as they slide over the dead ground. Menacing shadows watch you from the cover of the trees. The night is frigid; you pull your clothes tighter. If you spend any longer outside, you’ll freeze to death.\n";
     outside.description += "The manor to the north you’ve stumbled upon sends a chill deep into your bones. Ancient vines crawl over a dilapidated, dry fountain. Gothic windows, high and imposing, line the massive building’s exterior. Light spills through the highest window. The wind pushes you from behind toward the house.\n";
     outside.tryS = "Your instincts kick in, and your legs freeze up. If you go that way you know, you will die a miserable cold death.\n";
-    outside.tryE = "There is a scary looking mist that frightens you too much to go that way.\n";
-    outside.tryW = "You trip, fall, and when you stand back up your facing north.\n";
+    outside.tryE = "There is a foreboding looking mist that frightens you too much to go that way.\n";
+    outside.tryW = "You trip and fall. When you stand back up, you face north.\n";
     outside.north = &frontOfHouse;
     outside.items[0] = stick;
     outside.items[1] = dryTwig;
     outside.roomName = "Outside";
-    if(rand()%2 == 1) {
+    if(rand()%1 == 1) {
         outside.monster = outsideSnowman;
-        outside.enemyDes = "There is a snowman coming towards you. It has a vicious look in its coal eyes and a sinister mouth. The carrot sticking out of it is twisted.\n";
+        outside.enemyDes = "A snowman rushes toward you! It has a vicious look in its coal eyes and a wicked grin to sinister mouth. The carrot sticking out of it is twisted.\n";
     }
 
     //front of house
     frontOfHouse.description = "Cautiously, you approach the manor. Loose shingles rattle from the roof above. As you step up the wooden stairs leading to the door, the creaking underfoot sends shivers up your spine. The door, black and glossy, stands before you.\n";
-    frontOfHouse.tryS = "You just came from that way and it feels too counterproductive.\n";
-    frontOfHouse.tryE = "A strong gust of chilly wind blows you back.\n";
-    frontOfHouse.tryW = "You walk into the fountain. It trips you. You get out and are facing north. You better get indoors soon.\n";
+    frontOfHouse.tryS = "You just came from that way; it feels too counterproductive.\n";
+    frontOfHouse.tryE = "A strong gust of wind blows you back.\n";
+    frontOfHouse.tryW = "You walk into the fountain. It trips you. You get out and are facing north. You better get indoors soon!\n";
     frontOfHouse.north = &knocking;
     frontOfHouse.items[0] = brick;
     frontOfHouse.roomName = "Front of House";
 
     //knocking on door
-    knocking.description = "You knock on the door, sending a dull thud echoing through the inside of the house. After a moment’s pause, a shudder passes through the exterior of the house. You wait, but you don’t hear anyone come to open the door. The air is getting colder; your breath spirals around you.\n";
-    knocking.description += "You reach for the doorknob, but when your hand touches the brass, a loud click comes from within the door. Soundlessly, the door swings open. The inside of the house is darker than the night but you can feel the air is a little warmer there.\n";
+    knocking.description = "    You knock on the door, sending a dull thud echoing through the inside of the house. After a moment’s pause, a shudder passes through the exterior of the house. You wait, but you don’t hear anyone come to open the door. The air is getting colder; your breath spirals around you.\n";
+    knocking.description += "   You reach for the doorknob, but when your hand touches the brass, a loud click comes from within. Soundlessly, the door swings open. The inside of the house is darker than the night, but you can feel the air is a little warmer there.\n";
     knocking.tryS = "The warm air of the mansion pulls you in. The cold air chills your borns instinctively making you step back towards the door.\n";
     knocking.tryE = "Porch railing blocks your path that way.\n";
     knocking.tryW = "There is a loose board and you trip on it. When you stand back up you are facing the door of the mansion.\n";
@@ -170,22 +170,22 @@ room::room() {
     knocking.roomName = "Knocking";
 
     //the foyer
-    foyer.description = "You step inside and the sound of the wind immediately dies behind you. Shivering you let the warmer air thaw the chill set in your bones. There is a lone candle sitting on the floorboards.\n";
-    foyer.description += "The light of the candle lets you discern the room you are standing in. It's a large foyer with doors to the north, east, and west. You look behind you, but strangely the door you came through is gone; replaced by an empty frame. There is an enormous chandelier hanging from above, but none of its candles are lit.\n";
+    foyer.description = "   You step inside, and the sound of the wind immediately dies behind you. Shivering, you let the warmer air thaw the chill set in your bones. There is a lone candle sitting on the floorboards whose light lets you discern the features of the room.";
+    foyer.description += "It's a large foyer with doors to the north, east, and west. You look behind you, but strangely the door you came through is gone! An enormous chandelier hangs above, but none of its candles are lit.\n";
     foyer.north = &diningRoom;
     foyer.west = &leftHallway;
     foyer.east = &rightHallway;
-    foyer.tryS = "You turn to look at the empty frame, but now there resides a barely visible lady, shrouded by shadows. She appears to be looking behind you. Suddenly, you hear a noise behind your back. You try to turn but the woman captivates your muscles. The sound of scurrying gets closer, until something brushes your shoulder. Feeling this, you snap out of your trance and rapidle turn around, however, there is nothing there. When you look back to the painting, the lady is gone.\n";
+    foyer.tryS = "The wall is made of solid wood; you cannot go this direction.\n";
     foyer.items[0] = board;
     foyer.roomName = "You Enter The Foyer\n";
 
 
     //the diningRoom
-    diningRoom.description = "You enter a long, unlit dining room. A sturdy oak tbale spans the length of the room with enough chairs to fit more than twenty people. The table is set with plates, knives, glasses, and forks, but there's no food; however, you can smell something delivious in the air. There are doors leading north, east, and south\n";
+    diningRoom.description = "You enter a long, unlit dining room. A sturdy oak table spans the length of the room with enough chairs to fit more than twenty people. The table is set with plates, knives, glasses, and forks, but there's no food; however, you can smell something delivious in the air. There are doors leading north, east, and south\n";
     diningRoom.north = &trophyRoom;
     diningRoom.south = &foyer;
     diningRoom.east = &kitchen;
-    diningRoom.tryW = "You start walking towards the west wall. On your way though you trip over a chair. After flipping and rolling a few times, you appear to be facing north.\n";
+    diningRoom.tryW = "//HELP";
     diningRoom.items[0] = knife;
     diningRoom.items[1] = chair;
     diningRoom.roomName = "You enter the Dining Room\n";
@@ -194,9 +194,20 @@ room::room() {
 
 
     //left hallway
+    leftHallway.description = "You open the door to a small hallway. Stepping through, you see doors leading to the north, east, south, and west. A painting of an ancient woman is hanging next to the north door. The hinges of the door quietly scream as they shut.\n";
+    leftHallway.north = &barrenRoom;
+    leftHallway.south = &library;
+    leftHallway.east = &foyer;
+    leftHallway.west = &foggyGreenhouse;
+    leftHallway.roomName = "You enter a small hallway.\n";
 
 
     //library
+    library.description = "Shelves spilling with books line the walls and fill the room. Long cobwebs hang from the ceiling, their sticky fibers running between the shelves like bridges. You can feel the dust tickle your lungs from the air you breathe in. A hushed creaking comes from behind the shelves where you cannot see.\n";
+    library.north = &leftHallway;
+    library.tryE = "There is no door there; you cannot go that direction.";
+    library.tryS = "There is no door there; you cannot go that direction.";
+    library.tryW = "hLPE";
 
 
     //barren room
@@ -227,36 +238,6 @@ room::room() {
 
 
     //bathroom 2
-
-
-    //small bedroom
-
-
-    //long hallway
-
-
-    //longer hallway
-
-
-    //spooky bathroom
-
-
-    //master bedroom
-
-
-    //monster bedroom
-
-
-    //spooky bathroom 2
-
-
-    //child bedroom
-
-
-    //gallery of mirrors
-
-
-    //painting of a demon child room
 
 
 }
@@ -393,6 +374,7 @@ void room::loadGame(QString load) {
         bathroom1.visited = true;
     if(load[17] == "1")
         bathroom2.visited = true;
+
 }
 
 QString room::lookAround() {
@@ -461,9 +443,9 @@ int room::getItemID(Item *itemPtr) {
             return 8;
         if(itemPtr->name == "A Dining Chair")
             return 9;
-        return NULL;
+        return 99;
     } else {
-        return NULL;
+        return 99;
     }
 }
 

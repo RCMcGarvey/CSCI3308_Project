@@ -38,7 +38,8 @@ HEADERS += \
     manager.h \
     player.h \
     enemy.h \
-    room.h
+    room.h \
+    item.h
 
 FORMS += \
         display.ui

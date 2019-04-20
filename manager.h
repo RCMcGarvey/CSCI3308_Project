@@ -2,21 +2,47 @@
 #define MANAGER_H
 
 #include <QString>
+#include "player.h"
+#include "room.h"
+#include <string>
+#include <QTextEdit>
+#include <stdlib.h>
+#include <enemy.h>
+#include <vector>
 
-class manager
+
+class Manager
 {
 
 public:
-    manager();
-    ~manager();
+    Manager( );
+    ~Manager();
 
-    QString userInput(QString input);
+    //void userInput(QString input);
+    void setPlayerClass(int role);
+    QString move(int input);
+    bool pickup(int input);
+    void drop(int input);
+    QString interact(int input);
+    QString inspect(int input);
+    void swap(int input, int input2);
     int getPlayerHealth();
-    QString getNarrative();
+    QString startNarrative();
+    QString combatEvent(QString);
+    QString getItem(int index, int from);
+    int howManyItems();
+    int enemyHealth();
+
+
+    bool gameOver;
+
+    //Anton's Functions
+    Item** getRoomItems(){return map.getRoomItems();}
+
 private:
-    void combatEvent();
-    void moveEvent();
-    void playerEvent();
+    QString toOutput;
+    Player theHero;
+    room map;
 
 
 };
