@@ -40,11 +40,8 @@ HEADERS += \
     manager.h \
     player.h \
     enemy.h \
-<<<<<<< HEAD
-=======
     hashpass.h
     database.h \
->>>>>>> origin/db
     room.h \
     item.h
 
