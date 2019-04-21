@@ -30,7 +30,7 @@ public:
   //for taking damage or recovering health
   void adjustHealth(int);
 
-  void useItem(int slot);
+  QString useItem(int slot);
 
   //Activates or deactivates a certain item in the inventory
   void toggleItem(int slot);

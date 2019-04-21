@@ -72,6 +72,10 @@ private slots:
 
     void on_rogue_clicked();
 
+    void on_lineEdit_returnPressed();
+
+    void on_lineEdit_2_returnPressed();
+
 private:
     Ui::Display *ui;
     void populateDropdown(int box, QString button);
@@ -79,6 +83,7 @@ private:
     Manager bossMan;
 
     QPalette tb = palette();
+    bool signin;
     bool box1;
     int item;
     QString currentButton;

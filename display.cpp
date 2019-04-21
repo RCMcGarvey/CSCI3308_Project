@@ -8,6 +8,13 @@ Display::Display(QWidget *parent) :
     ui(new Ui::Display)
 {
     ui->setupUi(this);
+    signin = false;
+    ui->lineEdit_2->setEchoMode(QLineEdit::Password);
+    ui->warrior->setVisible(false);
+    ui->mage->setVisible(false);
+    ui->bard->setVisible(false);
+    ui->rogue->setVisible(false);
+
 
     mainMenu();
 
@@ -55,8 +62,9 @@ void Display::mainMenu()
     ui->textEdit->setHtml("<center><big>Presented by some Swonky Creatures</big></center>"
                           "<br></br>"
                           "<center><big>Mysterious Diary that Records the Voice</big></center>");
-
-
+    ui->textEdit->append("<br></br>Please sign in.");
+    ui->textEdit->append("Username");
+    ui->textEdit->append("Password");
 
 }
 
@@ -449,6 +457,7 @@ void Display::on_comboBox_activated(int index)
         if(currentButton == "Use Item")
         {
             ui->comboBox->clear();
+            ui->textEdit->append(bossMan.use(index));
             on_useButton_clicked();
         }
         else if(currentButton == "Inspect")
@@ -554,4 +563,17 @@ void Display::on_rogue_clicked()
     ui->rogue->setVisible(false);
     ui->textEdit->clear();
     andThusItBegins();
+}
+
+void Display::on_lineEdit_returnPressed()
+{
+    bossMan.setUser(ui->lineEdit->text());
+    ui->lineEdit->clear();
+}
+
+void Display::on_lineEdit_2_returnPressed()
+{
+    bossMan.setPass(ui->lineEdit_2->text());
+    ui->lineEdit_2->clear();
+
 }

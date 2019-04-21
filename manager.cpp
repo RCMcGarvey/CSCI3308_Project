@@ -46,6 +46,11 @@ QString Manager::move(int input)
         return map.nextRoom(input);
 }
 
+QString Manager::use(int slot)
+{
+    return theHero.useItem(slot);
+}
+
 QString Manager::inspect(int input)
 {
     if(theHero.getInventory()[input] != nullptr)
@@ -89,6 +94,8 @@ void Manager::drop(int input)
 bool Manager::pickup(int input)
 {
     Item *current = map.getRoomItems()[input];
+    if(current == nullptr)
+        return true;
     if(theHero.collectItem(current) == false)
     {
         return false;
@@ -215,3 +222,18 @@ int Manager::enemyHealth()
         return 0;
     return map.getEnemy()->getHealth();
 }
+
+void Manager::setUser(QString user)
+{
+    username = user;
+}
+void Manager::setPass(QString pass)
+{
+   password = pass;
+}
+
+
+
+
+
+

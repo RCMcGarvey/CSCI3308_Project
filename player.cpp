@@ -359,11 +359,33 @@ vector<Item*>& Player::getInventory()
     return inventory;
 }
 
-void Player::useItem(int slot)
+QString Player::useItem(int slot)
 {
     Item *current = new Item();
     current = inventory[slot];
-    //if(current->type == )
+    switch(current->type)
+    {
+    case weapon:
+        return "You can only use that in combat.";
+    case spell:
+        if(current->attack_boost > 0)
+        {
+            return "You can only use a damage spell during combat.";
+        }
+        health += current->healing;
+        defense_boost += defense_boost;
+        break;
+    case armor:
+        return "Armor is not a usable item.";
+    case consumable:
+        health += current->healing;
+        defense_boost += current->defense_boost;
+        inventory[slot] = nullptr;
+        delete current;
+        return "You used the item";
+    case other:
+        break;
+    }
 }
 
 int Player::getDefense()

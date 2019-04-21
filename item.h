@@ -17,6 +17,7 @@ struct Item{
   bool is_single_use;
   bool is_active;
   // int uses; //how many times item can be used
+  int healing;
   int attack_boost;
   int defense_boost;
   double crit_chance;
@@ -27,7 +28,7 @@ struct Item{
 
   //Constructor: (basic weapons, armor, and potions)
   //  type        name     singleuse atk dfs  crit
-  Item(ItemType t, QString n, bool single_use, int atk, int def, double crit)
+  Item(ItemType t, QString n, bool single_use, int atk, int def, double crit, int heal)
   {
     type = t;
     name = n;
@@ -37,12 +38,13 @@ struct Item{
     defense_boost = def;
     crit_chance = crit;
     has_message = false;
+    healing = heal;
     message = "";
   } //set
 
   //Constructor: (scrolls, items with messages, misc)
   //  type        name     singleuse atk dfs  crit    use/message
-  Item(ItemType t, QString n, bool single_use, int atk, int def, double crit, QString msg)
+  Item(ItemType t, QString n, bool single_use, int atk, int def, double crit, int heal, QString msg)
   {
     type = t;
     name = n;
@@ -51,6 +53,7 @@ struct Item{
     attack_boost = atk;
     defense_boost = def;
     crit_chance = crit;
+    healing = heal;
     has_message = true;
     message = msg;
   }
@@ -60,7 +63,11 @@ struct Item{
   //open to implementation
   QString display_message()
   {
-      if(type == weapon)
+      if(message != "")
+      {
+          return message;
+      }
+      else if(type == weapon)
       {
            return name + ", Attack Value: " + QString::number(attack_boost);
       }

@@ -4,6 +4,7 @@
 #include <QString>
 #include "player.h"
 #include "room.h"
+#include "database.h"
 #include <string>
 #include <QTextEdit>
 #include <stdlib.h>
@@ -21,17 +22,23 @@ public:
     //void userInput(QString input);
     void setPlayerClass(int role);
     QString move(int input);
-    bool pickup(int input);
+    QString startNarrative();
+    void setUser(QString user);
+    void setPass(QString pass);
+
     void drop(int input);
+    bool pickup(int input);
     QString interact(int input);
     QString inspect(int input);
     void swap(int input, int input2);
+    QString use(int slot);
+
     int getPlayerHealth();
-    QString startNarrative();
+    int enemyHealth();
     QString combatEvent(QString);
+
     QString getItem(int index, int from);
     int howManyItems();
-    int enemyHealth();
 
 
     bool gameOver;
@@ -40,6 +47,10 @@ public:
     Item** getRoomItems(){return map.getRoomItems();}
 
 private:
+    database db;
+
+    QString username;
+    QString password;
     QString toOutput;
     Player theHero;
     room map;
