@@ -25,6 +25,9 @@ public:
     QString startNarrative();
     void setUser(QString user);
     void setPass(QString pass);
+    void setPlayerName(QString name);
+    //void loadGame();
+    //void saveGame();
 
     void drop(int input);
     bool pickup(int input);
@@ -47,8 +50,8 @@ public:
     Item** getRoomItems(){return map.getRoomItems();}
 
 private:
-    database db;
-
+    //database db;
+    QString playername;
     QString username;
     QString password;
     QString toOutput;

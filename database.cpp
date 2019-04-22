@@ -36,3 +36,4 @@ database::~database()
     //Close database!!
     db.close();
 }
+

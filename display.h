@@ -76,6 +76,12 @@ private slots:
 
     void on_lineEdit_2_returnPressed();
 
+    void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
+
+    void on_actionSave_triggered();
+
 private:
     Ui::Display *ui;
     void populateDropdown(int box, QString button);
@@ -84,6 +90,7 @@ private:
 
     QPalette tb = palette();
     bool signin;
+    bool gamestart;
     bool box1;
     int item;
     QString currentButton;

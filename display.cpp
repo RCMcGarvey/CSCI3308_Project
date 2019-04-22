@@ -14,7 +14,11 @@ Display::Display(QWidget *parent) :
     ui->mage->setVisible(false);
     ui->bard->setVisible(false);
     ui->rogue->setVisible(false);
+    ui->pushButton->setVisible(false);
+    ui->pushButton_2->setVisible(false);
 
+    gamestart = false;
+    signin = false;
 
     mainMenu();
 
@@ -59,26 +63,36 @@ Display::~Display()
 void Display::mainMenu()
 {
     ui->textEdit->clear();
+    ui->lineEdit_2->setEnabled(false);
     ui->textEdit->setHtml("<center><big>Presented by some Swonky Creatures</big></center>"
                           "<br></br>"
                           "<center><big>Mysterious Diary that Records the Voice</big></center>");
-    ui->textEdit->append("<br></br>Please sign in.");
-    ui->textEdit->append("Username");
-    ui->textEdit->append("Password");
+    if (signin == false)
+    {
+        ui->textEdit->append("<br></br>Please sign in.");
+        ui->textEdit->append("Username");
+        ui->textEdit->append("Password");
+    }
+    else
+    {
+        ui->pushButton->setVisible(true);
+        ui->pushButton_2->setVisible(true);
+        ui->lineEdit_2->setVisible(false);
+        ui->lineEdit->setEnabled(false);
+    }
 
 }
 
 void Display::instructions()
 {
-    ui->textEdit->clear();
-    QString howYouDo = "-Basic interaction is through the push buttons."
-                       "-You are unable to move while there is an enemy in the same area you are."
-                       "-When you attack an enemy you can use a weapon or a spell."
-                       "    -Weapons can be used/picked up by Bards, Warriors, and Rogues."
-                       "    -Spells can be used/picked up Mages, Bards, and Rogues."
-                       "    -All other items can be picked up by the other classes."
-                       "    [Weapon, Spell, Armor, Item, Item, ...]"
-                       "-Once a room has been cleared its state wont change."
+    QString howYouDo = "-Basic interaction is through the push buttons.\n"
+                       "-You are unable to move while there is an enemy in the same area you are.\n"
+                       "-When you attack an enemy you can use a weapon or a spell.\n"
+                       "    -Weapons can be used/picked up by Bards, Warriors, and Rogues.\n"
+                       "    -Spells can be used/picked up Mages, Bards, and Rogues.\n"
+                       "    -All other items can be picked up by the other classes.\n"
+                       "    [Weapon, Spell, Armor, Item, Item, ...]\n"
+                       "-Once a room has been cleared its state wont change.\n"
                        "Get to the end and dont die.";
     ui->textEdit->append(howYouDo);
 }
@@ -86,6 +100,10 @@ void Display::instructions()
 void Display::startGame()
 {
     ui->textEdit->clear();
+    ui->warrior->setVisible(true);
+    ui->mage->setVisible(true);
+    ui->bard->setVisible(true);
+    ui->rogue->setVisible(true);
     ui->textEdit->append("Please select your class");
 }
 
@@ -513,12 +531,38 @@ void Display::on_comboBox_2_activated(int index)
 
 void Display::on_actionMain_Menu_triggered()
 {
+    ui->InventoryButton->setVisible(false);
+    ui->moveButton->setVisible(false);
+    ui->fightButton->setVisible(false);
+    ui->lookButton->setVisible(false);
+    ui->northButton->setVisible(false);
+    ui->eastButton->setVisible(false);
+    ui->southButton->setVisible(false);
+    ui->westButton->setVisible(false);
+    ui->weaponButton->setVisible(false);
+    ui->spellButton->setVisible(false);
+    ui->useButton->setVisible(false);
+    ui->inspectButton->setVisible(false);
+    ui->swapButton->setVisible(false);
+    ui->interactButton->setVisible(false);
+    ui->pickupButton->setVisible(false);
+    ui->comboBox->setVisible(false);
+    ui->comboBox_2->setVisible(false);
+    ui->label->setVisible(false);
+    ui->label_2->setVisible(false);
+    ui->progressBar->setVisible(false);
+    ui->progressBar_2->setVisible(false);
+
+    ui->lineEdit->setVisible(true);
+    ui->lineEdit_2->setVisible(true);
+
+    mainMenu();
 
 }
 
 void Display::on_actionHelp_triggered()
 {
-
+    instructions();
 }
 
 void Display::on_warrior_clicked()
@@ -567,13 +611,72 @@ void Display::on_rogue_clicked()
 
 void Display::on_lineEdit_returnPressed()
 {
-    bossMan.setUser(ui->lineEdit->text());
-    ui->lineEdit->clear();
+    if(signin != true)
+    {
+        bossMan.setUser(ui->lineEdit->text());
+        ui->lineEdit_2->setEnabled(true);
+        ui->lineEdit->setEnabled(false);
+    }
+    else
+    {
+        if(currentButton == "New")
+        {
+            bossMan.setPlayerName(ui->lineEdit->text());
+            ui->lineEdit->clear();
+            ui->lineEdit->setVisible(false);
+            startGame();
+        }
+        else if(currentButton == "Load")
+        {
+            ui->lineEdit->clear();
+            ui->lineEdit->setVisible(false);
+            //bossman.loadGame();
+            /*
+             *   ui->moveButton->setVisible(true);
+             *   ui->fightButton->setVisible(true);
+             *   ui->InventoryButton->setVisible(true);
+             *   ui->lookButton->setVisible(true);
+             *   ui->label->setVisible(true);
+             *   ui->progressBar->setVisible(true);
+             *
+             */
+        }
+    }
+
 }
 
 void Display::on_lineEdit_2_returnPressed()
 {
     bossMan.setPass(ui->lineEdit_2->text());
+    ui->lineEdit->clear();
     ui->lineEdit_2->clear();
+    ui->lineEdit_2->setVisible(false);
+    ui->pushButton->setVisible(true);
+    ui->pushButton_2->setVisible(true);
+    signin = true;
+}
 
+void Display::on_pushButton_clicked()
+{
+    ui->lineEdit->setEnabled(true);
+    ui->textEdit->append("Please enter a character name.");
+    currentButton = "New";
+    ui->pushButton->setVisible(false);
+    ui->pushButton_2->setVisible(false);
+}
+
+
+void Display::on_pushButton_2_clicked()
+{
+    ui->lineEdit->setEnabled(true);
+    ui->textEdit->append("Please enter a character name.");
+    currentButton = "Load";
+    ui->pushButton->setVisible(false);
+    ui->pushButton_2->setVisible(false);
+}
+
+void Display::on_actionSave_triggered()
+{
+    //bossMan.saveGame();
+    ui->textEdit->append("Game saved");
 }

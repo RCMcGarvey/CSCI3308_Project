@@ -232,6 +232,12 @@ void Manager::setPass(QString pass)
    password = pass;
 }
 
+void Manager::setPlayerName(QString name)
+{
+    playername = name;
+}
+
+
 
 
 
