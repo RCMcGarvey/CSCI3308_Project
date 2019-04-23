@@ -153,6 +153,7 @@ QString Manager::combatEvent(QString action)
             else if(theHero.getHealth() == 0)
             {
                 int msg = rand() % 3;
+                gameOver = true;
                 switch(msg)
                 {
                 case 0:
@@ -237,6 +238,10 @@ void Manager::setPlayerName(QString name)
     playername = name;
 }
 
+QString Manager::lookAround()
+{
+    return map.lookAround();
+}
 
 
 

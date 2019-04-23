@@ -35,6 +35,7 @@ public:
     QString inspect(int input);
     void swap(int input, int input2);
     QString use(int slot);
+    QString lookAround();
 
     int getPlayerHealth();
     int enemyHealth();

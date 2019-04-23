@@ -258,6 +258,7 @@ void Display::on_lookButton_clicked()
     {
         ui->interactButton->setVisible(true);
         ui->pickupButton->setVisible(true);
+        ui->textEdit->append(bossMan.lookAround());
         ui->lookButton->setText("Back");
     }
     else
@@ -282,6 +283,10 @@ void Display::on_weaponButton_clicked()
    ui->spellButton->setVisible(false);
    ui->lookButton->setEnabled(true);
    ui->fightButton->setText("Fight");
+   if(bossMan.gameOver == true)
+   {
+       QTimer::singleShot(5000, this, SLOT(on_actionMain_Menu_triggered()));
+   }
 }
 
 void Display::on_spellButton_clicked()
@@ -295,7 +300,10 @@ void Display::on_spellButton_clicked()
     ui->weaponButton->setVisible(false);
     ui->spellButton->setVisible(false);
     ui->fightButton->setText("Fight");
-
+    if(bossMan.gameOver == true)
+    {
+        QTimer::singleShot(5000, this, SLOT(on_actionMain_Menu_triggered()));
+    }
 }
 
 void Display::on_useButton_clicked()
@@ -501,9 +509,18 @@ void Display::on_comboBox_activated(int index)
             }
             else
             {
-                ui->textEdit->append("You picked up a " + ui->comboBox->currentText() + ".");
-                ui->comboBox->clear();
-                on_pickupButton_clicked();
+                if(bossMan.getItem(index, 1) == "Nothing there")
+                {
+                    ui->textEdit->append("You cant pick up something that doesnt exist.");
+                    ui->comboBox->clear();
+                    on_pickupButton_clicked();
+                }
+                else
+                {
+                    ui->textEdit->append("You picked up a " + ui->comboBox->currentText() + ".");
+                    ui->comboBox->clear();
+                    on_pickupButton_clicked();
+                }
             }
         }
     }
