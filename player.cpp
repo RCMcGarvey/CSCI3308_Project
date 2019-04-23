@@ -363,6 +363,10 @@ QString Player::useItem(int slot)
 {
     Item *current = new Item();
     current = inventory[slot];
+    if(current == nullptr)
+    {
+        return "You have nothing in that slot.";
+    }
     switch(current->type)
     {
     case weapon:

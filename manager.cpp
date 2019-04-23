@@ -70,6 +70,10 @@ QString Manager::interact(int input)
     {
         return items[input]->display_message();
     }
+    else
+    {
+        return "Theres nothing there.";
+    }
 }
 
 void Manager::drop(int input)
@@ -243,6 +247,11 @@ QString Manager::lookAround()
     return map.lookAround();
 }
 
+void Manager::signIn()
+{
+
+}
+
 void Manager::saveGame()
 {
     //QString charsave = theHero.saveGame();
@@ -264,7 +273,7 @@ void Manager::loadGame()
     //        break;
     //    }
     //}
-    //theHero.loadGame(charload);
+    //toOutput = theHero.loadGame(charload);
    // map.loadGame(mapload);
 }
 
