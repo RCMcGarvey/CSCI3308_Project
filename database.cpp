@@ -9,7 +9,7 @@ database::database()
         db.setUserName("postgres");
         QString dbPass = qgetenv("DBPASS");
         qDebug() << dbPass;
-        db.setPassword("OpenSesame");
+        db.setPassword("");
         bool ok = db.open();
         if (ok){
             cout << "Database Connection Open!" << endl;
