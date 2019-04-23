@@ -143,7 +143,7 @@ room::room() {
     outside.north = &frontOfHouse;
     outside.items[0] = stick;
     outside.items[1] = dryTwig;
-    outside.roomName = "Outside";
+    outside.roomName = "You're outside";
     if(rand()%1 == 1) {
         outside.monster = outsideSnowman;
         outside.enemyDes = "A snowman rushes toward you! It has a vicious look in its coal eyes and a wicked grin to sinister mouth. The carrot sticking out of it is twisted.\n";
@@ -156,7 +156,7 @@ room::room() {
     frontOfHouse.tryW = "You walk into the fountain. It trips you. You get out and are facing north. You better get indoors soon!\n";
     frontOfHouse.north = &knocking;
     frontOfHouse.items[0] = brick;
-    frontOfHouse.roomName = "Front of House";
+    frontOfHouse.roomName = "You're at the front of house";
 
     //knocking on door
     knocking.description = "    You knock on the door, sending a dull thud echoing through the inside of the house. After a moment’s pause, a shudder passes through the exterior of the house. You wait, but you don’t hear anyone come to open the door. The air is getting colder; your breath spirals around you.\n";
@@ -167,7 +167,7 @@ room::room() {
     knocking.north = &foyer;
     knocking.items[0] = brick;
     knocking.items[1] = stick;
-    knocking.roomName = "Knocking";
+    knocking.roomName = "You're knocking";
 
     //the foyer
     foyer.description = "   You step inside, and the sound of the wind immediately dies behind you. Shivering, you let the warmer air thaw the chill set in your bones. There is a lone candle sitting on the floorboards whose light lets you discern the features of the room.";
@@ -177,7 +177,7 @@ room::room() {
     foyer.east = &rightHallway;
     foyer.tryS = "The wall is made of solid wood; you cannot go this direction.\n";
     foyer.items[0] = board;
-    foyer.roomName = "You Enter The Foyer\n";
+    foyer.roomName = "You enter the Foyer\n";
 
 
     //the diningRoom
@@ -205,176 +205,65 @@ room::room() {
     //library
     library.description = "Shelves spilling with books line the walls and fill the room. Long cobwebs hang from the ceiling, their sticky fibers running between the shelves like bridges. You can feel the dust tickle your lungs from the air you breathe in. A hushed creaking comes from behind the shelves where you cannot see.\n";
     library.north = &leftHallway;
-    library.tryE = "There is no door there; you cannot go that direction.";
-    library.tryS = "There is no door there; you cannot go that direction.";
-    library.tryW = "hLPE";
+    library.roomName = "You enter the library.\n";
 
 
     //barren room
-
+    barrenRoom.description = "The ceiling of the room you enter is high and arched with cracked beams barely supporting it. Empty of furniture or windows, your candle’s light is all that reveals the interior of the barren room. Doors leading north and south stand on either side of the room. The floorboards beneath you moan against your weight, breaking the oppressive silence.\n";
+    barrenRoom.north = &sittingRoom;
+    barrenRoom.south = &leftHallway;
+    barrenRoom.roomName = "You enter the barren room.\n";
 
     //sitting room
-
+    sittingRoom.description = "Whispering fills your ears as you step into the sitting room. A table and set of three dilapidated chairs stand in the center of the room. The sole window is covered by thick, black curtains. Along one of the walls, five portraits of a family hang: a mother, father, daughter, and two sons; their eyes watch you. To the south, east, and west, doors lead.\n";
+    sittingRoom.east = &trophyRoom;
+    sittingRoom.west = &bathroom2;
+    sittingRoom.south = &barrenRoom;
+    sittingRoom.roomName = ".\n";
 
     //trophy room
-
+    trophyRoom.description = "Taxidermied heads of animals dot the wall and the pelts of exotic creatures line the floor. The beady eyes of the dead creatures stare blankly into the space before them. Two doors to the south and the west lead from the room. You can hear a faint dripping noise.\n";
+    trophyRoom.south = &diningRoom;
+    trophyRoom.west = &sittingRoom;
 
     //kitchen
-
+    kitchen.description = "A clatter splits the air as you step into the kitchen. You see a door swiftly close, then the room returns to silence. On the floor lays a bloody knife, the source of the noise. An array of pantries wrap around the room, and a large island rests in the center. You can see a wooden cutting board on the island drenched in blood. Doors lead to the north and west.\n";
+    kitchen.north = &cellar;
+    kitchen.west = &diningRoom;
 
     //cellar
-
+    cellar.description = "You feel the dank air on your skin as you step into the cellar. Barrels are stacked throughout the room, rotten and cracked. Water drips from the ceiling above and hits the shallow puddle along the floor with a splash. The only door is from the way you came: south.\n";
+    cellar.south = &kitchen;
 
     //room with couch
-
+    roomWithCouch.description = "A long couch, cleaved in two and splattered with dried blood, is the only furniture in an otherwise empty room. You can see red eyes glint through the window on the opposite wall. Creaking comes through the ceiling above. The only door is to the north.\n";
+    roomWithCouch.north = &rightHallway;
 
     //piano room
-
+    pianoRoom.description = "As you step into the room, you spy a decaying grand piano. Faint as a breath, quiet notes suffuse the air, their eerie tune making your hair stand on end. You can see nothing striking the keys to make the music. A door leads north.\n";
+    pianoRoom.north = &office;
 
     //office
-
+    office.description = "The office you enter is perfectly in order. A large desk is stacked neatly with letters and papers, the contents of which are written in an unintelligible script. What sounds like scratching comes from within the walls. Doors lead to the west, north, and south.\n";
+    office.north = &bathroom2;
+    office.north = &rightHallway;
+    office.south = &roomWithCouch;
 
     //bathroom 1
-
+    bathroom1.description = "You enter a bathroom made of white marble. The mirror, sink, and toilet are all cracked and crumbling. The sole door is to the south. An ominous gurgling comes from inside the toilet basin.\n";
+    bathroom1.east = &sittingRoom;
 
     //bathroom 2
-
-
+    bathroom2.description = "You step into a bathroom of dark, creaking wood. The bathroom looks long since used, and a foul smell seeps into the air. You can hear creaking come the ceiling above you. A door leads to the east.\n";
+    bathroom2.south = &office;
 }
 
 QString room::saveGame() {
-    QString saves;
-    if(outside.visited == true) {
-        saves += "1";
-    } else {
-        saves += "0";
-    }
-    if(frontOfHouse.visited == true) {
-        saves += "1";
-    } else {
-        saves += "0";
-    }
-    if(knocking.visited == true) {
-        saves += "1";
-    } else {
-        saves += "0";
-    }
-    if(foyer.visited == true) {
-        saves += "1";
-    } else {
-        saves += "0";
-    }
-    if(diningRoom.visited == true) {
-        saves += "1";
-    } else {
-        saves += "0";
-    }
-    if(rightHallway.visited == true) {
-        saves += "1";
-    } else {
-        saves += "0";
-    }
-    if(leftHallway.visited == true) {
-        saves += "1";
-    } else {
-        saves += "0";
-    }
-    if(library.visited == true) {
-        saves += "1";
-    } else {
-        saves += "0";
-    }
-    if(barrenRoom.visited == true) {
-        saves += "1";
-    } else {
-        saves += "0";
-    }
-    if(sittingRoom.visited == true) {
-        saves += "1";
-    } else {
-        saves += "0";
-    }
-    if(trophyRoom.visited == true) {
-        saves += "1";
-    } else {
-        saves += "0";
-    }
-    if(kitchen.visited == true) {
-        saves += "1";
-    } else {
-        saves += "0";
-    }
-    if(cellar.visited == true) {
-        saves += "1";
-    } else {
-        saves += "0";
-    }
-    if(roomWithCouch.visited == true) {
-        saves += "1";
-    } else {
-        saves += "0";
-    }
-    if(pianoRoom.visited == true) {
-        saves += "1";
-    } else {
-        saves += "0";
-    }
-    if(office.visited == true) {
-        saves += "1";
-    } else {
-        saves += "0";
-    }
-    if(bathroom1.visited == true) {
-        saves += "1";
-    } else {
-        saves += "0";
-    }
-    if(bathroom2.visited == true) {
-        saves += "1";
-    } else {
-        saves += "0";
-    }
-    return "your mom was in my room ;)";
+    QString help = "";
+    return help;
 }
 
 void room::loadGame(QString load) {
-    if(load[0] == "1")
-        outside.visited = true;
-    if(load[1] == "1")
-        frontOfHouse.visited = true;
-    if(load[2] == "1")
-        knocking.visited = true;
-    if(load[3] == "1")
-        foyer.visited = true;
-    if(load[4] == "1")
-        diningRoom.visited = true;
-    if(load[5] == "1")
-        rightHallway.visited = true;
-    if(load[6] == "1")
-        leftHallway.visited = true;
-    if(load[7] == "1")
-        library.visited = true;
-    if(load[8] == "1")
-        barrenRoom.visited = true;
-    if(load[9] == "1")
-        sittingRoom.visited = true;
-    if(load[10] == "1")
-        trophyRoom.visited = true;
-    if(load[11] == "1")
-        kitchen.visited = true;
-    if(load[12] == "1")
-        cellar.visited = true;
-    if(load[13] == "1")
-        roomWithCouch.visited = true;
-    if(load[14] == "1")
-        pianoRoom.visited = true;
-    if(load[15] == "1")
-        office.visited = true;
-    if(load[16] == "1")
-        bathroom1.visited = true;
-    if(load[17] == "1")
-        bathroom2.visited = true;
-
 }
 
 QString room::lookAround() {
