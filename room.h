@@ -21,7 +21,7 @@ class room
 public:
     struct roms {
         QString description;
-        bool visited = false;
+        bool visited = true;
         roms *south = nullptr;
         QString tryS;
         QString southGo;
@@ -56,17 +56,17 @@ public:
     QString lookAround();
 
     Item* itemList[100];
-    Item* oldSword  = new Item(weapon, "Old Sword", false, 20, 0, .1, 0);
-    Item* woodenBow = new Item(weapon, "Wooden Bow", false, 20, 0, .5, 0);
-    Item* rustyDagger = new Item(weapon, "Rusty Dagger", false, 12, 0, .0, 0);
-    Item* healingPotion = new Item(consumable, "Potion of Healing", true, 0, 15, 0.0, 25);
+    Item* oldSword  = new Item(weapon, "Old Sword", false, 20, 0, .1);
+    Item* woodenBow = new Item(weapon, "Wooden Bow", false, 20, 0, .5);
+    Item* rustyDagger = new Item(weapon, "Rusty Dagger", false, 12, 0, .0);
+    Item* healingPotion = new Item(consumable, "Potion of Healing", true, 0, 15, 0.0);
     //Can be found outdoors
-    Item* stick = new Item(weapon, "A Dry Stick", false, 1, 0, .0, 0);
-    Item* dryTwig = new Item(weapon, "A Dry Twig", true, 0, 0, .0, 0);
-    Item* brick = new Item(weapon, "A Brick", true, 10, 0, .1, 0);
-    Item* board = new Item(weapon, "A Wooden Board", false, 10, 0, 0.01, 0);
-    Item* knife = new Item(weapon, "A Dining Knife", false, 8, 0, 1.0, 0);
-    Item* chair = new Item(weapon, "A Dining Chair", true, 20, 0, 1.0, 0);
+    Item* stick = new Item(weapon, "A Dry Stick", false, 1, 0, .0);
+    Item* dryTwig = new Item(weapon, "A Dry Twig", true, 0, 0, .0);
+    Item* brick = new Item(weapon, "A Brick", true, 10, 0, .1);
+    Item* board = new Item(weapon, "A Wooden Board", false, 10, 0, 0.01);
+    Item* knife = new Item(weapon, "A Dining Knife", false, 8, 0, 1.0);
+    Item* chair = new Item(weapon, "A Dining Chair", true, 20, 0, 1.0);
 
     roms outside;
     roms frontOfHouse;
