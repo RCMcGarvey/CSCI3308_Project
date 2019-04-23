@@ -243,8 +243,30 @@ QString Manager::lookAround()
     return map.lookAround();
 }
 
+void Manager::saveGame()
+{
+    //QString charsave = theHero.saveGame();
+    //QString mapsave = map.saveGame();
+    //db.saveGame(playername ,charsave + ":" + mapsave);
+}
 
-
+void Manager::loadGame()
+{
+    //QString loadstr = db.loadGame(playername);
+    //QString charload;
+    //QString mapload;
+    //for(int i = 0; i < loadstr.length(); ++i)
+    //{
+    //    if(loadstr[i] == ':')
+    //    {
+    //        charload = loadstr.left(i-1);
+    //        mapload = loadstr.right(loadstr.length()-i+1);
+    //        break;
+    //    }
+    //}
+    //theHero.loadGame(charload);
+   // map.loadGame(mapload);
+}
 
 
 

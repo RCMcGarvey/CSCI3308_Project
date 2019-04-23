@@ -299,6 +299,7 @@ void Display::on_spellButton_clicked()
     ui->progressBar_2->setValue(bossMan.enemyHealth());
     ui->weaponButton->setVisible(false);
     ui->spellButton->setVisible(false);
+    ui->lookButton->setEnabled(true);
     ui->fightButton->setText("Fight");
     if(bossMan.gameOver == true)
     {
@@ -509,7 +510,7 @@ void Display::on_comboBox_activated(int index)
             }
             else
             {
-                if(bossMan.getItem(index, 1) == "Nothing there")
+                if(ui->comboBox->currentText() == "Nothing there")
                 {
                     ui->textEdit->append("You cant pick up something that doesnt exist.");
                     ui->comboBox->clear();
@@ -647,16 +648,16 @@ void Display::on_lineEdit_returnPressed()
         {
             ui->lineEdit->clear();
             ui->lineEdit->setVisible(false);
-            //bossman.loadGame();
-            /*
-             *   ui->moveButton->setVisible(true);
-             *   ui->fightButton->setVisible(true);
-             *   ui->InventoryButton->setVisible(true);
-             *   ui->lookButton->setVisible(true);
-             *   ui->label->setVisible(true);
-             *   ui->progressBar->setVisible(true);
-             *
-             */
+            bossMan.loadGame();
+
+             ui->moveButton->setVisible(true);
+             ui->fightButton->setVisible(true);
+             ui->InventoryButton->setVisible(true);
+             ui->lookButton->setVisible(true);
+             ui->label->setVisible(true);
+             ui->progressBar->setVisible(true);
+
+
         }
     }
 
