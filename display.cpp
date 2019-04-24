@@ -601,7 +601,7 @@ void Display::on_actionMain_Menu_triggered()
     ui->lineEdit->setVisible(true);
     ui->lineEdit_2->setVisible(true);
 
-    bossMan.startGame();
+    //bossMan.startGame();
 
     mainMenu();
 

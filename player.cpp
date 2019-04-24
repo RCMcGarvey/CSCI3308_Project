@@ -48,7 +48,8 @@ Player::Player(PlayerClass role)
         attack_boost = 0;
         defense_boost = 0;
         critChance = 0;
-        for(int i = 0; i < 8; ++i)
+        inventory.push_back(ItemPool[5]);
+        for(int i = 1; i < 8; ++i)
         {
             inventory.push_back(nullptr);
         }
@@ -63,7 +64,8 @@ Player::Player(PlayerClass role)
         attack_boost = 0;
         defense_boost = 0;
         critChance = 0;
-        for (int i = 0; i < 8; ++i)
+        inventory.push_back(ItemPool[8]);
+        for (int i = 1; i < 8; ++i)
         {
             inventory.push_back(nullptr);
         }
@@ -77,7 +79,8 @@ Player::Player(PlayerClass role)
         defense_boost = 0;
         critChance = 0;
         inventory.resize(10);
-        for(int i = 0; i < 10; ++i)
+        inventory.push_back(ItemPool[3]);
+        for(int i = 1; i < 10; ++i)
         {
             inventory[i] = nullptr;
         }
@@ -90,7 +93,8 @@ Player::Player(PlayerClass role)
         attack_boost = 0;
         defense_boost = 0;
         critChance = .33;
-        for (int i = 0; i < 8; ++i)
+        inventory.push_back(ItemPool[5]);
+        for (int i = 1; i < 8; ++i)
         {
             inventory.push_back(nullptr);
         }
@@ -283,9 +287,11 @@ int Player::attack(QString type){
       if(type =="Weapon"){
           if(inventory[0]){
               atk+=inventory[0]->attack_boost;
+              if(inventory[0]->is_single_use) inventory[0] = nullptr;
           }
           if(inventory[1]){
               atk+=inventory[1]->attack_boost;
+              if(inventory[1]->is_single_use) inventory[1] = nullptr;
           }
       }
       else if(type == "Spell"){
@@ -300,10 +306,12 @@ int Player::attack(QString type){
         if(inventory[0]){
           adjustHealth(inventory[0]->defense_boost);
           atk+=inventory[0]->attack_boost;
+          if(inventory[0]->is_single_use) inventory[0] = nullptr;
         }
         if(inventory[1]){
           adjustHealth(inventory[1]->defense_boost);
           atk+=inventory[1]->attack_boost;
+          if(inventory[1]->is_single_use) inventory[1] = nullptr;
         }
       }
   }
@@ -311,11 +319,13 @@ int Player::attack(QString type){
       if(type =="Weapon"){
           if(inventory[0]){
               atk+=inventory[0]->attack_boost;
+              if(inventory[0]->is_single_use) inventory[0] = nullptr;
           }
       }
       else if(type == "Spell"&&inventory[1]){
         adjustHealth(inventory[1]->defense_boost);
         atk+=inventory[1]->attack_boost;
+        if(inventory[1]->is_single_use) inventory[1] = nullptr;
       }
   }
   atk += (rand()%10* atk/20);//to vary attack damage (constants can be adjusted)
