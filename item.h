@@ -22,7 +22,7 @@ struct Item{
   int attack_boost;
   int defense_boost;
   double crit_chance;
-  char ID;
+  int ID;
 
 // in case the item is a sheet of paper which says something
   bool has_message;
@@ -30,9 +30,10 @@ struct Item{
 
   //Constructor: (basic weapons, armor, and potions)
   //  type        name     singleuse atk dfs  crit
-  Item(ItemType t, QString n, bool single_use, int atk, int def, double crit, int heal)
+  Item(int id ,ItemType t, QString n, bool single_use, int atk, int def, double crit, int heal)
   {
     type = t;
+    ID = id;
     name = n;
     is_single_use = single_use;
     is_active = false;
@@ -46,8 +47,9 @@ struct Item{
 
   //Constructor: (scrolls, items with messages, misc)
   //  type        name     singleuse atk dfs  crit    use/message
-  Item(ItemType t, QString n, bool single_use, int atk, int def, double crit, int heal, QString msg)
+  Item(int id ,ItemType t, QString n, bool single_use, int atk, int def, double crit, int heal, QString msg)
   {
+    ID = id;
     type = t;
     name = n;
     is_single_use = single_use;
