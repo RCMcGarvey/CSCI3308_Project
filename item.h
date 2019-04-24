@@ -89,10 +89,9 @@ struct Item{
   // bool action();//may be used to destroy single-use items after use
 };
 
-struct Items
-{
-    vector<Item*> item_pool;
-};
+extern Item *ItemPool[30];
+
+
 
 
 
