@@ -134,6 +134,8 @@ room::room() {
         outside.monster = outsideSnowman;
         outside.enemyDes = "A snowman rushes toward you! It has a vicious look in its coal eyes and a wicked grin to sinister mouth. The carrot sticking out of it is twisted.\n";
     }
+    outside.items[0] = ItemPool[2];
+    outside.items[1] = ItemPool[1];
 
     //front of house
     frontOfHouse.description = "Cautiously, you approach the manor. Loose shingles rattle from the roof above. As you step up the wooden stairs leading to the door, the creaking underfoot sends shivers up your spine. The door, black and glossy, stands before you.\n";
