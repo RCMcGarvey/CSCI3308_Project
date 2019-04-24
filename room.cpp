@@ -138,30 +138,27 @@ room::room() {
     outside.items[1] = ItemPool[1];
 
     //front of house
-    frontOfHouse.description = "Cautiously, you approach the manor. Loose shingles rattle from the roof above. As you step up the wooden stairs leading to the door, the creaking underfoot sends shivers up your spine. The door, black and glossy, stands before you.\n";
+    frontOfHouse.roomName = "Cautiously, you approach the manor. Loose shingles rattle from the roof above. As you step up the wooden stairs leading to the door, the creaking underfoot sends shivers up your spine. The door, black and glossy, stands before you.\n";
     frontOfHouse.tryS = "You just came from that way; it feels too counterproductive.\n";
     frontOfHouse.tryE = "A strong gust of wind blows you back.\n";
     frontOfHouse.tryW = "You walk into the fountain. It trips you. You get out and are facing north. You better get indoors soon!\n";
     frontOfHouse.north = &knocking;
-    frontOfHouse.roomName = "You're at the front of house.\n";
 
     //knocking on door
-    knocking.description = "    You knock on the door, sending a dull thud echoing through the inside of the house. After a moment’s pause, a shudder passes through the exterior of the house. You wait, but you don’t hear anyone come to open the door. The air is getting colder; your breath spirals around you.\n";
-    knocking.description += "   You reach for the doorknob, but when your hand touches the brass, a loud click comes from within. Soundlessly, the door swings open. The inside of the house is darker than the night, but you can feel the air is a little warmer there.\n";
+    knocking.roomName = "    You knock on the door, sending a dull thud echoing through the inside of the house. After a moment’s pause, a shudder passes through the exterior of the house. You wait, but you don’t hear anyone come to open the door. The air is getting colder; your breath spirals around you.\n";
+    knocking.roomName += "   You reach for the doorknob, but when your hand touches the brass, a loud click comes from within. Soundlessly, the door swings open. The inside of the house is darker than the night, but you can feel the air is a little warmer there.\n";
     knocking.tryS = "The warm air of the mansion pulls you in. The cold air chills your borns instinctively making you step back towards the door.\n";
     knocking.tryE = "Porch railing blocks your path that way.\n";
     knocking.tryW = "There is a loose board and you trip on it. When you stand back up you are facing the door of the mansion.\n";
     knocking.north = &foyer;
-    knocking.roomName = "You're knocking.\n";
 
     //the foyer
-    foyer.description = "   You step inside, and the sound of the wind immediately dies behind you. Shivering, you let the warmer air thaw the chill set in your bones. There is a lone candle sitting on the floorboards whose light lets you discern the features of the room.";
-    foyer.description += "It's a large foyer with doors to the north, east, and west. You look behind you, but strangely the door you came through is gone! An enormous chandelier hangs above, but none of its candles are lit.\n";
+    foyer.roomName = "   You step inside, and the sound of the wind immediately dies behind you. Shivering, you let the warmer air thaw the chill set in your bones. There is a lone candle sitting on the floorboards whose light lets you discern the features of the room.";
+    foyer.roomName += "It's a large foyer with doors to the north, east, and west. You look behind you, but strangely the door you came through is gone! An enormous chandelier hangs above, but none of its candles are lit.\n";
     foyer.north = &diningRoom;
     foyer.west = &leftHallway;
     foyer.east = &rightHallway;
     foyer.tryS = "The wall is made of solid wood; you cannot go this direction.\n";
-    foyer.roomName = "You enter the foyer\n";
 
 
     //the diningRoom
@@ -395,7 +392,7 @@ QString room::lookAround() {
    QString observations = "You see a ";
    if(currentRoom->items[0] == nullptr && currentRoom->items[1] == nullptr && currentRoom->items[2] == nullptr && currentRoom->items[3] == nullptr)
    {
-       return "You see nothing lying around.";
+       return currentRoom->description;
    }
    for(int i = 0; i < 4; ++i)
    {
