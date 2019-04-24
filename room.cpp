@@ -392,7 +392,24 @@ QString room::loadGame(QString load) {
 }
 
 QString room::lookAround() {
-    return currentRoom->description;
+   QString observations = "You see a ";
+   if(currentRoom->items[0] == nullptr && currentRoom->items[1] == nullptr && currentRoom->items[2] == nullptr && currentRoom->items[3] == nullptr)
+   {
+       return "You see nothing lying around.";
+   }
+   for(int i = 0; i < 4; ++i)
+   {
+       if(currentRoom->items[i] != nullptr)
+       {
+           observations += currentRoom->items[i]->name + ", ";
+       }
+       if(i == 3 && currentRoom->items[i] != nullptr)
+       {
+           observations += "and a " + currentRoom->items[i]->name;
+       }
+   }
+   return observations;
+
 }
 
 int room::getEnemyAttack(){
