@@ -33,7 +33,8 @@ SOURCES += \
     enemy.cpp \
     room.cpp \
     database.cpp \
-    hashpass.cpp
+    hashpass.cpp \
+    item.cpp
 
 HEADERS += \
         display.h \

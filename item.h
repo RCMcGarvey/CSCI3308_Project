@@ -3,6 +3,7 @@
 
 #include <string>
 #include <QString>
+#include <vector>
 
 using namespace std;
 
@@ -21,6 +22,7 @@ struct Item{
   int attack_boost;
   int defense_boost;
   double crit_chance;
+  char ID;
 
 // in case the item is a sheet of paper which says something
   bool has_message;
@@ -86,5 +88,13 @@ struct Item{
   }
   // bool action();//may be used to destroy single-use items after use
 };
+
+struct Items
+{
+    vector<Item*> item_pool;
+};
+
+
+
 
 #endif // ITEM_H
