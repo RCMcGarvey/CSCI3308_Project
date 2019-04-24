@@ -121,18 +121,6 @@ void room::cleared() {
 
 room::room() {
     srand(time(NULL));
-    //Found somewhere in the building
-
-    itemList[0] = oldSword;
-    itemList[1] = woodenBow;
-    itemList[2] = rustyDagger;
-    itemList[3] = healingPotion;
-    itemList[4] = stick;
-    itemList[5] = dryTwig;
-    itemList[6] = brick;
-    itemList[7] = board;
-    itemList[8] = knife;
-    itemList[9] = chair;
 
     //outside
     outside.description = "You look over your shoulder. Tendrils of fog slither out from the encroaching forest like snakes, hissing as they slide over the dead ground. Menacing shadows watch you from the cover of the trees. The night is frigid; you pull your clothes tighter. If you spend any longer outside, you’ll freeze to death.\n";
@@ -141,8 +129,6 @@ room::room() {
     outside.tryE = "There is a foreboding looking mist that frightens you too much to go that way.\n";
     outside.tryW = "You trip and fall. When you stand back up, you face north.\n";
     outside.north = &frontOfHouse;
-    outside.items[0] = stick;
-    outside.items[1] = dryTwig;
     outside.roomName = "You're outside.\n";
     if(rand()%1 == 1) {
         outside.monster = outsideSnowman;
@@ -155,7 +141,6 @@ room::room() {
     frontOfHouse.tryE = "A strong gust of wind blows you back.\n";
     frontOfHouse.tryW = "You walk into the fountain. It trips you. You get out and are facing north. You better get indoors soon!\n";
     frontOfHouse.north = &knocking;
-    frontOfHouse.items[0] = brick;
     frontOfHouse.roomName = "You're at the front of house.\n";
 
     //knocking on door
@@ -165,8 +150,6 @@ room::room() {
     knocking.tryE = "Porch railing blocks your path that way.\n";
     knocking.tryW = "There is a loose board and you trip on it. When you stand back up you are facing the door of the mansion.\n";
     knocking.north = &foyer;
-    knocking.items[0] = brick;
-    knocking.items[1] = stick;
     knocking.roomName = "You're knocking.\n";
 
     //the foyer
@@ -176,7 +159,6 @@ room::room() {
     foyer.west = &leftHallway;
     foyer.east = &rightHallway;
     foyer.tryS = "The wall is made of solid wood; you cannot go this direction.\n";
-    foyer.items[0] = board;
     foyer.roomName = "You enter the foyer\n";
 
 
@@ -185,8 +167,6 @@ room::room() {
     diningRoom.north = &trophyRoom;
     diningRoom.south = &foyer;
     diningRoom.east = &kitchen;
-    diningRoom.items[0] = knife;
-    diningRoom.items[1] = chair;
     diningRoom.roomName = "You enter the dining room\n";
 
     //right hallway
@@ -447,37 +427,5 @@ bool  room::addItem(Item* newItem){
         ++howManyItems;
     }
     return false;
-}
-
-Item* room::getItem(int id) {
-    return itemList[id];
-}
-
-int room::getItemID(Item *itemPtr) {
-    if(itemPtr != nullptr) {
-        if(itemPtr->name == "Old Sword")
-            return 0;
-        if(itemPtr->name == "Wooden Bow")
-            return 1;
-        if(itemPtr->name == "Rusty Dagger")
-            return 2;
-        if(itemPtr->name == "Potion of Healing")
-            return 3;
-        if(itemPtr->name == "A Dry Stick")
-            return 4;
-        if(itemPtr->name == "A Dry Twig")
-            return 5;
-        if(itemPtr->name == "A Brick")
-            return 6;
-        if(itemPtr->name == "A Wooden Board")
-            return 7;
-        if(itemPtr->name == "A Dining Knife")
-            return 8;
-        if(itemPtr->name == "A Dining Chair")
-            return 9;
-        return 99;
-    } else {
-        return 99;
-    }
 }
 
