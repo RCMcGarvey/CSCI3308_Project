@@ -120,7 +120,7 @@ public:
 
     //save the game
     QString saveGame();
-    void loadGame(QString load);
+    QString loadGame(QString load);
     Item* getItem(int id);
     int getItemID(Item* itemPtr);
 };
