@@ -410,7 +410,7 @@ QString Player::makeNS(int len, int val){
     return str;
   }
   QString num = QString::number(val, 10);
-  for(int i = 0; i<(len-num.length()), i++){
+  for(int i = 0; i<(len-num.length()); i++){
     str+="0";
   }
   str+=num;
@@ -423,7 +423,7 @@ QString Player::saveGame(){
   if(role == Mage) save+="M";
   else if(role == Warrior) save+="W";
   else if(role == Bard) save+="B";
-  else role+="R";
+  else save+="R";
   //adding health
   save+=makeNS(5,health);
   save+=makeNS(5,max_health);
@@ -437,35 +437,35 @@ QString Player::saveGame(){
   return save;
 }
 
-void Player::loadPlayer(QString l){
-  std::string load = l.toStdString();
+void Player::loadGame(QString l){
+  QString load = l;
   if(load[0] == "R"){
-    critChance = 1/3;
+    critChance = .33;
     role = Rogue;
   }
   else if(load[0] == "M") role = Mage;
   else if(load[0] == "B") role = Bard;
   else role = Warrior;
   //loading health
-  std::string val = load.substr(0,5);
-  health = std::stoi(val);
-  load = load.substr(5);
+  QString val = load.left(6);
+  health = val.toInt();
+  load = load.mid(6);
   //loading max health
-  val = load.substr(0,5);
-  max_health = std::stoi(val);
-  load = load.substr(5);
+  val = load.left(6);
+  max_health = val.toInt();
+  load = load.mid(6);
   //loading attack
-  val = load.substr(0,4);
-  base_attack = std::stoi(val);
-  load = load.substr(4);
+  val = load.left(5);
+  base_attack = val.toInt();
+  load = load.mid(5);
   //loading attack boost
-  val = load.substr(0,4);
-  attack_boost = std::stoi(val);
-  load = load.substr(4);
+  val = load.left(5);
+  attack_boost = val.toInt();
+  load = load.mid(5);
   //loading defense boost
-  val = load.substr(0,4);
-  defense_boost = std::stoi(val);
-  load = load.substr(4);
+  val = load.left(5);
+  defense_boost = val.toInt();
+  load = load.mid(5);
 
   int slot = 0;
   while(load.length()>0){

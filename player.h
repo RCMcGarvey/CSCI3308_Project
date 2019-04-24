@@ -20,7 +20,7 @@ public:
   Player();
   Player(PlayerClass);
   //       class    health max, atk, atk+ def+ crit   nextInventorySlot
-  loadGame(PlayerClass, int, int, int, int, int, int);
+  void loadGame(QString l);
   //tries to add an item to the inventory
   //returns false if item cannot be collected
   bool collectItem(Item*);
@@ -46,9 +46,7 @@ public:
   int getDefense();
 
   QString makeNS(int, int);
-  QString saveGame(){
-
-  }
+  QString saveGame();
 
 private:
 

@@ -8,6 +8,7 @@ database::database()
         db.setDatabaseName("csci3308_proj");
         db.setUserName("postgres");
         QString dbPass = qgetenv("DBPASS");
+
         qDebug() << dbPass;
         db.setPassword("");
         bool ok = db.open();
