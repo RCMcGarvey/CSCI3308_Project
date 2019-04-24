@@ -10,7 +10,7 @@ database::database()
         QString dbPass = qgetenv("DBPASS");
 
         qDebug() << dbPass;
-        db.setPassword("OpenSesame");
+        db.setPassword(dbPass);
         bool ok = db.open();
         if (ok){
             cout << "Database Connection Open!" << endl;
