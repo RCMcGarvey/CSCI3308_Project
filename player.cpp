@@ -26,6 +26,8 @@ Consider replacing the following method with a signal/slot pair
 
  /////////////////////////END ITEM CLASS DEFINITIONS////////////////////////////
 ////////////////////////BEGIN PLAYER CLASS DEFINITIONS/////////////////////////
+
+
 Player::Player(){
   health = 100;
   max_health = 100;
@@ -363,10 +365,6 @@ QString Player::useItem(int slot)
 {
     Item *current = new Item();
     current = inventory[slot];
-    if(current == nullptr)
-    {
-        return "You have nothing in that slot.";
-    }
     switch(current->type)
     {
     case weapon:
@@ -396,6 +394,93 @@ int Player::getDefense()
 {
     return defense_boost;
 }
+
+//make string of length n out of a value
+QString Player::makeNS(int len, int val){
+  QString str = "";
+  //case: item
+  if(len == 2){
+    if(val<10){
+      str+="0";
+      str+=QString::number(val, 10);
+    }
+    else{
+      str+=QString::number(val, 10);
+    }
+    return str;
+  }
+  QString num = QString::number(val, 10);
+  for(int i = 0; i<(len-num.length()), i++){
+    str+="0";
+  }
+  str+=num;
+  return str;
+}
+
+QString Player::saveGame(){
+  QString save = "";
+  //adding player role
+  if(role == Mage) save+="M";
+  else if(role == Warrior) save+="W";
+  else if(role == Bard) save+="B";
+  else role+="R";
+  //adding health
+  save+=makeNS(5,health);
+  save+=makeNS(5,max_health);
+  save+=makeNS(4,base_attack);
+  save+=makeNS(4,attack_boost);
+  save+=makeNS(4,defense_boost);
+  //inventory
+  for(int i = 0; i<inventory.size(); i++){
+    // save+=;
+  }
+  return save;
+}
+
+void Player::loadPlayer(QString l){
+  std::string load = l.toStdString();
+  if(load[0] == "R"){
+    critChance = 1/3;
+    role = Rogue;
+  }
+  else if(load[0] == "M") role = Mage;
+  else if(load[0] == "B") role = Bard;
+  else role = Warrior;
+  //loading health
+  std::string val = load.substr(0,5);
+  health = std::stoi(val);
+  load = load.substr(5);
+  //loading max health
+  val = load.substr(0,5);
+  max_health = std::stoi(val);
+  load = load.substr(5);
+  //loading attack
+  val = load.substr(0,4);
+  base_attack = std::stoi(val);
+  load = load.substr(4);
+  //loading attack boost
+  val = load.substr(0,4);
+  attack_boost = std::stoi(val);
+  load = load.substr(4);
+  //loading defense boost
+  val = load.substr(0,4);
+  defense_boost = std::stoi(val);
+  load = load.substr(4);
+
+  int slot = 0;
+  while(load.length()>0){
+    // val = load.substr(0,1);
+    // inventory[slot] = itemFunction(slot);
+    // slot++;
+    // load = load.substr(1);
+  }
+}
+//save string format:
+/*
+H: Health
+R/HHHHH/MMMMM/AAAA/BBBB/DDDD/(inventory slots)
+
+*/
 //Used to test functionalities of various methods
 //This isn't necessary
 /*int main(){
