@@ -130,7 +130,7 @@ room::room() {
     outside.tryW = "You trip and fall. When you stand back up, you face north.\n";
     outside.north = &frontOfHouse;
     outside.roomName = "You're outside.\n";
-    if(rand()%1 == 1) {
+    if(true) {
         outside.monster = outsideSnowman;
         outside.enemyDes = "A snowman rushes toward you! It has a vicious look in its coal eyes and a wicked grin to sinister mouth. The carrot sticking out of it is twisted.\n";
     }
@@ -171,7 +171,7 @@ room::room() {
         foyer.monster = new enemy(Ghost);
         foyer.enemyDes = "You here a wail and the ghost of a small girl attacks you.\n";
     }
-    if(rand()%1 == 1) {
+    if(true) {
         foyer.items[0] = ItemPool[(rand()%25)];
     }
 
