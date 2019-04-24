@@ -26,6 +26,8 @@ Consider replacing the following method with a signal/slot pair
 
  /////////////////////////END ITEM CLASS DEFINITIONS////////////////////////////
 ////////////////////////BEGIN PLAYER CLASS DEFINITIONS/////////////////////////
+
+
 Player::Player(){
   health = 100;
   max_health = 100;
@@ -392,6 +394,93 @@ int Player::getDefense()
 {
     return defense_boost;
 }
+
+//make string of length n out of a value
+QString Player::makeNS(int len, int val){
+  QString str = "";
+  //case: item
+  if(len == 2){
+    if(val<10){
+      str+="0";
+      str+=QString::number(val, 10);
+    }
+    else{
+      str+=QString::number(val, 10);
+    }
+    return str;
+  }
+  QString num = QString::number(val, 10);
+  for(int i = 0; i<(len-num.length()); i++){
+    str+="0";
+  }
+  str+=num;
+  return str;
+}
+
+QString Player::saveGame(){
+  QString save = "";
+  //adding player role
+  if(role == Mage) save+="M";
+  else if(role == Warrior) save+="W";
+  else if(role == Bard) save+="B";
+  else save+="R";
+  //adding health
+  save+=makeNS(5,health);
+  save+=makeNS(5,max_health);
+  save+=makeNS(4,base_attack);
+  save+=makeNS(4,attack_boost);
+  save+=makeNS(4,defense_boost);
+  //inventory
+  for(int i = 0; i<inventory.size(); i++){
+    // save+=;
+  }
+  return save;
+}
+
+void Player::loadGame(QString l){
+  QString load = l;
+  if(load[0] == "R"){
+    critChance = .33;
+    role = Rogue;
+  }
+  else if(load[0] == "M") role = Mage;
+  else if(load[0] == "B") role = Bard;
+  else role = Warrior;
+  //loading health
+  QString val = load.left(6);
+  health = val.toInt();
+  load = load.mid(6);
+  //loading max health
+  val = load.left(6);
+  max_health = val.toInt();
+  load = load.mid(6);
+  //loading attack
+  val = load.left(5);
+  base_attack = val.toInt();
+  load = load.mid(5);
+  //loading attack boost
+  val = load.left(5);
+  attack_boost = val.toInt();
+  load = load.mid(5);
+  //loading defense boost
+  val = load.left(5);
+  defense_boost = val.toInt();
+  load = load.mid(5);
+
+  int slot = 0;
+  while(load.length()>0){
+    // val = load.substr(0,1);
+    // inventory[slot] = itemFunction(slot);
+    // slot++;
+    // load = load.substr(1);
+  }
+}
+//save string format:
+/*
+H: Health
+R/HHHHH/MMMMM/AAAA/BBBB/DDDD/(inventory slots)
+
+*/
 //Used to test functionalities of various methods
 //This isn't necessary
 /*int main(){

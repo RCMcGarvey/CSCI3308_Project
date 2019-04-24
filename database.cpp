@@ -1,13 +1,16 @@
 #include "database.h"
+#include <QtDebug>
 
 database::database()
 {
         QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL");
         db.setHostName("127.0.0.1");
-        db.setDatabaseName("proj_db");
-        db.setUserName("csci3308_proj");
+        db.setDatabaseName("csci3308_proj");
+        db.setUserName("postgres");
         QString dbPass = qgetenv("DBPASS");
-        db.setPassword(dbPass);
+
+        qDebug() << dbPass;
+        db.setPassword("OpenSesame");
         bool ok = db.open();
         if (ok){
             cout << "Database Connection Open!" << endl;

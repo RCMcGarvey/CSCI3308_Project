@@ -1,8 +1,6 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 /*
-
-
 */
 
 #include <string>
@@ -21,7 +19,8 @@ class Player{
 public:
   Player();
   Player(PlayerClass);
-
+  //       class    health max, atk, atk+ def+ crit   nextInventorySlot
+  void loadGame(QString l);
   //tries to add an item to the inventory
   //returns false if item cannot be collected
   bool collectItem(Item*);
@@ -45,6 +44,9 @@ public:
   vector<Item*> &getInventory();
 
   int getDefense();
+
+  QString makeNS(int, int);
+  QString saveGame();
 
 private:
 

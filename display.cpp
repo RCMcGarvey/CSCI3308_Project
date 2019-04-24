@@ -64,9 +64,9 @@ void Display::mainMenu()
 {
     ui->textEdit->clear();
     ui->lineEdit_2->setEnabled(false);
-    ui->textEdit->setHtml("<center><big>Presented by some Swonky Creatures</big></center>"
+    ui->textEdit->setHtml("<center><big>Developed by Swonky Creatures</big></center>"
                           "<br></br>"
-                          "<center><big>Mysterious Diary that Records the Voice</big></center>");
+                          "<center><big>The Spooky Mansion</big></center>");
     if (signin == false)
     {
         ui->textEdit->append("<br></br>Please sign in.");
@@ -542,6 +542,9 @@ void Display::on_comboBox_2_activated(int index)
     if(currentButton == "Drop")
     {
         bossMan.drop(index);
+        ui->comboBox_2->clear();
+        ui->comboBox->clear();
+        on_pickupButton_clicked();
     }
     else if(currentButton == "Swap")
     {
@@ -654,6 +657,7 @@ void Display::on_lineEdit_returnPressed()
             ui->lineEdit->clear();
             ui->lineEdit->setVisible(false);
             bossMan.loadGame();
+            ui->textEdit->append(bossMan.startNarrative());
 
              ui->moveButton->setVisible(true);
              ui->fightButton->setVisible(true);
