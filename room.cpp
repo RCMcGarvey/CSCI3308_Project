@@ -136,13 +136,18 @@ room::room() {
     }
     outside.items[0] = ItemPool[2];
     outside.items[1] = ItemPool[1];
+    outside.items[2] = ItemPool[1];
 
     //front of house
     frontOfHouse.roomName = "Cautiously, you approach the manor. Loose shingles rattle from the roof above. As you step up the wooden stairs leading to the door, the creaking underfoot sends shivers up your spine. The door, black and glossy, stands before you.\n";
     frontOfHouse.tryS = "You just came from that way; it feels too counterproductive.\n";
     frontOfHouse.tryE = "A strong gust of wind blows you back.\n";
     frontOfHouse.tryW = "You walk into the fountain. It trips you. You get out and are facing north. You better get indoors soon!\n";
+    frontOfHouse.description = "You are standing in front of the hosue.\n";
     frontOfHouse.north = &knocking;
+    if(rand()%7==1) {
+        frontOfHouse.items[0] = ItemPool[3];
+    }
 
     //knocking on door
     knocking.roomName = "    You knock on the door, sending a dull thud echoing through the inside of the house. After a moment’s pause, a shudder passes through the exterior of the house. You wait, but you don’t hear anyone come to open the door. The air is getting colder; your breath spirals around you.\n";
@@ -151,22 +156,42 @@ room::room() {
     knocking.tryE = "Porch railing blocks your path that way.\n";
     knocking.tryW = "There is a loose board and you trip on it. When you stand back up you are facing the door of the mansion.\n";
     knocking.north = &foyer;
+    knocking.items[0] = ItemPool[4];
 
     //the foyer
-    foyer.roomName = "   You step inside, and the sound of the wind immediately dies behind you. Shivering, you let the warmer air thaw the chill set in your bones. There is a lone candle sitting on the floorboards whose light lets you discern the features of the room.";
-    foyer.roomName += "It's a large foyer with doors to the north, east, and west. You look behind you, but strangely the door you came through is gone! An enormous chandelier hangs above, but none of its candles are lit.\n";
+    foyer.description = "   You step inside, and the sound of the wind immediately dies behind you. Shivering, you let the warmer air thaw the chill set in your bones. There is a lone candle sitting on the floorboards whose light lets you discern the features of the room.";
+    foyer.description += "It's a large foyer with doors to the north, east, and west. You look behind you, but strangely the door you came through is gone! An enormous chandelier hangs above, but none of its candles are lit.\n";
+    foyer.roomName = "You enter the foyer.\n";
+    foyer.visited = false;
     foyer.north = &diningRoom;
     foyer.west = &leftHallway;
     foyer.east = &rightHallway;
     foyer.tryS = "The wall is made of solid wood; you cannot go this direction.\n";
-
+    if(rand()%4 == 1) {
+        foyer.monster = new enemy(Ghost);
+        foyer.enemyDes = "You here a wail and the ghost of a small girl attacks you.\n";
+    }
+    if(rand()%1 == 1) {
+        foyer.items[0] = ItemPool[(rand()%25)];
+    }
 
     //the diningRoom
     diningRoom.description = "You enter a long, unlit dining room. A sturdy oak table spans the length of the room with enough chairs to fit more than twenty people. The table is set with plates, knives, glasses, and forks, but there's no food; however, you can smell something delivious in the air. There are doors leading north, east, and south\n";
     diningRoom.north = &trophyRoom;
     diningRoom.south = &foyer;
     diningRoom.east = &kitchen;
+    diningRoom.tryW = "You try to go West but trip over a dining room chair tumbling majestically several times. When you stand back up you are facing North.";
     diningRoom.roomName = "You enter the dining room\n";
+    if(rand()%2 == 1) {
+        diningRoom.monster = new enemy(Zombie);
+        diningRoom.enemyDes = "A Zombie gets up from the table, and slowly hobbles over to you.\n";
+    }
+    diningRoom.items[0] = ItemPool[5];
+    diningRoom.items[1] = ItemPool[6];
+    diningRoom.items[2] = ItemPool[7];
+    if(rand()%5==1) {
+        diningRoom.items[3] = ItemPool[rand()%25];
+    }
 
     //right hallway
     rightHallway.description = "The hallway you step into is short but has doors leading north, east, south, and west. A painting of an old man hangs on one of the walls. You hear the door behind you creak shut.\n";
@@ -175,7 +200,6 @@ room::room() {
     rightHallway.south = &roomWithCouch;
     rightHallway.tryN = "You try to open the door, but it's locked.\n";
     rightHallway.roomName = "You enter a small hallway\n";
-
 
     //left hallway
     leftHallway.description = "You open the door to a small hallway. Stepping through, you see doors leading to the north, east, south, and west. A painting of an ancient woman is hanging next to the north door. The hinges of the door quietly scream as they shut.\n";
@@ -188,17 +212,27 @@ room::room() {
     //foggy Greenhouse
     foggyGreenhouse.description = "You step into a greenhouse bustling with dead plants and malignant fungus. Though the walls are made of tinted glass, a thick, wet fog clings to the surface, obscuring your view of the manor’s grounds. Some of the plants look content in their small pots, but a few have spread like a plague out of their containers and over the floorboards all the way to the only door leading East. The air is repugnant here.\n";
     foggyGreenhouse.east = &leftHallway;
+    foggyGreenhouse.tryW = "You trip over some fog and land on some pots that break.";
+    foggyGreenhouse.tryN = "You dissappear into the mist. You can't see and when you finally escape the mist you are back where you started walking from.";
+    foggyGreenhouse.tryS = "There is a wall there.\n";
     foggyGreenhouse.roomName = "You enter the foggy greenhouse.\n";
+    foggyGreenhouse.monster = new enemy(Ghoul);
+    foggyGreenhouse.enemyDes = "A Ghoul slowly approaches, barely visible through the fog.\n";
 
     //library
     library.description = "Shelves spilling with books line the walls and fill the room. Long cobwebs hang from the ceiling, their sticky fibers running between the shelves like bridges. You can feel the dust tickle your lungs from the air you breathe in. A hushed creaking comes from behind the shelves where you cannot see.\n";
     library.north = &leftHallway;
+    library.tryS = "There is a bookcase blocking that way.\n";
+    library.tryE = "There is a bookcase a through the cracks you see a shadow moving around.\n";
+    library.tryW = "You trip over a pile of books. When you stand back up, you are facing North.\n";
     library.roomName = "You enter the library.\n";
 
     //barren room
     barrenRoom.description = "The ceiling of the room you enter is high and arched with cracked beams barely supporting it. Empty of furniture or windows, your candle’s light is all that reveals the interior of the barren room. Doors leading north and south stand on either side of the room. The floorboards beneath you moan against your weight, breaking the oppressive silence.\n";
     barrenRoom.north = &sittingRoom;
     barrenRoom.south = &leftHallway;
+    barrenRoom.tryE = "There is nothing over there.";
+    barrenRoom.tryW = "You start going that way but fear tripping, so backtrack a litte. While backtracking you trip over backwords.\n";
     barrenRoom.roomName = "You enter the barren room.\n";
 
     //sitting room
@@ -207,6 +241,13 @@ room::room() {
     sittingRoom.west = &bathroom2;
     sittingRoom.south = &barrenRoom;
     sittingRoom.roomName = "You enter the sitting room.\n";
+    if(rand()%3 == 1) {
+        sittingRoom.monster = new enemy(Skeleton);
+        sittingRoom.enemyDes = "A Skeleton rattles, still clutching some jewls. When it stands, everything falls through its body. It angrily wobbles in your direction.\n";
+    }
+    if(rand()%2 == 1) {
+        sittingRoom.items[0] = ItemPool[rand()%25];
+    }
 
     //trophy room
     trophyRoom.description = "Taxidermied heads of animals dot the wall and the pelts of exotic creatures line the floor. The beady eyes of the dead creatures stare blankly into the space before them. Two doors to the south and the west lead from the room. You can hear a faint dripping noise.\n";
@@ -224,6 +265,12 @@ room::room() {
     cellar.description = "You feel the dank air on your skin as you step into the cellar. Barrels are stacked throughout the room, rotten and cracked. Water drips from the ceiling above and hits the shallow puddle along the floor with a splash. The only door is from the way you came: south.\n";
     cellar.south = &kitchen;
     cellar.roomName = "You enter the cellar.\n";
+    if(rand()%2==1) {
+        cellar.monster = new enemy(Vampire);
+        cellar.enemyDes = "A Vampire rises from its coffin and attacks you. Going for your kneck";
+        cellar.items[0] = ItemPool[rand()%25];
+        cellar.items[1] = ItemPool[rand()%25];
+    }
 
     //room with couch
     roomWithCouch.description = "A long couch, cleaved in two and splattered with dried blood, is the only furniture in an otherwise empty room. You can see red eyes glint through the window on the opposite wall. Creaking comes through the ceiling above. The only door is to the north.\n";
@@ -241,16 +288,26 @@ room::room() {
     office.west = &rightHallway;
     office.south = &roomWithCouch;
     office.roomName = "You enter the office.\n";
+    if(rand()%4==1) {
+        office.items[0] = ItemPool[rand()%25];
+    }
 
     //bathroom 1
     bathroom1.description = "You enter a bathroom made of white marble. The mirror, sink, and toilet are all cracked and crumbling. The sole door is to the south. An ominous gurgling comes from inside the toilet basin.\n";
     bathroom1.south = &office;
     bathroom1.roomName = "You enter the white bathroom.\n";
+    if(rand()%2 == 1) {
+        bathroom1.monster = new enemy(ZippyFlap);
+        bathroom1.enemyDes = "A ZippyFlap was lying in wait. It attacks you.";
+        bathroom1.items[0] = ItemPool[rand()%25];
+    }
 
     //bathroom 2
     bathroom2.description = "You step into a bathroom of dark, creaking wood. The bathroom looks long since used, and a foul smell seeps into the air. You can hear creaking come the ceiling above you. A door leads to the east.\n";
     bathroom2.east = &sittingRoom;
     bathroom2.roomName = "You enter the dark bathroom.\n";
+    bathroom2.monster = new enemy(Diary);
+    bathroom2.enemyDes = "The final boss, A Diary attacks you.";
 }
 
 QString room::saveGame() {
@@ -345,6 +402,11 @@ QString room::saveGame() {
     } else {
         saves += "0";
     }
+    if(foggyGreenhouse.roomName == currentRoom->roomName) {
+        saves += "1";
+    } else {
+        saves += "0";
+    }
     return saves;
 }
 
@@ -385,6 +447,7 @@ QString room::loadGame(QString load) {
         currentRoom = &bathroom1;
     if(load[17] == "1")
         currentRoom = &bathroom2;
+    if(load[18] == "1")
     return currentRoom->roomName;
 }
 
