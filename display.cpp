@@ -104,7 +104,12 @@ void Display::startGame()
     ui->mage->setVisible(true);
     ui->bard->setVisible(true);
     ui->rogue->setVisible(true);
-    ui->textEdit->append("Please select your class");
+    ui->textEdit->append("Please select your class\n"
+                         "Warrior: Has more health and replaces its spell slot for a second weapon slot.\n"
+                         "Mage: Second spell slot and no weapon slot.\n"
+                         "Bard: Slightly less health but two extra item slots\n"
+                         "Rogue: Normal inventory, has a crit chance");
+
 }
 
 void Display::andThusItBegins()
@@ -137,7 +142,7 @@ void Display::on_moveButton_clicked()
     }
     else
     {
-        ui->textEdit->append("You canceled");
+        //ui->textEdit->append("You canceled");
         ui->northButton->setVisible(false);
         ui->eastButton->setVisible(false);
         ui->southButton->setVisible(false);
