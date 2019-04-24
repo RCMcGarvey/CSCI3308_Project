@@ -275,11 +275,138 @@ room::room() {
 }
 
 QString room::saveGame() {
-    QString help = "";
-    return help;
+    QString saves;
+    if(outside.roomName == currentRoom->roomName) {
+        saves += "1";
+    } else {
+        saves += "0";
+    }
+    if(frontOfHouse.roomName == currentRoom->roomName) {
+        saves += "1";
+    } else {
+        saves += "0";
+    }
+    if(knocking.roomName == currentRoom->roomName) {
+        saves += "1";
+    } else {
+        saves += "0";
+    }
+    if(foyer.roomName == currentRoom->roomName) {
+        saves += "1";
+    } else {
+        saves += "0";
+    }
+    if(diningRoom.roomName == currentRoom->roomName) {
+        saves += "1";
+    } else {
+        saves += "0";
+    }
+    if(rightHallway.roomName == currentRoom->roomName) {
+        saves += "1";
+    } else {
+        saves += "0";
+    }
+    if(leftHallway.roomName == currentRoom->roomName) {
+        saves += "1";
+    } else {
+        saves += "0";
+    }
+    if(library.roomName == currentRoom->roomName) {
+        saves += "1";
+    } else {
+        saves += "0";
+    }
+    if(barrenRoom.roomName == currentRoom->roomName) {
+        saves += "1";
+    } else {
+        saves += "0";
+    }
+    if(sittingRoom.roomName == currentRoom->roomName) {
+        saves += "1";
+    } else {
+        saves += "0";
+    }
+    if(trophyRoom.roomName == currentRoom->roomName) {
+        saves += "1";
+    } else {
+        saves += "0";
+    }
+    if(kitchen.roomName == currentRoom->roomName) {
+        saves += "1";
+    } else {
+        saves += "0";
+    }
+    if(cellar.roomName == currentRoom->roomName) {
+        saves += "1";
+    } else {
+        saves += "0";
+    }
+    if(roomWithCouch.roomName == currentRoom->roomName) {
+        saves += "1";
+    } else {
+        saves += "0";
+    }
+    if(pianoRoom.roomName == currentRoom->roomName) {
+        saves += "1";
+    } else {
+        saves += "0";
+    }
+    if(office.roomName == currentRoom->roomName) {
+        saves += "1";
+    } else {
+        saves += "0";
+    }
+    if(bathroom1.roomName == currentRoom->roomName) {
+        saves += "1";
+    } else {
+        saves += "0";
+    }
+    if(bathroom2.roomName == currentRoom->roomName) {
+        saves += "1";
+    } else {
+        saves += "0";
+    }
+    return saves;
 }
 
-void room::loadGame(QString load) {
+QString room::loadGame(QString load) {
+    if(load[0] == "1")
+        currentRoom = &outside;
+    if(load[1] == "1")
+        currentRoom = &frontOfHouse;
+    if(load[2] == "1")
+        currentRoom = &knocking;
+    if(load[3] == "1")
+        currentRoom = &foyer;
+    if(load[4] == "1")
+        currentRoom = &diningRoom;
+    if(load[5] == "1")
+        currentRoom = &rightHallway;
+    if(load[6] == "1")
+        currentRoom = &leftHallway;
+    if(load[7] == "1")
+        currentRoom = &library;
+    if(load[8] == "1")
+        currentRoom = &barrenRoom;
+    if(load[9] == "1")
+        currentRoom = &sittingRoom;
+    if(load[10] == "1")
+        currentRoom = &trophyRoom;
+    if(load[11] == "1")
+        currentRoom = &kitchen;
+    if(load[12] == "1")
+        currentRoom = &cellar;
+    if(load[13] == "1")
+        currentRoom = &roomWithCouch;
+    if(load[14] == "1")
+        currentRoom = &pianoRoom;
+    if(load[15] == "1")
+        currentRoom = &office;
+    if(load[16] == "1")
+        currentRoom = &bathroom1;
+    if(load[17] == "1")
+        currentRoom = &bathroom2;
+    return currentRoom->roomName;
 }
 
 QString room::lookAround() {
