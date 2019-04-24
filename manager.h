@@ -47,9 +47,11 @@ public:
     void loadGame();
     void saveGame();
     void signIn();
+    void startGame();
 
 
     bool gameOver;
+    int role;
 
     //Anton's Functions
     Item** getRoomItems(){return map.getRoomItems();}

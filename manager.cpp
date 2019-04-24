@@ -18,6 +18,14 @@ Manager::~Manager()
 
 }
 
+void Manager::startGame()
+{
+    gameOver = false;
+    toOutput = map.theBeginning();
+    map.~room();
+    map = room();
+}
+
 void Manager::setPlayerClass(int role)
 {
     if(role == 1)
@@ -36,6 +44,7 @@ void Manager::setPlayerClass(int role)
     {
         theHero = Player(Rogue);
     }
+    this->role = role;
 }
 
 QString Manager::move(int input)

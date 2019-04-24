@@ -508,10 +508,25 @@ void Display::on_comboBox_activated(int index)
         {
             if(bossMan.pickup(index) == false)
             {
-                ui->textEdit->append("You need to drop an item");
-                populateDropdown(2, "Drop");
-                currentButton = "Drop";
-                ui->comboBox_2->setVisible(true);
+                if(bossMan.role == 1)
+                {
+                    ui->textEdit->append("Warriors cant pick up spells");
+                    ui->comboBox->clear();
+                    on_pickupButton_clicked();
+                }
+                else if(bossMan.role == 2)
+                {
+                    ui->textEdit->append("Mages cant pick up weapons");
+                    ui->comboBox->clear();
+                    on_pickupButton_clicked();
+                }
+                else
+                {
+                    ui->textEdit->append("You need to drop an item");
+                    populateDropdown(2, "Drop");
+                    currentButton = "Drop";
+                    ui->comboBox_2->setVisible(true);
+                }
             }
             else
             {
@@ -558,9 +573,13 @@ void Display::on_comboBox_2_activated(int index)
 void Display::on_actionMain_Menu_triggered()
 {
     ui->InventoryButton->setVisible(false);
+    ui->InventoryButton->setEnabled(true);
     ui->moveButton->setVisible(false);
+    ui->moveButton->setEnabled(true);
     ui->fightButton->setVisible(false);
+    ui->fightButton->setEnabled(true);
     ui->lookButton->setVisible(false);
+    ui->lookButton->setEnabled(true);
     ui->northButton->setVisible(false);
     ui->eastButton->setVisible(false);
     ui->southButton->setVisible(false);
@@ -581,6 +600,8 @@ void Display::on_actionMain_Menu_triggered()
 
     ui->lineEdit->setVisible(true);
     ui->lineEdit_2->setVisible(true);
+
+    bossMan.startGame();
 
     mainMenu();
 
