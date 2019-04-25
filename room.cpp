@@ -452,11 +452,8 @@ QString room::loadGame(QString load) {
 }
 
 QString room::lookAround() {
+   QString roomDes = currentRoom->description;
    QString observations = "You see a ";
-   if(currentRoom->items[0] == nullptr && currentRoom->items[1] == nullptr && currentRoom->items[2] == nullptr && currentRoom->items[3] == nullptr)
-   {
-       return currentRoom->description;
-   }
    for(int i = 0; i < 4; ++i)
    {
        if(currentRoom->items[i] != nullptr)
@@ -468,7 +465,7 @@ QString room::lookAround() {
            observations += "and a " + currentRoom->items[i]->name;
        }
    }
-   return observations;
+   return roomDes + "\n" + observations;
 
 }
 
