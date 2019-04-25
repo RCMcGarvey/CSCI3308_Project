@@ -375,6 +375,7 @@ QString Player::useItem(int slot)
 {
     Item *current = new Item();
     current = inventory[slot];
+    if(current == nullptr) return "You can't use something that doesn't exist";
     switch(current->type)
     {
     case weapon:
