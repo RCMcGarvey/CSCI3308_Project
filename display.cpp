@@ -138,6 +138,9 @@ void Display::on_moveButton_clicked()
         ui->eastButton->setVisible(true);
         ui->southButton->setVisible(true);
         ui->westButton->setVisible(true);
+        ui->progressBar_2->setValue(0);
+        ui->progressBar_2->setVisible(false);
+        ui->label_2->setVisible(false);
         ui->moveButton->setText("Cancel");
     }
     else

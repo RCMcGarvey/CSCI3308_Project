@@ -20,7 +20,7 @@ void populateItems() {
     ItemPool[14] = new Item(14,weapon, "Kingkiller", false, 50, 0, 0.2, 0);
     ItemPool[15] = new Item(15,weapon, "The Viper", false, 10, 0, 0.75, 0);
     ItemPool[16] = new Item(16,spell, "Scroll of Lighting", true, 40, 0, 0.0, 0, "High damage single use spell");
-    ItemPool[17] = new Item(17,spell, "Scroll of Instadeath", true, 20, 0, 0.0, -1000, "Be carefull with this one");
+    ItemPool[17] = new Item(17,spell, "Scroll of Instadeath", true, 20, 0, 0.0, -100, "Be carefull with this one");
     ItemPool[18] = new Item(18,spell, "Magic Missle", false, 40, 0, 0.2, 0, "Very high damage spell");
     ItemPool[19] = new Item(19,armor, "Wooden Shield", false, 0, 10, 0.0, 0);
     ItemPool[20] = new Item(20,armor, "Bucket Helmet", false, 0, 15, 0.0, 0);

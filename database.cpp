@@ -4,13 +4,13 @@
 database::database()
 {
         QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL");
-        db.setHostName("127.0.0.1");
-        db.setDatabaseName("csci3308_proj");
-        db.setUserName("postgres");
-        QString dbPass = qgetenv("DBPASS");
+        db.setHostName("ec2-54-225-76-136.compute-1.amazonaws.com");
+        db.setDatabaseName("d4vqhahb2ccari");
+        db.setUserName("kiqporjdqtmvlq");
+        //QString dbPass = qgetenv();
 
-        qDebug() << dbPass;
-        db.setPassword("OpenSesame");
+        //qDebug() << dbPass;
+        //db.setPassword("");
         bool ok = db.open();
         if (ok){
             cout << "Database Connection Open!" << endl;

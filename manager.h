@@ -57,7 +57,7 @@ public:
     Item** getRoomItems(){return map.getRoomItems();}
 
 private:
-    database db;
+    //database db;
     QString playername;
     QString username;
     QString password;
