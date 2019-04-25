@@ -447,8 +447,12 @@ QString Player::saveGame(){
   save+=makeNS(4,attack_boost);
   save+=makeNS(4,defense_boost);
   //inventory
+  int idx;
   for(int i = 0; i<inventory.size(); i++){
-    // save+=;
+    if(inventory[i] == nullptr) idx = 99;
+    else idx = inventory[i]->ID;
+    if(idx<10) save+="0";
+      save+=QString::number(idx, 10);
   }
   return save;
 }
@@ -459,37 +463,43 @@ void Player::loadGame(QString l){
     critChance = .33;
     role = Rogue;
   }
+
   else if(load[0] == "M") role = Mage;
   else if(load[0] == "B") role = Bard;
   else role = Warrior;
+  load = load.mid(1);
   //loading health
-  QString val = load.left(6);
+  QString val = load.left(5);
+    qDebug()<<"|"<<val<<"|";
   health = val.toInt();
-  load = load.mid(6);
+  load = load.mid(5);
   //loading max health
-  val = load.left(6);
+    qDebug()<<"|"<<val<<"|";
+  val = load.left(5);
   max_health = val.toInt();
-  load = load.mid(6);
+  load = load.mid(5);
   //loading attack
-  val = load.left(5);
+  val = load.left(4);
   base_attack = val.toInt();
-  load = load.mid(5);
+  load = load.mid(4);
   //loading attack boost
-  val = load.left(5);
+  val = load.left(4);
   attack_boost = val.toInt();
-  load = load.mid(5);
+  load = load.mid(4);
   //loading defense boost
-  val = load.left(5);
+  val = load.left(4);
   defense_boost = val.toInt();
-  load = load.mid(5);
+  load = load.mid(4);
 
   int slot = 0;
   while(load.length()>0){
-    // val = load.substr(0,1);
-    // inventory[slot] = itemFunction(slot);
-    // slot++;
-    // load = load.substr(1);
+     val = load.left(2);
+     if(val.toInt()==99)inventory[slot] = nullptr;
+     else inventory[slot] = ItemPool[val.toInt()];
+     slot++;
+     load = load.mid(2);
   }
+  qDebug()<<health;
 }
 //save string format:
 /*

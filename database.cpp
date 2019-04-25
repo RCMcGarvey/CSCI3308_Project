@@ -96,8 +96,8 @@ int database::addChar(QString char_name, QString user)
 //        return -1;
 //    }
 
-    execStr = "INSERT INTO proj_schema.\"Characters\"(char_id, char_name)"
-                                  "VALUES('" + char_name + "', '" + user + "');";
+    execStr = "INSERT INTO proj_schema.\"Characters\"(char_name)"
+                                  "VALUES('" + char_name + "');";
     query.exec(execStr);
 
     return getCharId(char_name);
@@ -127,7 +127,7 @@ void database::saveGame(QString char_name, QString game_data)
     QSqlQuery save_query;
     QString execStr;
 
-    execStr = "UPDATE proj_schema.\"Characters\" SET char_string =" + game_data + " where name =" + char_name + ";";
+    execStr = "UPDATE proj_schema.\"Characters\" SET char_string ='" + game_data + "' where char_name ='" + char_name + "';";
 
     save_query.exec(execStr);
 
@@ -139,7 +139,7 @@ QString database::loadGame(QString char_name)
     QSqlQuery load_query;
     QString game_data, execStr;
 
-    execStr = "SELECT char_string from proj_schema.\"Characters\" where name =" + char_name + ";";
+    execStr = "SELECT char_string from proj_schema.\"Characters\" where char_name ='" + char_name + "';";
 
     load_query.exec(execStr);
 
@@ -148,6 +148,8 @@ QString database::loadGame(QString char_name)
     }
 
     return QString::number(-1);
+
+
 
 }
 

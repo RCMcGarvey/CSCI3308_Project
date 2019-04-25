@@ -273,8 +273,7 @@ void Manager::saveGame()
     QString mapsave = map.saveGame();
     db.saveGame(playername ,charsave + ":" + mapsave);
 }
-
-void Manager::loadGame()
+QString Manager::loadGame()
 {
     QString loadstr = db.loadGame(playername);
     QString charload;
@@ -283,13 +282,13 @@ void Manager::loadGame()
     {
         if(loadstr[i] == ':')
         {
-            charload = loadstr.left(i-1);
+            charload = loadstr.left(i);
             mapload = loadstr.mid(i+1);
             break;
         }
     }
     theHero.loadGame(charload);
-    map.loadGame(mapload);
+    return map.loadGame(mapload);
 }
 
 void Manager::addChar()

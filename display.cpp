@@ -683,17 +683,19 @@ void Display::on_lineEdit_returnPressed()
         }
         else if(currentButton == "Load")
         {
+            bossMan.setPlayerName(ui->lineEdit->text());
             ui->lineEdit->clear();
             ui->lineEdit->setVisible(false);
-            bossMan.loadGame();
-            ui->textEdit->append(bossMan.startNarrative());
+            ui->textEdit->append(bossMan.loadGame());
+            ui->progressBar->setValue(bossMan.getPlayerHealth());
+            //ui->textEdit->append(bossMan.startNarrative());
 
-             ui->moveButton->setVisible(true);
-             ui->fightButton->setVisible(true);
-             ui->InventoryButton->setVisible(true);
-             ui->lookButton->setVisible(true);
-             ui->label->setVisible(true);
-             ui->progressBar->setVisible(true);
+            ui->moveButton->setVisible(true);
+            ui->fightButton->setVisible(true);
+            ui->InventoryButton->setVisible(true);
+            ui->lookButton->setVisible(true);
+            ui->label->setVisible(true);
+            ui->progressBar->setVisible(true);
 
 
         }

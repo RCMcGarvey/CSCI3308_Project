@@ -45,7 +45,7 @@ public:
     QString getItem(int index, int from);
     int howManyItems();
 
-    void loadGame();
+    QString loadGame();
     void saveGame();
     bool signIn();
     void startGame();
