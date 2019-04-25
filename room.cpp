@@ -105,8 +105,8 @@ QString room::nextRoom(int dir) {
 QString room::theBeginning() {
     currentRoom = &outside;
     if(currentRoom->monster != nullptr)
-        currentRoom->description += currentRoom->enemyDes;
-    return currentRoom->description;
+        currentRoom->roomName += currentRoom->enemyDes;
+    return currentRoom->roomName;
 }
 
 //call this to see if there is an enemy in this room
@@ -124,13 +124,13 @@ room::room() {
     int tempprob;
 
     //outside
-    outside.description = "You look over your shoulder. Tendrils of fog slither out from the encroaching forest like snakes, hissing as they slide over the dead ground. Menacing shadows watch you from the cover of the trees. The night is frigid; you pull your clothes tighter. If you spend any longer outside, you’ll freeze to death.\n";
-    outside.description += "The manor to the north you’ve stumbled upon sends a chill deep into your bones. Ancient vines crawl over a dilapidated, dry fountain. Gothic windows, high and imposing, line the massive building’s exterior. Light spills through the highest window. The wind pushes you from behind toward the house.\n";
+    outside.roomName = "You look over your shoulder. Tendrils of fog slither out from the encroaching forest like snakes, hissing as they slide over the dead ground. Menacing shadows watch you from the cover of the trees. The night is frigid; you pull your clothes tighter. If you spend any longer outside, you’ll freeze to death.\n";
+    outside.roomName += "The manor to the north you’ve stumbled upon sends a chill deep into your bones. Ancient vines crawl over a dilapidated, dry fountain. Gothic windows, high and imposing, line the massive building’s exterior. Light spills through the highest window. The wind pushes you from behind toward the house.\n";
     outside.tryS = "Your instincts kick in, and your legs freeze up. If you go that way you know, you will die a miserable cold death.\n";
     outside.tryE = "There is a foreboding looking mist that frightens you too much to go that way.\n";
     outside.tryW = "You trip and fall. When you stand back up, you face north.\n";
     outside.north = &frontOfHouse;
-    outside.roomName = "You're outside.\n";
+    outside.description = "You're outside.\n";
     if(true) {
         outside.monster = outsideSnowman;
         outside.enemyDes = "A snowman rushes toward you! It has a vicious look in its coal eyes and a wicked grin to its sinister mouth. The carrot sticking out of it is twisted.\n";
@@ -312,7 +312,7 @@ room::room() {
     pianoRoom.description = "As you step into the room, you spy a decaying grand piano. Faint as a breath, quiet notes suffuse the air, their eerie tune making your hair stand on end. You can see nothing striking the keys to make the music. A door leads north.\n";
     pianoRoom.north = &office;
     pianoRoom.roomName = "You enter the piano room.\n";
-    tempprob = rand()%101;
+    tempprob = rand()%200 + 1;
     if (rand()%4 == 1) {
         pianoRoom.monster = new enemy(Skeleton, tempprob, tempprob, rand()%21, 0.01);
         pianoRoom.enemyDes = "The jangling of bones approaches! A skeleton attacks!";
@@ -499,13 +499,13 @@ QString room::lookAround() {
    QString observations = "You see a ";
    for(int i = 0; i < 4; ++i)
    {
-       if(currentRoom->items[i] != nullptr)
-       {
-           observations += currentRoom->items[i]->name + ", ";
-       }
        if(i == 3 && currentRoom->items[i] != nullptr)
        {
            observations += "and a " + currentRoom->items[i]->name;
+       }
+       else if(currentRoom->items[i] != nullptr)
+       {
+           observations += currentRoom->items[i]->name + ", ";
        }
    }
    return roomDes + "\n" + observations;
