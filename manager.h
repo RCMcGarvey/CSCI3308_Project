@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <enemy.h>
 #include <vector>
+#include <QCryptographicHash>
 
 
 class Manager
@@ -46,8 +47,10 @@ public:
 
     void loadGame();
     void saveGame();
-    void signIn();
+    bool signIn();
     void startGame();
+    void addChar();
+    void createUser();
 
 
     bool gameOver;
@@ -57,7 +60,7 @@ public:
     Item** getRoomItems(){return map.getRoomItems();}
 
 private:
-    //database db;
+    database db;
     QString playername;
     QString username;
     QString password;

@@ -18,6 +18,12 @@ Manager::~Manager()
 
 }
 
+bool Manager::signIn()
+{
+    QString blah = QString(QCryptographicHash::hash((password.toUtf8()),QCryptographicHash::Sha256).toHex());
+    return db.signIn(username, blah);
+}
+
 void Manager::startGame()
 {
     gameOver = false;
@@ -123,6 +129,7 @@ bool Manager::pickup(int input)
 void Manager::swap(int input, int input2)
 {
     Item *holder = theHero.getInventory()[input];
+    if(holder->type == weapon && input2)
     theHero.getInventory()[input] = theHero.getInventory()[input2];
     theHero.getInventory()[input2] = holder;
 
@@ -260,34 +267,40 @@ QString Manager::lookAround()
     return map.lookAround();
 }
 
-void Manager::signIn()
-{
-
-}
-
 void Manager::saveGame()
 {
-    //QString charsave = theHero.saveGame();
-    //QString mapsave = map.saveGame();
-    //db.saveGame(playername ,charsave + ":" + mapsave);
+    QString charsave = theHero.saveGame();
+    QString mapsave = map.saveGame();
+    db.saveGame(playername ,charsave + ":" + mapsave);
 }
 
 void Manager::loadGame()
 {
-    //QString loadstr = db.loadGame(playername);
-    //QString charload;
-    //QString mapload;
-    //for(int i = 0; i < loadstr.length(); ++i)
-    //{
-    //    if(loadstr[i] == ':')
-    //    {
-    //        charload = loadstr.left(i-1);
-    //        mapload = loadstr.right(loadstr.length()-i+1);
-    //        break;
-    //    }
-    //}
-    //toOutput = theHero.loadGame(charload);
-   // map.loadGame(mapload);
+    QString loadstr = db.loadGame(playername);
+    QString charload;
+    QString mapload;
+    for(int i = 0; i < loadstr.length(); ++i)
+    {
+        if(loadstr[i] == ':')
+        {
+            charload = loadstr.left(i-1);
+            mapload = loadstr.mid(i+1);
+            break;
+        }
+    }
+    theHero.loadGame(charload);
+    map.loadGame(mapload);
+}
+
+void Manager::addChar()
+{
+    db.addChar(playername, username);
+}
+
+void Manager::createUser()
+{
+    QString blah = QString(QCryptographicHash::hash((password.toUtf8()),QCryptographicHash::Sha256).toHex());
+    db.addUser(username, blah);
 }
 
 

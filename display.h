@@ -82,6 +82,10 @@ private slots:
 
     void on_actionSave_triggered();
 
+    void on_exists_clicked();
+
+    void on_newusr_clicked();
+
 private:
     Ui::Display *ui;
     void populateDropdown(int box, QString button);

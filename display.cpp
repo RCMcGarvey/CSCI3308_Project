@@ -16,11 +16,13 @@ Display::Display(QWidget *parent) :
     ui->rogue->setVisible(false);
     ui->pushButton->setVisible(false);
     ui->pushButton_2->setVisible(false);
+    ui->lineEdit->setVisible(false);
+    ui->lineEdit_2->setVisible(false);
+
 
     gamestart = false;
     signin = false;
 
-    mainMenu();
 
     tb.setColor(QPalette::Base, Qt::black);
     tb.setColor(QPalette::Text, Qt::white);
@@ -62,6 +64,8 @@ Display::~Display()
 
 void Display::mainMenu()
 {
+    ui->lineEdit->setVisible(true);
+    ui->lineEdit_2->setVisible(true);
     ui->textEdit->clear();
     ui->lineEdit_2->setEnabled(false);
     ui->textEdit->setHtml("<center><big>Developed by Swonky Creatures</big></center>"
@@ -672,6 +676,7 @@ void Display::on_lineEdit_returnPressed()
         if(currentButton == "New")
         {
             bossMan.setPlayerName(ui->lineEdit->text());
+            bossMan.addChar();
             ui->lineEdit->clear();
             ui->lineEdit->setVisible(false);
             startGame();
@@ -702,9 +707,30 @@ void Display::on_lineEdit_2_returnPressed()
     ui->lineEdit->clear();
     ui->lineEdit_2->clear();
     ui->lineEdit_2->setVisible(false);
-    ui->pushButton->setVisible(true);
-    ui->pushButton_2->setVisible(true);
-    signin = true;
+    if(currentButton == "exists")
+    {
+        if(bossMan.signIn())
+        {
+            signin = true;
+            ui->textEdit->append("Signin Success");
+            ui->pushButton->setVisible(true);
+            ui->pushButton_2->setVisible(true);
+        }
+        else
+        {
+            ui->textEdit->append("Signin failed");
+            ui->lineEdit_2->setVisible(true);
+        }
+    }
+    else if(currentButton == "newusr")
+    {
+        bossMan.createUser();
+        ui->textEdit->append("Created user");
+        bossMan.signIn();
+        ui->pushButton->setVisible(true);
+        ui->pushButton_2->setVisible(true);
+        signin = true;
+    }
 }
 
 void Display::on_pushButton_clicked()
@@ -724,10 +750,28 @@ void Display::on_pushButton_2_clicked()
     currentButton = "Load";
     ui->pushButton->setVisible(false);
     ui->pushButton_2->setVisible(false);
+    ui->textEdit->clear();
 }
 
 void Display::on_actionSave_triggered()
 {
-    //bossMan.saveGame();
+    bossMan.saveGame();
     ui->textEdit->append("Game saved");
+}
+
+void Display::on_exists_clicked()
+{
+    currentButton = "exists";
+    ui->exists->setVisible(false);
+    ui->newusr->setVisible(false);
+    mainMenu();
+}
+
+
+void Display::on_newusr_clicked()
+{
+    currentButton = "newusr";
+    ui->newusr->setVisible(false);
+    ui->exists->setVisible(false);
+    mainMenu();
 }

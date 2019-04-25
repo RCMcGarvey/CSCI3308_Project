@@ -448,6 +448,7 @@ QString room::loadGame(QString load) {
     if(load[17] == "1")
         currentRoom = &bathroom2;
     if(load[18] == "1")
+        currentRoom = &foggyGreenhouse;
     return currentRoom->roomName;
 }
 
