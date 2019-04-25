@@ -181,6 +181,10 @@ QString Manager::combatEvent(QString action)
                 {
                     return "You take "+ QString::number(enemyAttack) +" damage.<br></br><p style='color:darkred'><center><big>You got slushed by the " + enemyname + "!</big></center></p>";
                 }
+                case 3:
+                {
+                    return "You take "+ QString::number(enemyAttack) +" damage.<br></br><p style='color:darkred'><center><big>The " + enemyname + " clapped you!</big></center></p>";
+                }
                 }
             }
             else if(map.getEnemy()->getAlive() == true)
