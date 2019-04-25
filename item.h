@@ -91,7 +91,7 @@ struct Item{
   // bool action();//may be used to destroy single-use items after use
 };
 
-extern Item *ItemPool[30];
+extern Item *ItemPool[50];
 
 void populateItems();
 

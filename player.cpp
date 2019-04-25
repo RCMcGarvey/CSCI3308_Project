@@ -48,7 +48,7 @@ Player::Player(PlayerClass role)
         attack_boost = 0;
         defense_boost = 0;
         critChance = 0;
-        inventory.push_back(ItemPool[5]);
+        inventory.push_back(ItemPool[1]);
         for(int i = 1; i < 8; ++i)
         {
             inventory.push_back(nullptr);
@@ -64,7 +64,7 @@ Player::Player(PlayerClass role)
         attack_boost = 0;
         defense_boost = 0;
         critChance = 0;
-        inventory.push_back(ItemPool[8]);
+        inventory.push_back(ItemPool[36]);
         for (int i = 1; i < 8; ++i)
         {
             inventory.push_back(nullptr);
@@ -79,7 +79,7 @@ Player::Player(PlayerClass role)
         defense_boost = 0;
         critChance = 0;
         inventory.resize(10);
-        inventory.push_back(ItemPool[3]);
+        inventory.push_back(ItemPool[6]);
         for(int i = 1; i < 10; ++i)
         {
             inventory[i] = nullptr;
@@ -93,7 +93,7 @@ Player::Player(PlayerClass role)
         attack_boost = 0;
         defense_boost = 0;
         critChance = .33;
-        inventory.push_back(ItemPool[5]);
+        inventory.push_back(ItemPool[18]);
         for (int i = 1; i < 8; ++i)
         {
             inventory.push_back(nullptr);
@@ -495,7 +495,6 @@ void Player::loadGame(QString l){
 /*
 H: Health
 R/HHHHH/MMMMM/AAAA/BBBB/DDDD/(inventory slots)
-
 */
 //Used to test functionalities of various methods
 //This isn't necessary
