@@ -18,6 +18,7 @@ Display::Display(QWidget *parent) :
     ui->pushButton_2->setVisible(false);
     ui->lineEdit->setVisible(false);
     ui->lineEdit_2->setVisible(false);
+    ui->textEdit->append("<center>New or Existing user?</center>");
 
 
     gamestart = false;
@@ -93,6 +94,7 @@ void Display::instructions()
                        "-You are unable to move while there is an enemy in the same area you are.\n"
                        "-When you attack an enemy you can use a weapon or a spell.\n"
                        "    -Weapons can be used/picked up by Bards, Warriors, and Rogues.\n"
+                       "    -Be carefull as some weapons are single use.\n"
                        "    -Spells can be used/picked up Mages, Bards, and Rogues.\n"
                        "    -All other items can be picked up by the other classes.\n"
                        "    [Weapon, Spell, Armor, Item, Item, ...]\n"
@@ -686,6 +688,7 @@ void Display::on_lineEdit_returnPressed()
             bossMan.setPlayerName(ui->lineEdit->text());
             ui->lineEdit->clear();
             ui->lineEdit->setVisible(false);
+            ui->textEdit->clear();
             ui->textEdit->append(bossMan.loadGame());
             ui->progressBar->setValue(bossMan.getPlayerHealth());
             //ui->textEdit->append(bossMan.startNarrative());
@@ -722,6 +725,8 @@ void Display::on_lineEdit_2_returnPressed()
         {
             ui->textEdit->append("Signin failed");
             ui->lineEdit_2->setVisible(true);
+            ui->lineEdit->setEnabled(true);
+            ui->lineEdit_2->setEnabled(false);
         }
     }
     else if(currentButton == "newusr")
@@ -752,7 +757,6 @@ void Display::on_pushButton_2_clicked()
     currentButton = "Load";
     ui->pushButton->setVisible(false);
     ui->pushButton_2->setVisible(false);
-    ui->textEdit->clear();
 }
 
 void Display::on_actionSave_triggered()
