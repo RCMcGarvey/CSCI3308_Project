@@ -287,10 +287,12 @@ int Player::attack(QString type){
       if(type =="Weapon"){
           if(inventory[0]){
               atk+=inventory[0]->attack_boost;
+              adjustHealth(inventory[0]->healing);
               if(inventory[0]->is_single_use) inventory[0] = nullptr;
           }
           if(inventory[1]){
               atk+=inventory[1]->attack_boost;
+              adjustHealth(inventory[1]->healing);
               if(inventory[1]->is_single_use) inventory[1] = nullptr;
           }
       }
@@ -304,11 +306,13 @@ int Player::attack(QString type){
       }
       else if(type == "Spell"){
         if(inventory[0]){
+            adjustHealth(inventory[0]->healing);
           adjustHealth(inventory[0]->defense_boost);
           atk+=inventory[0]->attack_boost;
           if(inventory[0]->is_single_use) inventory[0] = nullptr;
         }
         if(inventory[1]){
+            adjustHealth(inventory[1]->healing);
           adjustHealth(inventory[1]->defense_boost);
           atk+=inventory[1]->attack_boost;
           if(inventory[1]->is_single_use) inventory[1] = nullptr;
@@ -323,6 +327,7 @@ int Player::attack(QString type){
           }
       }
       else if(type == "Spell"&&inventory[1]){
+          adjustHealth(inventory[1]->healing);
         adjustHealth(inventory[1]->defense_boost);
         atk+=inventory[1]->attack_boost;
         if(inventory[1]->is_single_use) inventory[1] = nullptr;
