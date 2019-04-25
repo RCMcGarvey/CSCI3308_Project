@@ -330,7 +330,7 @@ int Player::attack(QString type){
   }
   atk += (rand()%10* atk/20);//to vary attack damage (constants can be adjusted)
 
-  if(role == Mage&&(inventory[1]->crit_chance+critChance)*1000>bonus) atk*=3;
+  if(role == Mage&&(inventory[1]&&inventory[1]->crit_chance+critChance)*1000>bonus) atk*=3;
   else if(inventory[0]&&(inventory[0]->crit_chance+critChance)*1000>bonus) atk*=3;//critical hit
   if(bonus>989) atk = 0;//attack missed... for some reason
 
