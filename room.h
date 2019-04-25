@@ -45,13 +45,13 @@ public:
 
     enemy* outsideSnowman = new enemy(Snowman);
 
-    QString meunster = "There is a monster blocking your movements.";
+    QString meunster = "There is a monster blocking your movements.\n";
 
     roms *currentRoom;
     room();
     QString nextRoom(int dir);
     QString moving = "";
-    QString nothing = "There is nothing that way";
+    QString nothing = "There is nothing that way\n";
     QString theBeginning();
     QString lookAround();
 
