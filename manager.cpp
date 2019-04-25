@@ -171,7 +171,7 @@ QString Manager::combatEvent(QString action)
                 {
                 case 0:
                 {
-                    return "You take "+ QString::number(enemyAttack) +" damage.<br></br><p style='color:darkred'><center><big>You're innards become outards!</big></center></p>";
+                    return "You take "+ QString::number(enemyAttack) +" damage.<br></br><p style='color:darkred'><center><big>Your innards become outards!</big></center></p>";
                 }
                 case 1:
                 {
