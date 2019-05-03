@@ -67,11 +67,8 @@ struct Item{
   //open to implementation
   QString display_message()
   {
-      if(message != "")
-      {
-          return message;
-      }
-      else if(type == weapon)
+      QString msg = "";
+      if(type == weapon)
       {
            return name + ", Attack Value: " + QString::number(attack_boost);
       }
@@ -85,8 +82,9 @@ struct Item{
       }
       else
       {
-           return name + ". " + message;
+           return message;
       }
+
   }
   // bool action();//may be used to destroy single-use items after use
 };

@@ -129,7 +129,6 @@ bool Manager::pickup(int input)
 void Manager::swap(int input, int input2)
 {
     Item *holder = theHero.getInventory()[input];
-    if(holder->type == weapon && input2)
     theHero.getInventory()[input] = theHero.getInventory()[input2];
     theHero.getInventory()[input2] = holder;
 

@@ -65,6 +65,7 @@ Display::~Display()
 
 void Display::mainMenu()
 {
+    bossMan.gameOver = false;
     ui->lineEdit->setVisible(true);
     ui->lineEdit_2->setVisible(true);
     ui->textEdit->clear();
@@ -111,6 +112,7 @@ void Display::startGame()
     ui->bard->setVisible(true);
     ui->rogue->setVisible(true);
     ui->textEdit->append("Please select your class\n"
+                         "Inventory Layout: [Weapon, Spell, Armor, Item, Item, ...]\n"
                          "Warrior: Has more health and replaces its spell slot for a second weapon slot.\n"
                          "Mage: Second spell slot and no weapon slot.\n"
                          "Bard: Slightly less health but two extra item slots\n"
@@ -499,6 +501,7 @@ void Display::on_comboBox_activated(int index)
         {
             ui->comboBox->clear();
             ui->textEdit->append(bossMan.use(index));
+            ui->progressBar->setValue(bossMan.getPlayerHealth());
             on_useButton_clicked();
         }
         else if(currentButton == "Inspect")
@@ -723,6 +726,8 @@ void Display::on_lineEdit_2_returnPressed()
         }
         else
         {
+            ui->exists->setVisible(true);
+            ui->newusr->setVisible(true);
             ui->textEdit->append("Signin failed");
             ui->lineEdit_2->setVisible(true);
             ui->lineEdit->setEnabled(true);

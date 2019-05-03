@@ -87,8 +87,8 @@ Player::Player(PlayerClass role)
     }
     else if(role == Rogue)
     {
-        health = 100;
-        max_health = 100;
+        health = 75;
+        max_health = 75;
         base_attack = 5;
         attack_boost = 0;
         defense_boost = 0;
@@ -138,7 +138,7 @@ bool Player::collectItem(Item* new_item){
       }
       else if(role == Mage)
       {
-        return flag;
+        return false;
       }
       else if(role == Bard || role == Rogue)
       {
@@ -188,7 +188,7 @@ bool Player::collectItem(Item* new_item){
     }
     else if(role == Warrior)
     {
-      return flag;
+      return false;
     }
     else if(role == Bard || role == Rogue)
     {
