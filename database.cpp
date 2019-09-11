@@ -8,7 +8,7 @@ database::database()
         db.setDatabaseName("d4vqhahb2ccari");
         db.setUserName("kiqporjdqtmvlq");
         QString dbPass = qgetenv("");
-        db.setPassword("df75c634d836ec46359fd12e8abb1f9dc0ec8e550a7e0634f0f32d278495ef2c");
+        db.setPassword("NOT_ACTUAL_PASSWORD");
         bool ok = db.open();
         if (ok){
             cout << "Database Connection Open!" << endl;
